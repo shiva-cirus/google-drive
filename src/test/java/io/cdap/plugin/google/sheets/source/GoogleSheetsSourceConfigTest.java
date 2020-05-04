@@ -221,7 +221,8 @@ public class GoogleSheetsSourceConfigTest {
   @Test
   public void testProcessColumns() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     Method processColumnsMethod = config.getClass().getDeclaredMethod("processColumns", List.class,
-                                                                      List.class, List.class, List.class, FailureCollector.class);
+                                                                      List.class, List.class, List.class,
+                                                                      FailureCollector.class);
     processColumnsMethod.setAccessible(true);
 
     List<CellData> columnsRow = new ArrayList<>();
@@ -246,7 +247,8 @@ public class GoogleSheetsSourceConfigTest {
 
     LinkedHashMap<Integer, ColumnComplexSchemaInfo> columns =
       (LinkedHashMap<Integer, ColumnComplexSchemaInfo>) processColumnsMethod.invoke(config, columnsRow,
-                                                                                    subColumnsRow, dataRow, columnMerges, collector);
+                                                                                    subColumnsRow, dataRow,
+                                                                                    columnMerges, collector);
 
     Assert.assertEquals(2, columns.size());
     Assert.assertTrue(columns.keySet().containsAll(Arrays.asList(0, 1)));
@@ -272,7 +274,8 @@ public class GoogleSheetsSourceConfigTest {
   public void testProcessColumnsInvalidTitles()
     throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     Method processColumnsMethod = config.getClass().getDeclaredMethod("processColumns", List.class,
-                                                                      List.class, List.class, List.class, FailureCollector.class);
+                                                                      List.class, List.class, List.class,
+                                                                      FailureCollector.class);
     processColumnsMethod.setAccessible(true);
 
     List<CellData> columnsRow = new ArrayList<>();
@@ -297,7 +300,8 @@ public class GoogleSheetsSourceConfigTest {
 
     LinkedHashMap<Integer, ColumnComplexSchemaInfo> columns =
       (LinkedHashMap<Integer, ColumnComplexSchemaInfo>) processColumnsMethod.invoke(config, columnsRow,
-                                                                                    subColumnsRow, dataRow, columnMerges, collector);
+                                                                                    subColumnsRow, dataRow,
+                                                                                    columnMerges, collector);
 
     Assert.assertEquals(2, columns.size());
     Assert.assertTrue(columns.keySet().containsAll(Arrays.asList(0, 1)));

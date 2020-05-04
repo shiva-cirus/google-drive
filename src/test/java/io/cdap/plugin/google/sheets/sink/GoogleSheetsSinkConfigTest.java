@@ -54,9 +54,12 @@ public class GoogleSheetsSinkConfigTest {
     Schema testValidSchema = Schema.recordOf(SCHEMA_NAME,
                                              Schema.Field.of(TEST_RECORD_FIELD_NAME, Schema.recordOf(
                                                TEST_RECORD_FIELD_NAME,
-                                               Schema.Field.of(TEST_RECORD_SUB_1_FIELD_NAME, Schema.of(Schema.Type.STRING)),
-                                               Schema.Field.of(TEST_RECORD_SUB_2_FIELD_NAME, Schema.of(Schema.Type.BOOLEAN)),
-                                               Schema.Field.of(TEST_RECORD_SUB_3_FIELD_NAME, Schema.of(Schema.Type.DOUBLE))
+                                               Schema.Field.of(TEST_RECORD_SUB_1_FIELD_NAME, Schema.of(Schema.Type.
+                                                                                                         STRING)),
+                                               Schema.Field.of(TEST_RECORD_SUB_2_FIELD_NAME, Schema.of(Schema.Type.
+                                                                                                         BOOLEAN)),
+                                               Schema.Field.of(TEST_RECORD_SUB_3_FIELD_NAME, Schema.of(Schema.Type.
+                                                                                                         DOUBLE))
                                              )),
                                              Schema.Field.of(TEST_ARRAY_FIELD_NAME, Schema.arrayOf(
                                                Schema.of(Schema.Type.STRING)
@@ -87,14 +90,19 @@ public class GoogleSheetsSinkConfigTest {
     Schema testInvalidSchema = Schema.recordOf(SCHEMA_NAME,
                                                Schema.Field.of(TEST_RECORD_FIELD_NAME, Schema.recordOf(
                                                  TEST_RECORD_FIELD_NAME,
-                                                 Schema.Field.of(TEST_RECORD_SUB_1_FIELD_NAME, Schema.of(Schema.Type.STRING)),
-                                                 Schema.Field.of(TEST_RECORD_SUB_2_FIELD_NAME, Schema.of(Schema.Type.BOOLEAN)),
-                                                 Schema.Field.of(TEST_RECORD_SUB_3_FIELD_NAME, Schema.recordOf(TEST_SUB_RECORD_FIELD_NAME,
-                                                                                                               Schema.Field.of(TEST_SUB_RECORD_SUB_1_FIELD_NAME, Schema.of(Schema.Type.STRING))))
+                                                 Schema.Field.of(TEST_RECORD_SUB_1_FIELD_NAME, Schema.of(Schema.Type.
+                                                                                                           STRING)),
+                                                 Schema.Field.of(TEST_RECORD_SUB_2_FIELD_NAME, Schema.of(Schema.Type.
+                                                                                                           BOOLEAN)),
+                                                 Schema.Field.of(TEST_RECORD_SUB_3_FIELD_NAME, Schema.recordOf(
+                                                   TEST_SUB_RECORD_FIELD_NAME,
+                                                   Schema.Field.of(TEST_SUB_RECORD_SUB_1_FIELD_NAME,
+                                                                   Schema.of(Schema.Type.STRING))))
                                                )),
                                                Schema.Field.of(TEST_ARRAY_FIELD_NAME, Schema.arrayOf(
                                                  Schema.recordOf(TEST_SUB_ARRAY_RECORD_FIELD_NAME,
-                                                                 Schema.Field.of(TEST_SUB_ARRAY_SUB_1_FIELD_NAME, Schema.of(Schema.Type.STRING)))
+                                                                 Schema.Field.of(TEST_SUB_ARRAY_SUB_1_FIELD_NAME,
+                                                                                 Schema.of(Schema.Type.STRING)))
                                                )),
                                                Schema.Field.of(TEST_MAP_FIELD_NAME, Schema.mapOf(
                                                  Schema.of(Schema.Type.STRING),
@@ -110,7 +118,8 @@ public class GoogleSheetsSinkConfigTest {
     List<ValidationFailure> failures = collector.getValidationFailures();
     Assert.assertEquals(4, failures.size());
     Assert.assertEquals(String.format(GoogleSheetsSinkConfig.RECORD_FIELD_SCHEMA_MESSAGE,
-                                      TEST_RECORD_FIELD_NAME, TEST_RECORD_SUB_3_FIELD_NAME, Schema.Type.RECORD, null), failures.get(0).getMessage());
+                                      TEST_RECORD_FIELD_NAME, TEST_RECORD_SUB_3_FIELD_NAME, Schema.Type.RECORD, null),
+                        failures.get(0).getMessage());
     Assert.assertEquals(String.format(GoogleSheetsSinkConfig.ARRAY_COMPONENTS_SCHEMA_MESSAGE,
                                       TEST_ARRAY_FIELD_NAME, Schema.Type.RECORD, null), failures.get(1).getMessage());
     Assert.assertEquals(String.format(GoogleSheetsSinkConfig.TOP_LEVEL_SCHEMA_MESSAGE,

@@ -34,7 +34,8 @@ public class GoogleDriveRecordWriter extends RecordWriter<NullWritable, FileFrom
   private GoogleDriveSinkClient driveSinkClient;
 
   /**
-   *   Constructor for GoogleDriveRecordWriter object.
+   * Constructor for GoogleDriveRecordWriter object.
+   *
    * @param taskAttemptContext the task attempt context
    * @throws IOException on issues with file reading
    */

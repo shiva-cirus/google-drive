@@ -30,10 +30,11 @@ public class SchemaBuilder {
   public static final String SCHEMA_ROOT_RECORD_NAME = "RowRecord";
 
   /**
-   *  Returns  the instance of Schema.
-   * @param config  The GoogleSheetsSourceConfig
-   * @param dataSchemaInfo   The list of  ColumnComplexSchemaInfo
-   * @return   The instance of Schema
+   * Returns  the instance of Schema.
+   *
+   * @param config         The GoogleSheetsSourceConfig
+   * @param dataSchemaInfo The list of  ColumnComplexSchemaInfo
+   * @return The instance of Schema
    */
   public static Schema buildSchema(GoogleSheetsSourceConfig config,
                                    List<ColumnComplexSchemaInfo> dataSchemaInfo) {
@@ -51,7 +52,8 @@ public class SchemaBuilder {
           .map(c -> Schema.Field.of(c.getHeaderTitle(), Schema.nullableOf(c.getDataSchema())))
           .collect(Collectors.toList());
         generalFields.add(Schema.Field.of(schemaInfo.getHeaderTitle(),
-                                          Schema.nullableOf(Schema.recordOf(schemaInfo.getHeaderTitle(), recordFields))));
+                                          Schema.nullableOf(Schema.recordOf(schemaInfo.getHeaderTitle(),
+                                                                            recordFields))));
       }
     }
 

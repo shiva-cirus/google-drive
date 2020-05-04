@@ -42,12 +42,13 @@ public class ModifiedDateRangeUtils {
                       "(\\.[0-9]+)?(([Zz])|([\\+|\\-]([01][0-9]|2[0-3]):[0-5][0-9]))?)?$");
 
   /**
-   *  Returns the instance of DateRange.
-   * @param modifiedDateRangeType  The modified date range type   with
-   * @param startDate              The start date  with
-   * @param endDate                The end date
+   * Returns the instance of DateRange.
+   *
+   * @param modifiedDateRangeType The modified date range type   with
+   * @param startDate             The start date  with
+   * @param endDate               The end date
    * @return The instance of DateRange
-   * @throws InterruptedException  if there was an error getting the column information for the data
+   * @throws InterruptedException if there was an error getting the column information for the data
    */
   public static DateRange getDataRange(ModifiedDateRangeType modifiedDateRangeType, String startDate, String endDate)
     throws InterruptedException {
@@ -145,8 +146,9 @@ public class ModifiedDateRangeUtils {
   }
 
   /**
-   *  Returns the String.
-   * @param dateRange  The data range is reference of DateRange
+   * Returns the String.
+   *
+   * @param dateRange The data range is reference of DateRange
    * @return The String
    */
   public static String getFilterValue(DateRange dateRange) {

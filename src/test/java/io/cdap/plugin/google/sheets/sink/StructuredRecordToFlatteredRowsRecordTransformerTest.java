@@ -43,7 +43,8 @@ public class StructuredRecordToFlatteredRowsRecordTransformerTest {
   private static final LocalDate TEST_DATE = LocalDate.of(2019, 03, 14);
   private static final LocalTime TEST_TIME = LocalTime.of(13, 03, 14);
   private static final ZonedDateTime TEST_DATE_TIME = ZonedDateTime.of(TEST_DATE, TEST_TIME,
-                                                                       StructuredRecordToFlatteredRowsRecordTransformer.UTC_ZONE_ID);
+                                                                       StructuredRecordToFlatteredRowsRecordTransformer
+                                                                         .UTC_ZONE_ID);
   private static final String SPREADSHEET_NAME = "spName";
   private static final String SHEET_TITLE = "title";
   private static final String PRESET_SPREADSHEET_TITLE = "generalName";
@@ -103,11 +104,13 @@ public class StructuredRecordToFlatteredRowsRecordTransformerTest {
     StructuredRecord dateRecord = builder.build();
 
     Method processDateTimeValueMethod = transformer.getClass().getDeclaredMethod("processDateTimeValue",
-                                                                                 Schema.LogicalType.class, Schema.class, Object.class);
+                                                                                 Schema.LogicalType.class, Schema.class
+      , Object.class);
     processDateTimeValueMethod.setAccessible(true);
 
     CellData resultCell = (CellData) processDateTimeValueMethod.invoke(transformer,
-                                                                       dataSchema.getField(DATE_FIELD_NAME).getSchema().getLogicalType(),
+                                                                       dataSchema.getField(DATE_FIELD_NAME).getSchema()
+                                                                         .getLogicalType(),
                                                                        Schema.of(Schema.LogicalType.DATE),
                                                                        dateRecord.get(DATE_FIELD_NAME));
     Assert.assertNotNull(resultCell.getUserEnteredFormat());
@@ -137,11 +140,13 @@ public class StructuredRecordToFlatteredRowsRecordTransformerTest {
     StructuredRecord dateRecord = builder.build();
 
     Method processDateTimeValueMethod = transformer.getClass().getDeclaredMethod("processDateTimeValue",
-                                                                                 Schema.LogicalType.class, Schema.class, Object.class);
+                                                                                 Schema.LogicalType.class, Schema.class,
+                                                                                 Object.class);
     processDateTimeValueMethod.setAccessible(true);
 
     CellData resultCell = (CellData) processDateTimeValueMethod.invoke(transformer,
-                                                                       timeSchema.getField(TIME_FIELD_NAME).getSchema().getLogicalType(),
+                                                                       timeSchema.getField(TIME_FIELD_NAME).getSchema()
+                                                                         .getLogicalType(),
                                                                        Schema.of(Schema.LogicalType.TIME_MILLIS),
                                                                        dateRecord.get(TIME_FIELD_NAME));
     Assert.assertNotNull(resultCell.getUserEnteredFormat());
@@ -162,20 +167,24 @@ public class StructuredRecordToFlatteredRowsRecordTransformerTest {
   public void testProcessDateTimeDateTimeValue() throws NoSuchMethodException, InvocationTargetException,
     IllegalAccessException {
     StructuredRecordToFlatteredRowsRecordTransformer transformer =
-      new StructuredRecordToFlatteredRowsRecordTransformer("", "", "", "", false);
+      new StructuredRecordToFlatteredRowsRecordTransformer("", "",
+                                                           "", "", false);
 
     Schema dateTimeSchema = Schema.recordOf(SCHEMA_NAME,
-                                            Schema.Field.of(DATE_TIME_FIELD_NAME, Schema.of(Schema.LogicalType.TIMESTAMP_MILLIS)));
+                                            Schema.Field.of(DATE_TIME_FIELD_NAME, Schema.of(Schema.LogicalType.
+                                                                                              TIMESTAMP_MILLIS)));
     StructuredRecord.Builder builder = StructuredRecord.builder(dateTimeSchema);
     builder.setTimestamp(DATE_TIME_FIELD_NAME, TEST_DATE_TIME);
     StructuredRecord dateRecord = builder.build();
 
     Method processDateTimeValueMethod = transformer.getClass().getDeclaredMethod("processDateTimeValue",
-                                                                                 Schema.LogicalType.class, Schema.class, Object.class);
+                                                                                 Schema.LogicalType.class,
+                                                                                 Schema.class, Object.class);
     processDateTimeValueMethod.setAccessible(true);
 
     CellData resultCell = (CellData) processDateTimeValueMethod.invoke(transformer,
-                                                                       dateTimeSchema.getField(DATE_TIME_FIELD_NAME).getSchema().getLogicalType(),
+                                                                       dateTimeSchema.getField(DATE_TIME_FIELD_NAME)
+                                                                         .getSchema().getLogicalType(),
                                                                        Schema.of(Schema.LogicalType.TIMESTAMP_MILLIS),
                                                                        dateRecord.get(DATE_TIME_FIELD_NAME));
     Assert.assertNotNull(resultCell.getUserEnteredFormat());

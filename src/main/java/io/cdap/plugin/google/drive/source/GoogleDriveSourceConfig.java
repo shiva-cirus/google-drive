@@ -99,7 +99,8 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
   private transient Schema schema = null;
 
   /**
-   *  Returns  the instance of Schema.
+   * Returns  the instance of Schema.
+   *
    * @return The  instance of Schema
    */
   public Schema getSchema() {
@@ -111,8 +112,9 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the  ValidationResult.
-   * @param collector   the failure collector is provided
-   * @return  The ValidationResult
+   *
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
    */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
@@ -169,7 +171,8 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * returns the list of ExportedType.
-   * @return  The list of ExportedType
+   *
+   * @return The list of ExportedType
    */
   public List<ExportedType> getFileTypesToPull() {
     if (Strings.isNullOrEmpty(fileTypesToPull)) {

@@ -35,10 +35,11 @@ public class RecordsBatchProcessor implements Callable {
   private final Semaphore threadsSemaphore;
 
   /**
-   *   Constructor for RecordsBatchProcessor object.
-   * @param sheetsSinkClient      The sheets sink client
-   * @param recordsBatch          The records batch
-   * @param threadsSemaphore      The threads semaphore
+   * Constructor for RecordsBatchProcessor object.
+   *
+   * @param sheetsSinkClient The sheets sink client
+   * @param recordsBatch     The records batch
+   * @param threadsSemaphore The threads semaphore
    */
   public RecordsBatchProcessor(GoogleSheetsSinkClient sheetsSinkClient, RecordsBatch recordsBatch,
                                Semaphore threadsSemaphore) {

@@ -43,9 +43,10 @@ public enum HeaderSelection {
   }
 
   /**
-   *  Returns the  HeaderSelection.
-   * @param value  The value is String type
-   * @return   The  HeaderSelection
+   * Returns the  HeaderSelection.
+   *
+   * @param value The value is String type
+   * @return The  HeaderSelection
    */
   public static HeaderSelection fromValue(String value) {
     return Stream.of(HeaderSelection.values())

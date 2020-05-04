@@ -124,7 +124,9 @@ public class GoogleSheetsSinkClientTest {
     headerNames.stream().forEach(h -> complexHeader.addHeader(new ComplexHeader(h)));
 
     Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("calculateHeaderMerges",
-                                                                                        ComplexHeader.class, List.class, int.class, int.class, int.class);
+                                                                                        ComplexHeader.class,
+                                                                                        List.class, int.class,
+                                                                                        int.class, int.class);
     calculateHeaderMergesMethod.setAccessible(true);
 
     List<GridRange> headerMergeRanges = new ArrayList<>();
@@ -144,8 +146,9 @@ public class GoogleSheetsSinkClientTest {
 
     ComplexHeader complexHeader = new ComplexHeader("h");
 
-    Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("calculateHeaderMerges",
-                                                                                        ComplexHeader.class, List.class, int.class, int.class, int.class);
+    Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.
+      getDeclaredMethod("calculateHeaderMerges", ComplexHeader.class, List.class, int.class,
+                        int.class, int.class);
     calculateHeaderMergesMethod.setAccessible(true);
 
     List<GridRange> headerMergeRanges = new ArrayList<>();
@@ -178,12 +181,14 @@ public class GoogleSheetsSinkClientTest {
     complexHeader.addHeader(new ComplexHeader("h1"));
     complexHeader.addHeader(complexSubHeader);
 
-    Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("calculateHeaderMerges",
-                                                                                        ComplexHeader.class, List.class, int.class, int.class, int.class);
+    Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.
+      getDeclaredMethod("calculateHeaderMerges", ComplexHeader.class, List.class, int.class,
+                        int.class, int.class);
     calculateHeaderMergesMethod.setAccessible(true);
 
     List<GridRange> headerMergeRanges = new ArrayList<>();
-    calculateHeaderMergesMethod.invoke(sinkClient, complexHeader, headerMergeRanges, 0, complexHeader.getDepth(), 0);
+    calculateHeaderMergesMethod.invoke(sinkClient, complexHeader, headerMergeRanges, 0, complexHeader.getDepth()
+      , 0);
 
     Assert.assertEquals(4, headerMergeRanges.size());
 
@@ -221,8 +226,8 @@ public class GoogleSheetsSinkClientTest {
       headerRows.add(rowData);
     }
 
-    Method populateHeaderRowsMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("populateHeaderRows",
-                                                                                     ComplexHeader.class, List.class, int.class, int.class);
+    Method populateHeaderRowsMethod = GoogleSheetsSinkClient.class.
+      getDeclaredMethod("populateHeaderRows", ComplexHeader.class, List.class, int.class, int.class);
     populateHeaderRowsMethod.setAccessible(true);
 
     populateHeaderRowsMethod.invoke(sinkClient, complexHeader, headerRows, 0, 0);
@@ -270,8 +275,8 @@ public class GoogleSheetsSinkClientTest {
       headerRows.add(rowData);
     }
 
-    Method populateHeaderRowsMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("populateHeaderRows",
-                                                                                     ComplexHeader.class, List.class, int.class, int.class);
+    Method populateHeaderRowsMethod = GoogleSheetsSinkClient.class
+      .getDeclaredMethod("populateHeaderRows", ComplexHeader.class, List.class, int.class, int.class);
     populateHeaderRowsMethod.setAccessible(true);
 
     populateHeaderRowsMethod.invoke(sinkClient, complexHeader, headerRows, 0, 0);
@@ -308,7 +313,8 @@ public class GoogleSheetsSinkClientTest {
     ComplexHeader complexHeaderWrapper = new ComplexHeader("root");
     realHeaders.stream().forEach(h -> complexHeaderWrapper.addHeader(new ComplexHeader(h)));
     FlatteredRowsRecord rowsRecord = new FlatteredRowsRecord("spreadsheetName", "sheetTitle",
-                                                             complexHeaderWrapper, Collections.emptyList(), Collections.emptyList());
+                                                             complexHeaderWrapper, Collections.emptyList(),
+                                                             Collections.emptyList());
 
     Method prepareContentRequestMethod =
       GoogleSheetsSinkClient.class.getDeclaredMethod("prepareFlatteredRequest", Integer.class,

@@ -157,7 +157,9 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
       if (isNewSheet || isNewGroupTask) {
 
         bufferedMultipleRowRecord = googleSheetsSourceClient.getContent(fileId, currentSheetTitle,
-                                                                        currentGroupedRowTask.getRowNumber(), currentGroupedRowTask.getLength(), resolvedHeaders,
+                                                                        currentGroupedRowTask.getRowNumber(),
+                                                                        currentGroupedRowTask.getLength(),
+                                                                        resolvedHeaders,
                                                                         isNewSheet ? metadataCoordinates : null);
 
         if (isNewSheet) {
@@ -170,7 +172,8 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
       throw new RuntimeException(
         String.format("Exception on retrieving sheet content, file id: '%s', sheet title: '%s', " +
                         "start row number: '%d', length of the group: '%d'",
-                      fileId, currentSheetTitle, currentGroupedRowTask.getRowNumber(), currentGroupedRowTask.getLength()), e);
+                      fileId, currentSheetTitle, currentGroupedRowTask.getRowNumber(),
+                      currentGroupedRowTask.getLength()), e);
     }
 
     processedRowsCounter++;

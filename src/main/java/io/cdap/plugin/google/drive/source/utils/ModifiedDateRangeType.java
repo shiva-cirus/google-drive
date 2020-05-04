@@ -59,9 +59,10 @@ public enum ModifiedDateRangeType {
   }
 
   /**
-   *  Returns ModifiedDateRangeType.
+   * Returns ModifiedDateRangeType.
+   *
    * @param value The value is String type.
-   * @return  The  ModifiedDateRangeType
+   * @return The  ModifiedDateRangeType
    */
   public static ModifiedDateRangeType fromValue(String value) {
     return Stream.of(ModifiedDateRangeType.values())

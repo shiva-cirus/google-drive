@@ -86,10 +86,11 @@ public class SchemaBuilder {
   public static final String IMAGE_ALTITUDE_FIELD_NAME = "altitude";
 
   /**
-   *   Returns the instance of Schema.
-   * @param fields      The Fields are list of fields
-   * @param bodyFormat  The BodyFormat
-   * @return  The instance of Schema
+   * Returns the instance of Schema.
+   *
+   * @param fields     The Fields are list of fields
+   * @param bodyFormat The BodyFormat
+   * @return The instance of Schema
    */
   public static Schema buildSchema(List<String> fields, BodyFormat bodyFormat) {
     List<String> extendedFields = new ArrayList<>(fields);
@@ -105,9 +106,10 @@ public class SchemaBuilder {
   }
 
   /**
-   *  Returns the field of Schema.
-   * @param name  The name is String type
-   * @param bodyFormat  The BodyFormat
+   * Returns the field of Schema.
+   *
+   * @param name       The name is String type
+   * @param bodyFormat The BodyFormat
    * @return The field of Schema
    */
   public static Schema.Field getTopLevelField(String name, BodyFormat bodyFormat) {
@@ -158,8 +160,9 @@ public class SchemaBuilder {
 
   /**
    * Returns type is void.
-   * @param fields        The fields are list of String
-   * @param schemaFields   The field of Schema
+   *
+   * @param fields       The fields are list of String
+   * @param schemaFields The field of Schema
    */
   public static void processImageMediaMetadata(List<String> fields, List<Schema.Field> schemaFields) {
     List<String> imageMediaFields =
@@ -191,8 +194,9 @@ public class SchemaBuilder {
 
   /**
    * Returns type is void.
-   * @param fields        The fields are list of String
-   * @param schemaFields   The field of Schema
+   *
+   * @param fields       The fields are list of String
+   * @param schemaFields The field of Schema
    */
   public static void processVideoMediaMetadata(List<String> fields, List<Schema.Field> schemaFields) {
     List<String> videoMediaFields =
@@ -209,9 +213,11 @@ public class SchemaBuilder {
                                                                          videoMediaFieldsSchemas))));
     }
   }
+
   /**
-   *  Returns  the field of Schema.
-   * @param name  The name is String type
+   * Returns  the field of Schema.
+   *
+   * @param name The name is String type
    * @return The  field of Schema
    */
   public static Schema.Field fromImageMediaMetadataName(String name) {
@@ -248,9 +254,11 @@ public class SchemaBuilder {
         }
     }
   }
+
   /**
-   *  Returns  the field of Schema.
-   * @param name  The name is String type
+   * Returns  the field of Schema.
+   *
+   * @param name The name is String type
    * @return The  field of Schema
    */
   public static Schema.Field fromVideoMediaMetadataName(String name) {
@@ -266,8 +274,9 @@ public class SchemaBuilder {
   }
 
   /**
-   *  Returns  the field of Schema.
-   * @param name  The name is String type
+   * Returns  the field of Schema.
+   *
+   * @param name The name is String type
    * @return The  field of Schema
    */
   public static Schema.Field fromLocationName(String name) {

@@ -46,6 +46,7 @@ public class ComplexHeader {
 
   /**
    * Returns the int.
+   *
    * @return The int
    */
   public int getDepth() {
@@ -62,7 +63,8 @@ public class ComplexHeader {
 
   /**
    * Returns the int.
-   * @return  The int
+   *
+   * @return The int
    */
   public int getWidth() {
     if (CollectionUtils.isEmpty(subHeaders)) {

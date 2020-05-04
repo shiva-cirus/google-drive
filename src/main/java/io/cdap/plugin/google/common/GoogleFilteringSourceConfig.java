@@ -68,8 +68,9 @@ public class GoogleFilteringSourceConfig extends GoogleRetryingConfig {
 
   /**
    * Returns the ValidationResult.
-   * @param collector   the failure collector is provided
-   * @return  The ValidationResult
+   *
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
    */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);

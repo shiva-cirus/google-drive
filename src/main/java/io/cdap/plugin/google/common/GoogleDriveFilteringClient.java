@@ -49,16 +49,19 @@ public class GoogleDriveFilteringClient<C extends GoogleFilteringSourceConfig> e
 
   /**
    * Returns the list of file.
-   * @param exportedTypes  the exported types are provided with
+   *
+   * @param exportedTypes the exported types are provided with
    * @param filesNumber   the number of files is provided
    * @return The list of file
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException     if there was an error getting the column information for the retry
    */
   public List<File> getFilesSummary(List<ExportedType> exportedTypes, int filesNumber)
     throws ExecutionException, RetryException {
     Retryer<List<File>> filesSummaryRetryer = APIRequestRetryer.getRetryer(config,
-                                                                           String.format("Get files summary, files: '%d'.", filesNumber));
+                                                                           String.format(
+                                                                             "Get files summary, files: '%d'" +
+                                                                               ".", filesNumber));
     return filesSummaryRetryer.call(() -> {
       List<File> files = new ArrayList<>();
       String nextToken = "";

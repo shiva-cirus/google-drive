@@ -66,15 +66,16 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
 
   /**
    * Returns the list of Sheet.
+   *
    * @param spreadsheetId The spread sheet id is provided
-   * @return  The list of Sheet
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   * @return The list of Sheet
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException     if there was an error getting the column information for the retry
    */
   public List<com.google.api.services.sheets.v4.model.Sheet> getSheets(String spreadsheetId)
     throws ExecutionException, RetryException {
     Retryer<List<com.google.api.services.sheets.v4.model.Sheet>> sheetsRetryer = APIRequestRetryer.getRetryer(config,
-                                                                                                              String.format("Get spreadsheet, id: '%s'.", spreadsheetId));
+    String.format("Get spreadsheet, id: '%s'.", spreadsheetId));
     return sheetsRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets();
@@ -83,16 +84,19 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
 
   /**
    * Returns the list of String.
+   *
    * @param spreadsheetId The spread sheet id is provided with
-   * @param indexes   the indexes are provided
-   * @return  The list of String
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   * @param indexes       the indexes are provided
+   * @return The list of String
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException     if there was an error getting the column information for the retry
    */
   public List<String> getSheetsTitles(String spreadsheetId, List<Integer> indexes)
     throws ExecutionException, RetryException {
     Retryer<List<String>> sheetTitlesRetryer = APIRequestRetryer.getRetryer(config,
-                                                                            String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
+                                                                            String.format(
+                                                                              "Get sheet titles, spreadsheet id: '%s'."
+                                                                              , spreadsheetId));
     return sheetTitlesRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets().stream().filter(s -> indexes.contains(s.getProperties().getIndex()))
@@ -102,14 +106,17 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
 
   /**
    * Returns the list of String.
+   *
    * @param spreadsheetId The spread sheet id is provided
-   * @return  The list of String
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   * @return The list of String
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException     if there was an error getting the column information for the retry
    */
   public List<String> getSheetsTitles(String spreadsheetId) throws ExecutionException, RetryException {
     Retryer<List<String>> sheetsTitlesRetryer = APIRequestRetryer.getRetryer(config,
-                                                                             String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
+                                                                             String.format(
+                                                                               "Get sheet titles, spreadsheet id: " +
+                                                                                 "'%s'.", spreadsheetId));
     return sheetsTitlesRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets().stream().map(s -> s.getProperties().getTitle()).collect(Collectors.toList());
@@ -141,8 +148,11 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       prepareContentRequest(spreadsheetId, sheetTitle, rowNumber, length, metadataCoordinates);
 
     Retryer<Spreadsheet> contentRetryer = APIRequestRetryer.getRetryer(config,
-                                                                       String.format("Get content, spreadsheet id: '%s', sheet title: '%s', row number: '%d'.",
-                                                                                     spreadsheetId, sheetTitle, rowNumber));
+                                                                       String.format("Get content, spreadsheet id: " +
+                                                                                       "'%s', sheet title: '%s'," +
+                                                                                       " row number: '%d'.",
+                                                                                     spreadsheetId,
+                                                                                     sheetTitle, rowNumber));
     Spreadsheet spreadsheet = contentRetryer.call(() -> contentRequest.execute());
     checkSingleSheetRetrieved(spreadsheet);
 

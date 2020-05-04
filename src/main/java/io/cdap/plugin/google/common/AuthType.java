@@ -41,13 +41,15 @@ public enum AuthType {
 
   /**
    * Returns the AuthType.
+   *
    * @param value the value is string type.
    * @return The AuthType
    */
   public static AuthType fromValue(String value) {
     return Arrays.stream(AuthType.values()).filter(authtype -> authtype.getValue().equals(value))
       .findAny().orElseThrow(() ->
-                               new InvalidPropertyTypeException(GoogleAuthBaseConfig.AUTH_TYPE_LABEL, value, getAllowedValues()));
+                               new InvalidPropertyTypeException(GoogleAuthBaseConfig.AUTH_TYPE_LABEL, value,
+                                                                getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {

@@ -37,7 +37,8 @@ public class GoogleSheetsSplit extends InputSplit implements Writable {
   }
 
   /**
-   *     Constructor for GoogleSheetsSplit object.
+   * Constructor for GoogleSheetsSplit object.
+   *
    * @param fileId
    * @param headers
    * @param metadates

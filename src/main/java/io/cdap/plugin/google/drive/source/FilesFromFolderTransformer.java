@@ -31,9 +31,10 @@ import java.time.ZonedDateTime;
 public class FilesFromFolderTransformer {
   /**
    * Returns the StructuredRecord
-   * @param fileFromFolder  the file from folder is provided with
-   * @param schema  the schema is provided.
-   * @return  The StructuredRecord
+   *
+   * @param fileFromFolder the file from folder is provided with
+   * @param schema         the schema is provided.
+   * @return The StructuredRecord
    */
   public static StructuredRecord transform(FileFromFolder fileFromFolder, Schema schema) {
     StructuredRecord.Builder builder = StructuredRecord.builder(schema);

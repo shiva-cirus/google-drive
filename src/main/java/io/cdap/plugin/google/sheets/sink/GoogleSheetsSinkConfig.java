@@ -61,8 +61,10 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
   public static final List<Schema.LogicalType> SUPPORTED_LOGICAL_TYPES = Arrays.asList(Schema.LogicalType.DATE,
                                                                                        Schema.LogicalType.TIME_MILLIS,
                                                                                        Schema.LogicalType.TIME_MICROS,
-                                                                                       Schema.LogicalType.TIMESTAMP_MILLIS,
-                                                                                       Schema.LogicalType.TIMESTAMP_MICROS,
+                                                                                       Schema.LogicalType.
+                                                                                         TIMESTAMP_MILLIS,
+                                                                                       Schema.LogicalType.
+                                                                                         TIMESTAMP_MICROS,
                                                                                        Schema.LogicalType.DECIMAL);
 
   public static final List<Schema.Type> SUPPORTED_TYPES = Arrays.asList(Schema.Type.STRING,
@@ -162,9 +164,10 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
   private boolean skipNameFields;
 
   /**
-   *  Validate that the given schema is compatible with the given extension.
-   * @param collector  failure collector with
-   * @param schema  the schema to check compatibility
+   * Validate that the given schema is compatible with the given extension.
+   *
+   * @param collector failure collector with
+   * @param schema    the schema to check compatibility
    */
   public void validate(FailureCollector collector, Schema schema) {
     super.validate(collector);
@@ -195,7 +198,8 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
         checkSupportedSchemas(collector, componentSchema, SUPPORTED_LOGICAL_TYPES, SUPPORTED_NESTED_TYPES,
                               String.format(ARRAY_COMPONENTS_SCHEMA_MESSAGE, field.getName(),
                                             componentSchema.getType(), componentSchema.getLogicalType()),
-                              String.format(ARRAY_COMPONENTS_SCHEMA_CORRECTIVE_MESSAGE, SUPPORTED_NESTED_TYPES.toString(),
+                              String.format(ARRAY_COMPONENTS_SCHEMA_CORRECTIVE_MESSAGE,
+                                            SUPPORTED_NESTED_TYPES.toString(),
                                             SUPPORTED_LOGICAL_TYPES.toString()));
       }
       if (Schema.Type.RECORD.equals(fieldSchema.getType())) {
@@ -205,7 +209,8 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
                                 String.format(RECORD_FIELD_SCHEMA_MESSAGE, field.getName(), nestedField.getName(),
                                               nestedComponentSchema.getType(), nestedComponentSchema.getLogicalType()),
                                 String.format(String.format(RECORD_FIELD_SCHEMA_CORRECTIVE_MESSAGE,
-                                                            SUPPORTED_NESTED_TYPES.toString(), SUPPORTED_LOGICAL_TYPES.toString())));
+                                                            SUPPORTED_NESTED_TYPES.toString(),
+                                                            SUPPORTED_LOGICAL_TYPES.toString())));
         }
       }
     }

@@ -53,7 +53,8 @@ public enum ExportedType {
 
   /**
    * Returns the  ExportedType.
-   * @param value  the vale is String type
+   *
+   * @param value the vale is String type
    * @return The ExportedType
    */
   public static ExportedType fromValue(String value) {

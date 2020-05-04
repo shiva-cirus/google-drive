@@ -63,11 +63,12 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
 
   /**
    * Constructor for StructuredRecordToFlatteredRowsRecordTransformer object.
-   * @param spreadsheetNameFieldName  The spread sheet Name Field Name
-   * @param sheetNameFieldName        The sheet Name Field Name
-   * @param spreadsheetName           The spread sheet Name
-   * @param sheetName                 The sheet Name
-   * @param skipNameFields            The skip Name Fields
+   *
+   * @param spreadsheetNameFieldName The spread sheet Name Field Name
+   * @param sheetNameFieldName       The sheet Name Field Name
+   * @param spreadsheetName          The spread sheet Name
+   * @param sheetName                The sheet Name
+   * @param skipNameFields           The skip Name Fields
    */
   public StructuredRecordToFlatteredRowsRecordTransformer(String spreadsheetNameFieldName,
                                                           String sheetNameFieldName,
@@ -82,9 +83,10 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
   }
 
   /**
-   *   Returns selected StructuredRecord.
+   * Returns selected StructuredRecord.
+   *
    * @param input The StructuredRecord
-   * @return  the instance of StructuredRecord
+   * @return the instance of StructuredRecord
    */
   public FlatteredRowsRecord transform(StructuredRecord input) {
     List<List<CellData>> data = new ArrayList<>();

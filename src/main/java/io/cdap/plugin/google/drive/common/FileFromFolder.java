@@ -27,7 +27,8 @@ public class FileFromFolder {
   private final File file;
 
   /**
-   *    Constructor for FileFromFolder object.
+   * Constructor for FileFromFolder object.
+   *
    * @param content the content is provided with
    * @param offset  the offset is provided with
    * @param file    the file is provided
@@ -39,9 +40,10 @@ public class FileFromFolder {
   }
 
   /**
-   *     Constructor for FileFromFolder object.
-   * @param content  the content is provided with
-   * @param file     the file is provided
+   * Constructor for FileFromFolder object.
+   *
+   * @param content the content is provided with
+   * @param file    the file is provided
    */
   public FileFromFolder(byte[] content, File file) {
     this.content = content;

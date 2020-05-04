@@ -40,9 +40,10 @@ public class GoogleDriveSinkClient extends GoogleDriveClient<GoogleDriveSinkConf
 
   /**
    * Create file that the given FileFromFolder is compatible with the given extension.
-   * @param fileFromFolder  the  file From Folder is provided
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   *
+   * @param fileFromFolder the  file From Folder is provided
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException     if there was an error getting the column information for the retry
    */
   public void createFile(FileFromFolder fileFromFolder) throws ExecutionException, RetryException {
     APIRequestRetryer.getRetryer(config,

@@ -230,7 +230,8 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the instance of Schema.
-   * @return  The instance of Schema
+   *
+   * @return The instance of Schema
    */
   public Schema getSchema() {
     if (schema == null) {
@@ -245,8 +246,9 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the ValidationResult
-   * @param collector   the failure collector is provided
-   * @return  The ValidationResult
+   *
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
    */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
@@ -403,8 +405,9 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
             requiredTitles.put(currentSpreadsheetId, getSheetsIdentifiers());
             break;
           case NUMBERS:
-            requiredTitles.put(currentSpreadsheetId, sheetsSourceClient.getSheetsTitles(currentSpreadsheetId,
-                                                                                        getSheetsIdentifiers().stream().map(Integer::parseInt).collect(Collectors.toList())));
+            requiredTitles.put(currentSpreadsheetId, sheetsSourceClient.
+              getSheetsTitles(currentSpreadsheetId, getSheetsIdentifiers().
+                stream().map(Integer::parseInt).collect(Collectors.toList())));
             break;
           default:
             collector.addFailure(String.format("'%s' is not processed value.", sheetsToPull.toString()), null)
@@ -429,8 +432,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
           currentSheetTitle = sheetTitle;
 
           // get rows for columns and data
-          MergesForNumeredRows headerDataRows = sheetsSourceClient.getSingleRows(currentSpreadsheetId,
-                                                                                 currentSheetTitle, new HashSet<>(Arrays.asList(columnNamesRow, subColumnNamesRow, firstDataRow)));
+          MergesForNumeredRows headerDataRows = sheetsSourceClient.
+            getSingleRows(currentSpreadsheetId, currentSheetTitle, new HashSet<>(Arrays.asList(columnNamesRow,
+                                                                                               subColumnNamesRow,
+                                                                                               firstDataRow)));
 
           List<CellData> columnsRow = headerDataRows.getNumeredRows().get(columnNamesRow);
           List<CellData> subColumnsRow = headerDataRows.getNumeredRows().get(subColumnNamesRow);
@@ -475,7 +480,8 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
           Map.Entry<String, List<String>> firstFileTitles = requiredTitles.entrySet().iterator().next();
           MergesForNumeredRows firstRowData = sheetsSourceClient.getSingleRows(firstFileTitles.getKey(),
-                                                                               firstFileTitles.getValue().get(0), Collections.singleton(firstDataRow));
+                                                                               firstFileTitles.getValue().get(0),
+                                                                               Collections.singleton(firstDataRow));
           List<CellData> dataCells = firstRowData.getNumeredRows().get(firstDataRow);
           if (CollectionUtils.isEmpty(dataCells)) {
             dataSchemaInfo = defaultGeneratedHeaders(getLastDataColumn());
@@ -569,7 +575,8 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     if (!COLUMN_NAME.matcher(title).matches()) {
       String defaultColumnName = ColumnAddressConverter.getColumnName(columnIndex + 1);
       LOG.warn(String.format("Original column name '%s' doesn't satisfy column name requirements '%s', " +
-                               "the default column name '%s' will be used.", title, COLUMN_NAME.pattern(), defaultColumnName));
+                               "the default column name '%s' will be used.", title, COLUMN_NAME.pattern(),
+                             defaultColumnName));
       return defaultColumnName;
     }
     return title;
@@ -586,8 +593,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     }
     return dataSchema;
   }
+
   /**
    * Returns the int.
+   *
    * @return The int
    */
   public int getActualFirstDataRow() {
@@ -608,6 +617,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the int.
+   *
    * @return The int
    */
   public int getActualLastDataRow() {
@@ -797,6 +807,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the int.
+   *
    * @return The int
    */
   public int getColumnNamesRow() {
@@ -857,7 +868,8 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the map which have key is Integer and value is map.
-   * @return   The Map which have key is Integer and value is map
+   *
+   * @return The Map which have key is Integer and value is map
    */
   public Map<Integer, Map<String, List<String>>> getHeaderTitlesRow() {
     Map<Integer, Map<String, List<String>>> titles = new HashMap<>();
@@ -877,8 +889,9 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
   }
 
   /**
-   *  Returns the list of MetadataKeyValueAddress.
-   * @return  the List of MetadataKeyValueAddress
+   * Returns the list of MetadataKeyValueAddress.
+   *
+   * @return the List of MetadataKeyValueAddress
    */
   public List<MetadataKeyValueAddress> getMetadataCoordinates() {
     List<MetadataKeyValueAddress> metadataCoordinates = new ArrayList<>();

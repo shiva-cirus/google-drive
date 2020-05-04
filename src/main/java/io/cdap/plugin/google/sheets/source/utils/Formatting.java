@@ -42,9 +42,10 @@ public enum Formatting {
   }
 
   /**
-   *  Retuns the  Formatting.
+   * Retuns the  Formatting.
+   *
    * @param value the value is String type
-   * @return  The Formatting
+   * @return The Formatting
    */
   public static Formatting fromValue(String value) {
     return Stream.of(Formatting.values())

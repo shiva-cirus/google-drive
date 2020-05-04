@@ -29,12 +29,13 @@ public class RowRecord {
   private boolean isEmptyData;
 
   /**
-   *  Constructor for RowRecord object.
-   * @param spreadsheetName  The spread sheet name
-   * @param sheetTitle       The sheet title
-   * @param metadata         The metadata
-   * @param headeredCells    The headered cells
-   * @param isEmptyData      The isEmptyData
+   * Constructor for RowRecord object.
+   *
+   * @param spreadsheetName The spread sheet name
+   * @param sheetTitle      The sheet title
+   * @param metadata        The metadata
+   * @param headeredCells   The headered cells
+   * @param isEmptyData     The isEmptyData
    */
   public RowRecord(String spreadsheetName, String sheetTitle, Map<String, String> metadata,
                    Map<String, ComplexSingleValueColumn> headeredCells, boolean isEmptyData) {

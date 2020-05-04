@@ -43,15 +43,17 @@ public enum BodyFormat {
 
   /**
    * Returns the BodyFormat.
+   *
    * @param value the value is String type.
-   * @return  The BodyFormat
+   * @return The BodyFormat
    */
   public static BodyFormat fromValue(String value) {
     return Stream.of(BodyFormat.values())
       .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
       .findAny()
       .orElseThrow(() ->
-                     new InvalidPropertyTypeException(GoogleDriveSourceConfig.BODY_FORMAT_LABEL, value, getAllowedValues()));
+                     new InvalidPropertyTypeException(GoogleDriveSourceConfig.BODY_FORMAT_LABEL, value,
+                                                      getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {

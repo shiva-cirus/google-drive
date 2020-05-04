@@ -43,7 +43,8 @@ public enum SheetsToPull {
   }
 
   /**
-   *  Returns the SheetsToPull.
+   * Returns the SheetsToPull.
+   *
    * @param value the value is a String type.
    * @return The SheetsToPull
    */
