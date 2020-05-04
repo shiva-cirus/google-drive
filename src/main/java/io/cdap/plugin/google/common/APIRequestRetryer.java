@@ -57,8 +57,9 @@ public abstract class APIRequestRetryer {
 
   /**
    * Returns the Retryer.
-   * @param config  the  google retrying config is provided with
-   * @param operationDescription  the operation description is provided
+   *
+   * @param config               the  google retrying config is provided with
+   * @param operationDescription the operation description is provided
    * @param <T>
    * @return The Retryer
    */

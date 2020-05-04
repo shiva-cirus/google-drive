@@ -66,6 +66,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
 
   /**
    * Returns the list of Sheet.
+   *
    * @param spreadsheetId The spread sheet id is provided
    * @return  The list of Sheet
    * @throws ExecutionException   if there was an error getting the column information for the execution
@@ -83,6 +84,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
 
   /**
    * Returns the list of String.
+   *
    * @param spreadsheetId The spread sheet id is provided with
    * @param indexes   the indexes are provided
    * @return  The list of String
@@ -102,6 +104,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
 
   /**
    * Returns the list of String.
+   *
    * @param spreadsheetId The spread sheet id is provided
    * @return  The list of String
    * @throws ExecutionException   if there was an error getting the column information for the execution

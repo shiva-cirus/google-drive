@@ -62,7 +62,7 @@ public class ComplexHeader {
 
   /**
    * Returns the width.
-   * @return  The int
+   * @return The int
    */
   public int getWidth() {
     if (CollectionUtils.isEmpty(subHeaders)) {

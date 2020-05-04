@@ -43,11 +43,12 @@ public class SheetTransformer {
 
   /**
    * Returns the StructuredRecord.
-   * @param rowRecord  The rowRecord  with
-   * @param schema     The schema    with
-   * @param extractMetadata  The extractMetadata     with
-   * @param metadataRecordName  The metadataRecordName   with
-   * @param addNames            The addNames              with
+   *
+   * @param rowRecord            The rowRecord  with
+   * @param schema               The schema    with
+   * @param extractMetadata      The extractMetadata     with
+   * @param metadataRecordName   The metadataRecordName   with
+   * @param addNames             The addNames              with
    * @param spreadsheetFieldName The spreadsheetFieldName  with
    * @param sheetFieldName       The sheetFieldName
    * @return The StructuredRecord

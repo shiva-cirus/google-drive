@@ -43,9 +43,10 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
   protected NetHttpTransport httpTransport;
 
   /**
-   *    Constructor for GoogleDriveClient object.
-   * @param config  the google auth base config is provided
-   * @throws IOException   on issues with file reading
+   * Constructor for GoogleDriveClient object.
+   *
+   * @param config the google auth base config is provided
+   * @throws IOException on issues with file reading
    */
   public GoogleDriveClient(C config) throws IOException {
     this.config = config;

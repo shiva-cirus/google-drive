@@ -34,7 +34,7 @@ public class GoogleDriveOutputFormatProvider implements OutputFormatProvider {
 
   /**
    * Constructor for GoogleDriveOutputFormatProvider object.
-   * @param config  the GoogleDriveSinkConfig is provided
+   * @param config the GoogleDriveSinkConfig is provided
    */
   public GoogleDriveOutputFormatProvider(GoogleDriveSinkConfig config) {
     this.configMap = new ImmutableMap.Builder<String, String>()

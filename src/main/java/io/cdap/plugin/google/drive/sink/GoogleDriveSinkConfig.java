@@ -53,7 +53,7 @@ public class GoogleDriveSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
     "Is optional. In the case it is not set Google API will try to recognize file's MIME type automatically.")
   @Macro
   protected String schemaMimeFieldName;
-  
+
   /**
    * Validate that the given schema is compatible with the given extension.
    * @param collector  failure collector with

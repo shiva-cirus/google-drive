@@ -120,8 +120,8 @@ public class GoogleDriveSourceClient extends GoogleDriveFilteringClient<GoogleDr
   /**
    * Returns the list of file.
    * @return The list of file
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException     if there was an error getting the column information for the retry
    */
   // We should separate binary and Google Drive formats between two requests
   public List<File> getFilesSummary() throws ExecutionException, RetryException {

@@ -92,8 +92,9 @@ public abstract class GoogleAuthBaseConfig extends PluginConfig {
 
   /**
    * Returns the ValidationResult.
-   * @param collector  the failure collector is provided
-   * @return  The ValidationResult
+   *
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
    */
   public ValidationResult validate(FailureCollector collector) {
     IdUtils.validateReferenceName(referenceName, collector);

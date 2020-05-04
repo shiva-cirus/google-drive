@@ -41,6 +41,7 @@ public enum AuthType {
 
   /**
    * Returns the AuthType.
+   *
    * @param value the value is string type.
    * @return The AuthType
    */
