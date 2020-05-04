@@ -34,6 +34,12 @@ public class RecordsBatchProcessor implements Callable {
   private final RecordsBatch recordsBatch;
   private final Semaphore threadsSemaphore;
 
+  /**
+   *   Constructor for RecordsBatchProcessor object.
+   * @param sheetsSinkClient      The sheets sink client
+   * @param recordsBatch          The records batch
+   * @param threadsSemaphore      The threads semaphore
+   */
   public RecordsBatchProcessor(GoogleSheetsSinkClient sheetsSinkClient, RecordsBatch recordsBatch,
                                Semaphore threadsSemaphore) {
     this.sheetsSinkClient = sheetsSinkClient;
@@ -62,7 +68,7 @@ public class RecordsBatchProcessor implements Callable {
       String spreadsheetId = recordsBatch.getSpreadsheetId();
 
       sheetsSinkClient.populateCells(spreadsheetId, spreadsheetName, sheetTitles,
-        contentRequests, mergeRequests);
+                                     contentRequests, mergeRequests);
     } finally {
       threadsSemaphore.release();
       return null;

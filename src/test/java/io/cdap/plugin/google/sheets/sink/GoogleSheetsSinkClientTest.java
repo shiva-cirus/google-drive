@@ -65,15 +65,15 @@ public class GoogleSheetsSinkClientTest {
 
     // add some single-cell merges that should be filtered out
     testMergeRanges.add(new GridRange().setStartRowIndex(0).setEndRowIndex(1)
-      .setStartColumnIndex(0).setEndColumnIndex(1));
+                          .setStartColumnIndex(0).setEndColumnIndex(1));
     testMergeRanges.add(new GridRange().setStartRowIndex(10).setEndRowIndex(11)
-      .setStartColumnIndex(2).setEndColumnIndex(3));
+                          .setStartColumnIndex(2).setEndColumnIndex(3));
 
     // invalid merges with no differences in coordinates
     testMergeRanges.add(new GridRange().setStartRowIndex(0).setEndRowIndex(0)
-      .setStartColumnIndex(0).setEndColumnIndex(10));
+                          .setStartColumnIndex(0).setEndColumnIndex(10));
     testMergeRanges.add(new GridRange().setStartRowIndex(10).setEndRowIndex(10)
-      .setStartColumnIndex(20).setEndColumnIndex(30));
+                          .setStartColumnIndex(20).setEndColumnIndex(30));
 
     // valid merges
     GridRange validRange1 = new GridRange().setStartRowIndex(0).setEndRowIndex(4)
@@ -97,7 +97,7 @@ public class GoogleSheetsSinkClientTest {
 
     Method prepareMergeRequestsMethod =
       GoogleSheetsSinkClient.class.getDeclaredMethod("shiftAndNameMergeRequests",
-        List.class, int.class, int.class);
+                                                     List.class, int.class, int.class);
     prepareMergeRequestsMethod.setAccessible(true);
 
     List<MergeCellsRequest> mergeRequests = (List<MergeCellsRequest>) prepareMergeRequestsMethod
@@ -124,7 +124,7 @@ public class GoogleSheetsSinkClientTest {
     headerNames.stream().forEach(h -> complexHeader.addHeader(new ComplexHeader(h)));
 
     Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("calculateHeaderMerges",
-      ComplexHeader.class, List.class, int.class, int.class, int.class);
+                                                                                        ComplexHeader.class, List.class, int.class, int.class, int.class);
     calculateHeaderMergesMethod.setAccessible(true);
 
     List<GridRange> headerMergeRanges = new ArrayList<>();
@@ -145,7 +145,7 @@ public class GoogleSheetsSinkClientTest {
     ComplexHeader complexHeader = new ComplexHeader("h");
 
     Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("calculateHeaderMerges",
-      ComplexHeader.class, List.class, int.class, int.class, int.class);
+                                                                                        ComplexHeader.class, List.class, int.class, int.class, int.class);
     calculateHeaderMergesMethod.setAccessible(true);
 
     List<GridRange> headerMergeRanges = new ArrayList<>();
@@ -179,7 +179,7 @@ public class GoogleSheetsSinkClientTest {
     complexHeader.addHeader(complexSubHeader);
 
     Method calculateHeaderMergesMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("calculateHeaderMerges",
-      ComplexHeader.class, List.class, int.class, int.class, int.class);
+                                                                                        ComplexHeader.class, List.class, int.class, int.class, int.class);
     calculateHeaderMergesMethod.setAccessible(true);
 
     List<GridRange> headerMergeRanges = new ArrayList<>();
@@ -222,7 +222,7 @@ public class GoogleSheetsSinkClientTest {
     }
 
     Method populateHeaderRowsMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("populateHeaderRows",
-      ComplexHeader.class, List.class, int.class, int.class);
+                                                                                     ComplexHeader.class, List.class, int.class, int.class);
     populateHeaderRowsMethod.setAccessible(true);
 
     populateHeaderRowsMethod.invoke(sinkClient, complexHeader, headerRows, 0, 0);
@@ -271,7 +271,7 @@ public class GoogleSheetsSinkClientTest {
     }
 
     Method populateHeaderRowsMethod = GoogleSheetsSinkClient.class.getDeclaredMethod("populateHeaderRows",
-      ComplexHeader.class, List.class, int.class, int.class);
+                                                                                     ComplexHeader.class, List.class, int.class, int.class);
     populateHeaderRowsMethod.setAccessible(true);
 
     populateHeaderRowsMethod.invoke(sinkClient, complexHeader, headerRows, 0, 0);
@@ -308,11 +308,11 @@ public class GoogleSheetsSinkClientTest {
     ComplexHeader complexHeaderWrapper = new ComplexHeader("root");
     realHeaders.stream().forEach(h -> complexHeaderWrapper.addHeader(new ComplexHeader(h)));
     FlatteredRowsRecord rowsRecord = new FlatteredRowsRecord("spreadsheetName", "sheetTitle",
-      complexHeaderWrapper, Collections.emptyList(), Collections.emptyList());
+                                                             complexHeaderWrapper, Collections.emptyList(), Collections.emptyList());
 
     Method prepareContentRequestMethod =
       GoogleSheetsSinkClient.class.getDeclaredMethod("prepareFlatteredRequest", Integer.class,
-        FlatteredRowsRecord.class, int.class);
+                                                     FlatteredRowsRecord.class, int.class);
     prepareContentRequestMethod.setAccessible(true);
 
     FlatteredRowsRequest request = (FlatteredRowsRequest) prepareContentRequestMethod
@@ -358,11 +358,11 @@ public class GoogleSheetsSinkClientTest {
     dataMerges.add(new GridRange().setStartRowIndex(0).setEndRowIndex(2).setStartColumnIndex(0).setEndColumnIndex(1));
 
     FlatteredRowsRecord rowsRecord = new FlatteredRowsRecord("spreadsheetName", "sheetTitle",
-      complexHeaderWrapper, dataRows, dataMerges);
+                                                             complexHeaderWrapper, dataRows, dataMerges);
 
     Method prepareContentRequestMethod =
       GoogleSheetsSinkClient.class.getDeclaredMethod("prepareFlatteredRequest", Integer.class,
-        FlatteredRowsRecord.class, int.class);
+                                                     FlatteredRowsRecord.class, int.class);
     prepareContentRequestMethod.setAccessible(true);
 
     FlatteredRowsRequest request = (FlatteredRowsRequest) prepareContentRequestMethod

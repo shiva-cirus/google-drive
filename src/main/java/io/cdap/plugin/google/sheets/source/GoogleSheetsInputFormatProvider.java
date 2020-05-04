@@ -33,6 +33,10 @@ public class GoogleSheetsInputFormatProvider implements InputFormatProvider {
 
   private final Map<String, String> conf;
 
+  /**
+   *     Constructor for GoogleSheetsInputFormatProvider object.
+   * @param config the google sheets source config is provided
+   */
   public GoogleSheetsInputFormatProvider(GoogleSheetsSourceConfig config) {
     this.conf = new ImmutableMap.Builder<String, String>()
       .put(PROPERTY_CONFIG_JSON, GSON.toJson(config))

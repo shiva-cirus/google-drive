@@ -47,18 +47,26 @@ public class GoogleDriveFilteringClient<C extends GoogleFilteringSourceConfig> e
     return getFilesSummary(exportedTypes, 0);
   }
 
+  /**
+   * Returns the list of file.
+   * @param exportedTypes  the exported types are provided with
+   * @param filesNumber   the number of files is provided
+   * @return The list of file
+   * @throws ExecutionException   if there was an error getting the column information for the execution
+   * @throws RetryException  if there was an error getting the column information for the retry
+   */
   public List<File> getFilesSummary(List<ExportedType> exportedTypes, int filesNumber)
-      throws ExecutionException, RetryException {
+    throws ExecutionException, RetryException {
     Retryer<List<File>> filesSummaryRetryer = APIRequestRetryer.getRetryer(config,
-        String.format("Get files summary, files: '%d'.", filesNumber));
+                                                                           String.format("Get files summary, files: '%d'.", filesNumber));
     return filesSummaryRetryer.call(() -> {
       List<File> files = new ArrayList<>();
       String nextToken = "";
       int retrievedFiles = 0;
       int actualFilesNumber = filesNumber;
       Drive.Files.List request = service.files().list()
-          .setQ(generateFilter(exportedTypes))
-          .setFields("nextPageToken, files(id, size)");
+        .setQ(generateFilter(exportedTypes))
+        .setFields("nextPageToken, files(id, size)");
       if (actualFilesNumber > 0) {
         request.setPageSize(actualFilesNumber);
       } else {
@@ -72,8 +80,8 @@ public class GoogleDriveFilteringClient<C extends GoogleFilteringSourceConfig> e
         retrievedFiles += result.size();
       }
       return actualFilesNumber == 0 || files.size() <= actualFilesNumber ?
-          files :
-          files.subList(0, actualFilesNumber);
+        files :
+        files.subList(0, actualFilesNumber);
 
     });
   }
@@ -116,7 +124,7 @@ public class GoogleDriveFilteringClient<C extends GoogleFilteringSourceConfig> e
     }
 
     DateRange modifiedDateRange = ModifiedDateRangeUtils.getDataRange(config.getModificationDateRangeType(),
-        config.getStartDate(), config.getEndDate());
+                                                                      config.getStartDate(), config.getEndDate());
     if (modifiedDateRange != null) {
       sb.append(" and ");
       sb.append(ModifiedDateRangeUtils.getFilterValue(modifiedDateRange));

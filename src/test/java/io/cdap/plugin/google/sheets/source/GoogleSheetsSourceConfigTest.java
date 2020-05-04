@@ -94,11 +94,11 @@ public class GoogleSheetsSourceConfigTest {
 
     List<MetadataKeyValueAddress> expectedCoordinates = new ArrayList<>();
     expectedCoordinates.add(new MetadataKeyValueAddress(new CellCoordinate(1, 1),
-        new CellCoordinate(2, 2)));
+                                                        new CellCoordinate(2, 2)));
     expectedCoordinates.add(new MetadataKeyValueAddress(new CellCoordinate(2, 1),
-        new CellCoordinate(4, 2)));
+                                                        new CellCoordinate(4, 2)));
     expectedCoordinates.add(new MetadataKeyValueAddress(new CellCoordinate(5, 1),
-        new CellCoordinate(7, 2)));
+                                                        new CellCoordinate(7, 2)));
 
     Assert.assertEquals(expectedCoordinates, metadataCoordinates);
   }
@@ -130,13 +130,13 @@ public class GoogleSheetsSourceConfigTest {
     List<ValidationFailure> failures = collector.getValidationFailures();
     Assert.assertEquals(2, failures.size());
     Assert.assertTrue(failures.get(0).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
-        || failures.get(0).getMessage().equals(
-            String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
+      String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
+                        || failures.get(0).getMessage().equals(
+      String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
     Assert.assertTrue(failures.get(1).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
-        || failures.get(1).getMessage().equals(
-            String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
+      String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
+                        || failures.get(1).getMessage().equals(
+      String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
     Assert.assertNotEquals(failures.get(0).getMessage(), failures.get(1).getMessage());
   }
 
@@ -164,18 +164,18 @@ public class GoogleSheetsSourceConfigTest {
     String beforeAddress = "B5";
     String afterAddress = "X9";
     setFieldValue("metadataCells",
-        String.format("A6:B7,Z7:U6,%s:A8,B8:%s", beforeAddress, afterAddress));
+                  String.format("A6:B7,Z7:U6,%s:A8,B8:%s", beforeAddress, afterAddress));
     validateMetadataCellsMethod.invoke(config, collector);
     List<ValidationFailure> failures = collector.getValidationFailures();
     Assert.assertEquals(2, failures.size());
     Assert.assertTrue(failures.get(0).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
-        || failures.get(0).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
+      String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
+                        || failures.get(0).getMessage().equals(
+      String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
     Assert.assertTrue(failures.get(1).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
-        || failures.get(1).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
+      String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
+                        || failures.get(1).getMessage().equals(
+      String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
     Assert.assertNotEquals(failures.get(0).getMessage(), failures.get(1).getMessage());
   }
 
@@ -203,25 +203,25 @@ public class GoogleSheetsSourceConfigTest {
     String beforeAddress = "B5";
     String afterAddress = "X9";
     setFieldValue("metadataCells",
-        String.format("A6:A3,Z7:B8,%s:C8,B8:%s", beforeAddress, afterAddress));
+                  String.format("A6:A3,Z7:B8,%s:C8,B8:%s", beforeAddress, afterAddress));
     validateMetadataCellsMethod.invoke(config, collector);
     List<ValidationFailure> failures = collector.getValidationFailures();
     Assert.assertEquals(2, failures.size());
     Assert.assertTrue(failures.get(0).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
-        || failures.get(0).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
+      String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
+                        || failures.get(0).getMessage().equals(
+      String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
     Assert.assertTrue(failures.get(1).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
-        || failures.get(1).getMessage().equals(
-        String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
+      String.format("Metadata cell '%s' is out of header or footer rows.", beforeAddress))
+                        || failures.get(1).getMessage().equals(
+      String.format("Metadata cell '%s' is out of header or footer rows.", afterAddress)));
     Assert.assertNotEquals(failures.get(0).getMessage(), failures.get(1).getMessage());
   }
 
   @Test
   public void testProcessColumns() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     Method processColumnsMethod = config.getClass().getDeclaredMethod("processColumns", List.class,
-      List.class, List.class, List.class, FailureCollector.class);
+                                                                      List.class, List.class, List.class, FailureCollector.class);
     processColumnsMethod.setAccessible(true);
 
     List<CellData> columnsRow = new ArrayList<>();
@@ -246,7 +246,7 @@ public class GoogleSheetsSourceConfigTest {
 
     LinkedHashMap<Integer, ColumnComplexSchemaInfo> columns =
       (LinkedHashMap<Integer, ColumnComplexSchemaInfo>) processColumnsMethod.invoke(config, columnsRow,
-      subColumnsRow, dataRow, columnMerges, collector);
+                                                                                    subColumnsRow, dataRow, columnMerges, collector);
 
     Assert.assertEquals(2, columns.size());
     Assert.assertTrue(columns.keySet().containsAll(Arrays.asList(0, 1)));
@@ -272,7 +272,7 @@ public class GoogleSheetsSourceConfigTest {
   public void testProcessColumnsInvalidTitles()
     throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
     Method processColumnsMethod = config.getClass().getDeclaredMethod("processColumns", List.class,
-      List.class, List.class, List.class, FailureCollector.class);
+                                                                      List.class, List.class, List.class, FailureCollector.class);
     processColumnsMethod.setAccessible(true);
 
     List<CellData> columnsRow = new ArrayList<>();
@@ -297,7 +297,7 @@ public class GoogleSheetsSourceConfigTest {
 
     LinkedHashMap<Integer, ColumnComplexSchemaInfo> columns =
       (LinkedHashMap<Integer, ColumnComplexSchemaInfo>) processColumnsMethod.invoke(config, columnsRow,
-      subColumnsRow, dataRow, columnMerges, collector);
+                                                                                    subColumnsRow, dataRow, columnMerges, collector);
 
     Assert.assertEquals(2, columns.size());
     Assert.assertTrue(columns.keySet().containsAll(Arrays.asList(0, 1)));

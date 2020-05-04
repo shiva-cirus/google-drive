@@ -29,6 +29,12 @@ import java.util.stream.Collectors;
 public class SchemaBuilder {
   public static final String SCHEMA_ROOT_RECORD_NAME = "RowRecord";
 
+  /**
+   *  Returns  the instance of Schema.
+   * @param config  The GoogleSheetsSourceConfig
+   * @param dataSchemaInfo   The list of  ColumnComplexSchemaInfo
+   * @return   The instance of Schema
+   */
   public static Schema buildSchema(GoogleSheetsSourceConfig config,
                                    List<ColumnComplexSchemaInfo> dataSchemaInfo) {
     List<Schema.Field> generalFields = new ArrayList<>();
@@ -45,14 +51,14 @@ public class SchemaBuilder {
           .map(c -> Schema.Field.of(c.getHeaderTitle(), Schema.nullableOf(c.getDataSchema())))
           .collect(Collectors.toList());
         generalFields.add(Schema.Field.of(schemaInfo.getHeaderTitle(),
-          Schema.nullableOf(Schema.recordOf(schemaInfo.getHeaderTitle(), recordFields))));
+                                          Schema.nullableOf(Schema.recordOf(schemaInfo.getHeaderTitle(), recordFields))));
       }
     }
 
     if (!config.containsMacro(config.EXTRACT_METADATA) && !config.containsMacro(config.METADATA_FIELD_NAME)
       && config.isExtractMetadata()) {
       generalFields.add(Schema.Field.of(config.getMetadataFieldName(),
-          Schema.mapOf(Schema.of(Schema.Type.STRING), Schema.of(Schema.Type.STRING))));
+                                        Schema.mapOf(Schema.of(Schema.Type.STRING), Schema.of(Schema.Type.STRING))));
     }
 
     return Schema.recordOf(SCHEMA_ROOT_RECORD_NAME, generalFields);

@@ -98,6 +98,10 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
   protected String presentationsExportingFormat;
   private transient Schema schema = null;
 
+  /**
+   *  Returns  the instance of Schema.
+   * @return The  instance of Schema
+   */
   public Schema getSchema() {
     if (schema == null) {
       schema = SchemaBuilder.buildSchema(getFileMetadataProperties(), getBodyFormat());
@@ -105,6 +109,11 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
     return schema;
   }
 
+  /**
+   * Returns the  ValidationResult.
+   * @param collector   the failure collector is provided
+   * @return  The ValidationResult
+   */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
 
@@ -158,6 +167,10 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
     return Arrays.asList(fileMetadataProperties.split(","));
   }
 
+  /**
+   * returns the list of ExportedType.
+   * @return  The list of ExportedType
+   */
   public List<ExportedType> getFileTypesToPull() {
     if (Strings.isNullOrEmpty(fileTypesToPull)) {
       return Collections.emptyList();

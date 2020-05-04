@@ -36,6 +36,12 @@ public class GoogleSheetsSplit extends InputSplit implements Writable {
     // For serialization
   }
 
+  /**
+   *     Constructor for GoogleSheetsSplit object.
+   * @param fileId
+   * @param headers
+   * @param metadates
+   */
   public GoogleSheetsSplit(String fileId, String headers, String metadates) {
     this.fileId = fileId;
     this.headers = headers;

@@ -90,6 +90,11 @@ public abstract class GoogleAuthBaseConfig extends PluginConfig {
   @Description("Identifier of the destination folder.")
   private String directoryIdentifier;
 
+  /**
+   * Returns the ValidationResult.
+   * @param collector  the failure collector is provided
+   * @return  The ValidationResult
+   */
   public ValidationResult validate(FailureCollector collector) {
     IdUtils.validateReferenceName(referenceName, collector);
 
@@ -138,7 +143,7 @@ public abstract class GoogleAuthBaseConfig extends PluginConfig {
         return true;
       } catch (InvalidPropertyTypeException e) {
         collector.addFailure(e.getMessage(), Arrays.stream(AuthType.values()).map(v -> v.getValue())
-            .collect(Collectors.joining()))
+          .collect(Collectors.joining()))
           .withConfigProperty(AUTH_TYPE);
         return false;
       }

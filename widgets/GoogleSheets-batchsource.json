@@ -72,7 +72,11 @@
           "label": "Sheets To Pull",
           "widget-attributes": {
             "default": "all",
-            "values": ["all", "numbers", "titles"]
+            "values": [
+              "all",
+              "numbers",
+              "titles"
+            ]
           }
         },
         {
@@ -167,7 +171,6 @@
     {
       "label": "Metadata Extraction",
       "properties": [
-
         {
           "widget-type": "toggle",
           "label": "Extract Metadata",

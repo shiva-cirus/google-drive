@@ -42,12 +42,17 @@ public enum HeaderSelection {
     return value;
   }
 
+  /**
+   *  Returns the  HeaderSelection.
+   * @param value  The value is String type
+   * @return   The  HeaderSelection
+   */
   public static HeaderSelection fromValue(String value) {
     return Stream.of(HeaderSelection.values())
-        .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
-        .findAny()
-        .orElseThrow(() -> new InvalidPropertyTypeException(GoogleSheetsSourceConfig.HEADERS_SELECTION_LABEL, value,
-          getAllowedValues()));
+      .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
+      .findAny()
+      .orElseThrow(() -> new InvalidPropertyTypeException(GoogleSheetsSourceConfig.HEADERS_SELECTION_LABEL, value,
+                                                          getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {

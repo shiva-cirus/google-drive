@@ -41,6 +41,14 @@ public class ModifiedDateRangeUtils {
                       // .microseconds or partial-time
                       "(\\.[0-9]+)?(([Zz])|([\\+|\\-]([01][0-9]|2[0-3]):[0-5][0-9]))?)?$");
 
+  /**
+   *  Returns the instance of DateRange.
+   * @param modifiedDateRangeType  The modified date range type   with
+   * @param startDate              The start date  with
+   * @param endDate                The end date
+   * @return The instance of DateRange
+   * @throws InterruptedException  if there was an error getting the column information for the data
+   */
   public static DateRange getDataRange(ModifiedDateRangeType modifiedDateRangeType, String startDate, String endDate)
     throws InterruptedException {
     ZoneId zoneId = ZoneId.systemDefault();
@@ -136,6 +144,11 @@ public class ModifiedDateRangeUtils {
     return DATE_PATTERN.matcher(dateString).matches();
   }
 
+  /**
+   *  Returns the String.
+   * @param dateRange  The data range is reference of DateRange
+   * @return The String
+   */
   public static String getFilterValue(DateRange dateRange) {
     if (dateRange == null) {
       return "";

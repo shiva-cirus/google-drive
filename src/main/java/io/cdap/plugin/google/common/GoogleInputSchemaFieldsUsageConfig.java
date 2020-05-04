@@ -26,14 +26,14 @@ import io.cdap.cdap.etl.api.FailureCollector;
 public class GoogleInputSchemaFieldsUsageConfig extends GoogleRetryingConfig {
 
   protected void validateSchemaField(FailureCollector collector, Schema schema, String propertyName,
-                                   String propertyValue, String propertyLabel, Schema.Type requiredSchemaType) {
+                                     String propertyValue, String propertyLabel, Schema.Type requiredSchemaType) {
     if (!containsMacro(propertyName)) {
       if (!Strings.isNullOrEmpty(propertyValue)) {
         Schema.Field field = schema.getField(propertyValue);
         if (field == null) {
           collector.addFailure(String.format("Input schema doesn't contain '%s' field.", propertyValue),
-              String.format("Provide existent field from input schema for '%s'.", propertyLabel))
-              .withConfigProperty(propertyName);
+                               String.format("Provide existent field from input schema for '%s'.", propertyLabel))
+            .withConfigProperty(propertyName);
         } else {
           Schema fieldSchema = field.getSchema();
           if (fieldSchema.isNullable()) {
@@ -42,13 +42,13 @@ public class GoogleInputSchemaFieldsUsageConfig extends GoogleRetryingConfig {
 
           if (fieldSchema.getLogicalType() != null || fieldSchema.getType() != requiredSchemaType) {
             collector.addFailure(String.format("Field '%s' must be of type '%s' but is of type '%s'.",
-                field.getName(),
-                requiredSchemaType,
-                fieldSchema.getDisplayName()),
-                String.format("Provide field with '%s' format for '%s' property.",
-                    requiredSchemaType,
-                    propertyLabel))
-                .withConfigProperty(propertyName).withInputSchemaField(propertyValue);
+                                               field.getName(),
+                                               requiredSchemaType,
+                                               fieldSchema.getDisplayName()),
+                                 String.format("Provide field with '%s' format for '%s' property.",
+                                               requiredSchemaType,
+                                               propertyLabel))
+              .withConfigProperty(propertyName).withInputSchemaField(propertyValue);
           }
         }
       }

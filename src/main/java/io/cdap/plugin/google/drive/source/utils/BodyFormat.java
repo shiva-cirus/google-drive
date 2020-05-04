@@ -41,16 +41,21 @@ public enum BodyFormat {
     return value;
   }
 
+  /**
+   * Returns the BodyFormat.
+   * @param value the value is String type.
+   * @return  The BodyFormat
+   */
   public static BodyFormat fromValue(String value) {
     return Stream.of(BodyFormat.values())
       .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
       .findAny()
       .orElseThrow(() ->
-          new InvalidPropertyTypeException(GoogleDriveSourceConfig.BODY_FORMAT_LABEL, value, getAllowedValues()));
+                     new InvalidPropertyTypeException(GoogleDriveSourceConfig.BODY_FORMAT_LABEL, value, getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {
     return Arrays.stream(BodyFormat.values()).map(v -> v.getValue())
-        .collect(Collectors.toList());
+      .collect(Collectors.toList());
   }
 }

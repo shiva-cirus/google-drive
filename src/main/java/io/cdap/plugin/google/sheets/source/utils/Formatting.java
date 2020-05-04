@@ -41,12 +41,17 @@ public enum Formatting {
     return value;
   }
 
+  /**
+   *  Retuns the  Formatting.
+   * @param value the value is String type
+   * @return  The Formatting
+   */
   public static Formatting fromValue(String value) {
     return Stream.of(Formatting.values())
-        .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
-        .findAny()
-        .orElseThrow(() -> new InvalidPropertyTypeException(GoogleSheetsSourceConfig.FORMATTING_LABEL, value,
-          getAllowedValues()));
+      .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
+      .findAny()
+      .orElseThrow(() -> new InvalidPropertyTypeException(GoogleSheetsSourceConfig.FORMATTING_LABEL, value,
+                                                          getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {

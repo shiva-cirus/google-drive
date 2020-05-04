@@ -64,20 +64,35 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     return Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
   }
 
+  /**
+   * Returns the list of Sheet.
+   * @param spreadsheetId The spread sheet id is provided
+   * @return  The list of Sheet
+   * @throws ExecutionException   if there was an error getting the column information for the execution
+   * @throws RetryException  if there was an error getting the column information for the retry
+   */
   public List<com.google.api.services.sheets.v4.model.Sheet> getSheets(String spreadsheetId)
     throws ExecutionException, RetryException {
     Retryer<List<com.google.api.services.sheets.v4.model.Sheet>> sheetsRetryer = APIRequestRetryer.getRetryer(config,
-      String.format("Get spreadsheet, id: '%s'.", spreadsheetId));
+                                                                                                              String.format("Get spreadsheet, id: '%s'.", spreadsheetId));
     return sheetsRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets();
     });
   }
 
+  /**
+   * Returns the list of String.
+   * @param spreadsheetId The spread sheet id is provided with
+   * @param indexes   the indexes are provided
+   * @return  The list of String
+   * @throws ExecutionException   if there was an error getting the column information for the execution
+   * @throws RetryException  if there was an error getting the column information for the retry
+   */
   public List<String> getSheetsTitles(String spreadsheetId, List<Integer> indexes)
     throws ExecutionException, RetryException {
     Retryer<List<String>> sheetTitlesRetryer = APIRequestRetryer.getRetryer(config,
-      String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
+                                                                            String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
     return sheetTitlesRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets().stream().filter(s -> indexes.contains(s.getProperties().getIndex()))
@@ -85,9 +100,16 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     });
   }
 
+  /**
+   * Returns the list of String.
+   * @param spreadsheetId The spread sheet id is provided
+   * @return  The list of String
+   * @throws ExecutionException   if there was an error getting the column information for the execution
+   * @throws RetryException  if there was an error getting the column information for the retry
+   */
   public List<String> getSheetsTitles(String spreadsheetId) throws ExecutionException, RetryException {
     Retryer<List<String>> sheetsTitlesRetryer = APIRequestRetryer.getRetryer(config,
-      String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
+                                                                             String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
     return sheetsTitlesRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets().stream().map(s -> s.getProperties().getTitle()).collect(Collectors.toList());
@@ -99,11 +121,11 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
    * empty values with value in main cell of merge.
    * Metadata info is retrieved if needed.
    *
-   * @param spreadsheetId id of the spreadsheet.
-   * @param sheetTitle title of sheet.
-   * @param rowNumber number of start row to read.
-   * @param length number of rows to read.
-   * @param resolvedHeaders complex header.
+   * @param spreadsheetId       id of the spreadsheet.
+   * @param sheetTitle          title of sheet.
+   * @param rowNumber           number of start row to read.
+   * @param length              number of rows to read.
+   * @param resolvedHeaders     complex header.
    * @param metadataCoordinates coordinates of metadata cells.
    * @return multiple rows mapped to complex headers.
    * @throws ExecutionException
@@ -119,8 +141,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       prepareContentRequest(spreadsheetId, sheetTitle, rowNumber, length, metadataCoordinates);
 
     Retryer<Spreadsheet> contentRetryer = APIRequestRetryer.getRetryer(config,
-      String.format("Get content, spreadsheet id: '%s', sheet title: '%s', row number: '%d'.",
-        spreadsheetId, sheetTitle, rowNumber));
+                                                                       String.format("Get content, spreadsheet id: '%s', sheet title: '%s', row number: '%d'.",
+                                                                                     spreadsheetId, sheetTitle, rowNumber));
     Spreadsheet spreadsheet = contentRetryer.call(() -> contentRequest.execute());
     checkSingleSheetRetrieved(spreadsheet);
 
@@ -158,16 +180,16 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     }
 
     return new MultipleRowRecord(spreadsheet.getProperties().getTitle(), sheetTitle, metadata, headers,
-      spreadsheet.getSheets().get(0).getMerges());
+                                 spreadsheet.getSheets().get(0).getMerges());
   }
 
   /**
    * Method that prepares get request for retrieving of content and metadata cells.
    *
-   * @param spreadsheetId id of the spreadsheet.
-   * @param sheetTitle title of the sheet.
-   * @param rowNumber number of start row to read.
-   * @param length number of rows to read.
+   * @param spreadsheetId       id of the spreadsheet.
+   * @param sheetTitle          title of the sheet.
+   * @param rowNumber           number of start row to read.
+   * @param length              number of rows to read.
    * @param metadataCoordinates coordinates of metadata cells.
    * @return {@link Sheets.Spreadsheets.Get} request.
    * @throws IOException
@@ -181,11 +203,11 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     if (config.isExtractMetadata() && CollectionUtils.isNotEmpty(metadataCoordinates)) {
       if (config.getFirstHeaderRow() > 0) {
         headerRange = String.format("%s!%d:%d", sheetTitle,
-          config.getFirstHeaderRow(), config.getLastHeaderRow());
+                                    config.getFirstHeaderRow(), config.getLastHeaderRow());
       }
       if (config.getFirstFooterRow() > 0) {
         footerRange = String.format("%s!%d:%d", sheetTitle,
-          config.getFirstFooterRow(), config.getLastFooterRow());
+                                    config.getFirstFooterRow(), config.getLastFooterRow());
       }
     }
 
@@ -207,8 +229,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   /**
    * Method that prepares range values for all head cells from merge ranges that are out of data rows.
    *
-   * @param sheetTitle source sheet title.
-   * @param dataGrids data rows.
+   * @param sheetTitle  source sheet title.
+   * @param dataGrids   data rows.
    * @param mergeRanges ranges of merged cells.
    * @return ranges in A1 notation for merge heads that are out of data rows.
    */
@@ -220,11 +242,11 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       for (GridRange range : mergeRanges) {
         if (!isHeadAvailableInDataRange(range, startRow)) {
           rangesToCall.add(String.format("%s!%s%d:%s%d",
-            sheetTitle,
-            ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
-            range.getStartRowIndex() + 1,
-            ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
-            range.getStartRowIndex() + 1));
+                                         sheetTitle,
+                                         ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
+                                         range.getStartRowIndex() + 1,
+                                         ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
+                                         range.getStartRowIndex() + 1));
         }
       }
     }
@@ -238,7 +260,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   /**
    * Method that calls Sheets API for required single cells.
    *
-   * @param rangesToCall list of ranges for single cells.
+   * @param rangesToCall  list of ranges for single cells.
    * @param spreadsheetId id of the spreadsheet.
    * @return map of cell ranges to cell values.
    * @throws ExecutionException
@@ -253,7 +275,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       headCellsRequest.setRanges(rangesToCall);
       headCellsRequest.setIncludeGridData(true);
       Retryer<Spreadsheet> headCellsRetryer = APIRequestRetryer.getRetryer(config,
-        "Get additional cells for merge resolving.");
+                                                                           "Get additional cells for merge resolving.");
       Spreadsheet headesSpreadsheet = headCellsRetryer.call(() -> headCellsRequest.execute());
       checkSingleSheetRetrieved(headesSpreadsheet);
 
@@ -269,8 +291,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
           headCell = gridData.getRowData().get(0).getValues().get(0);
         }
         retriedHeads.put(new GridRange().setStartRowIndex(headRow).setEndRowIndex(headRow + 1)
-            .setStartColumnIndex(headColumn).setEndColumnIndex(headColumn + 1),
-          headCell);
+                           .setStartColumnIndex(headColumn).setEndColumnIndex(headColumn + 1),
+                         headCell);
       }
     }
     return retriedHeads;
@@ -279,10 +301,10 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   /**
    * Method that replaces all cells inside all merges with value for merge (from head cell of merge).
    *
-   * @param dataGrids data to process.
-   * @param mergeRanges ranges for merged cells.
+   * @param dataGrids              data to process.
+   * @param mergeRanges            ranges for merged cells.
    * @param expectedDataRowsNumber number of rows should be in data.
-   * @param missedHeadCells values for head cells that are out of data range.
+   * @param missedHeadCells        values for head cells that are out of data range.
    */
   private void replaceMergeCells(List<GridData> dataGrids, List<GridRange> mergeRanges, int expectedDataRowsNumber,
                                  Map<GridRange, CellData> missedHeadCells) {
@@ -305,10 +327,10 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
         } else {
           // get cell value from additional API request results
           headCell = missedHeadCells.get(new GridRange()
-            .setStartRowIndex(range.getStartRowIndex())
-            .setEndRowIndex(range.getStartRowIndex() + 1)
-            .setStartColumnIndex(range.getStartColumnIndex())
-            .setEndColumnIndex(range.getStartColumnIndex() + 1));
+                                           .setStartRowIndex(range.getStartRowIndex())
+                                           .setEndRowIndex(range.getStartRowIndex() + 1)
+                                           .setStartColumnIndex(range.getStartColumnIndex())
+                                           .setEndColumnIndex(range.getStartColumnIndex() + 1));
         }
 
         // skip if head cell is empty
@@ -325,10 +347,10 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   /**
    * Method that replaces all cells from a single merge with required value. If needed new rows/columns are adding.
    *
-   * @param mergeRange range for merged cells.
-   * @param headCell value of head cell of merge range.
-   * @param dataRows data to process.
-   * @param dataStartRow index of the first row of the data relative to the start of sheet.
+   * @param mergeRange             range for merged cells.
+   * @param headCell               value of head cell of merge range.
+   * @param dataRows               data to process.
+   * @param dataStartRow           index of the first row of the data relative to the start of sheet.
    * @param expectedDataRowsNumber number of rows should be in data.
    */
   private void replaceCell(GridRange mergeRange, CellData headCell, List<RowData> dataRows, int dataStartRow,
@@ -360,8 +382,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
    * Method that retrieves metadata info from data rows.
    *
    * @param metadataCoordinates coordinates of metadata cells.
-   * @param rows data rows to process.
-   * @param startRow index of the first row of the data relative to the start of sheet.
+   * @param rows                data rows to process.
+   * @param startRow            index of the first row of the data relative to the start of sheet.
    * @return
    */
   private Map<String, String> parseMetadata(List<MetadataKeyValueAddress> metadataCoordinates, List<RowData> rows,
@@ -383,7 +405,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
    * Method that retrieves all values for all headers.
    *
    * @param resolvedHeaders required headers to populate.
-   * @param rows data to process.
+   * @param rows            data to process.
    * @return populated complex headers.
    */
   private Map<String, ComplexMultiValueColumn> parseData(Map<Integer, Map<String, List<String>>> resolvedHeaders,
@@ -412,8 +434,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   /**
    * Method that go through all rows and collects value for specified header.
    *
-   * @param rows data to process.
-   * @param header header to populate with values.
+   * @param rows        data to process.
+   * @param header      header to populate with values.
    * @param columnIndex index of column relative to start of the sheet.
    */
   private void scanRowsAndPopulateHeader(List<RowData> rows, ComplexMultiValueColumn header, int columnIndex) {
@@ -439,8 +461,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
    * Method that retrieves cell value according to cell's relative coordinate.
    *
    * @param coordinate cell's relative coordinate.
-   * @param rows data to process.
-   * @param startRow index of the first row of the data relative to the start of sheet.
+   * @param rows       data to process.
+   * @param startRow   index of the first row of the data relative to the start of sheet.
    * @return string value;
    */
   private String getCellValue(CellCoordinate coordinate, List<RowData> rows, int startRow) {
@@ -459,8 +481,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
    * Method that retrieves data for separate rows with related merge ranges.
    *
    * @param spreadsheetId id of the spreadsheet.
-   * @param sheetTitle title of the sheet.
-   * @param rowNumbers list of the rows required to retrieve.
+   * @param sheetTitle    title of the sheet.
+   * @param rowNumbers    list of the rows required to retrieve.
    * @return wrapper for rows with merge ranges.
    * @throws IOException
    */
@@ -501,7 +523,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   private void checkSingleSheetRetrieved(Spreadsheet spreadsheet) {
     if (CollectionUtils.isEmpty(spreadsheet.getSheets()) || spreadsheet.getSheets().size() > 1) {
       throw new RuntimeException(String.format("Invalid number of sheets were returned: '%d'.",
-        spreadsheet.getSheets() == null ? 0 : spreadsheet.getSheets().size()));
+                                               spreadsheet.getSheets() == null ? 0 : spreadsheet.getSheets().size()));
     }
   }
 }

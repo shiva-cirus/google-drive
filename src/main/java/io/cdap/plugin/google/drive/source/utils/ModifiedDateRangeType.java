@@ -58,6 +58,11 @@ public enum ModifiedDateRangeType {
     return value;
   }
 
+  /**
+   *  Returns ModifiedDateRangeType.
+   * @param value The value is String type.
+   * @return  The  ModifiedDateRangeType
+   */
   public static ModifiedDateRangeType fromValue(String value) {
     return Stream.of(ModifiedDateRangeType.values())
       .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
@@ -68,6 +73,6 @@ public enum ModifiedDateRangeType {
 
   public static List<String> getAllowedValues() {
     return Arrays.stream(ModifiedDateRangeType.values()).map(v -> v.getValue())
-        .collect(Collectors.toList());
+      .collect(Collectors.toList());
   }
 }

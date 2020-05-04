@@ -29,7 +29,12 @@ import java.time.ZonedDateTime;
  * Transforms {@link FileFromFolder} wrapper to {@link StructuredRecord} instance.
  */
 public class FilesFromFolderTransformer {
-
+  /**
+   * Returns the StructuredRecord
+   * @param fileFromFolder  the file from folder is provided with
+   * @param schema  the schema is provided.
+   * @return  The StructuredRecord
+   */
   public static StructuredRecord transform(FileFromFolder fileFromFolder, Schema schema) {
     StructuredRecord.Builder builder = StructuredRecord.builder(schema);
     File file = fileFromFolder.getFile();
@@ -74,7 +79,7 @@ public class FilesFromFolderTransformer {
       Object value = info.get(field.getName());
       if (value instanceof GenericJson) {
         subBuilder.set(field.getName(),
-                parseSubSchema(field.getSchema().getNonNullable(), (GenericJson) value));
+                       parseSubSchema(field.getSchema().getNonNullable(), (GenericJson) value));
       } else {
         subBuilder.set(field.getName(), info.get(field.getName()));
       }

@@ -104,7 +104,7 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
         rowsNumber -= bufferSize;
       }
       rowTaskQueue.add(new GroupedRowTask(t, counter * bufferSize + firstDataRow,
-        rowsNumber));
+                                          rowsNumber));
     });
     currentRowIndex = -1;
     currentGroupedRowTask = null;
@@ -157,8 +157,8 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
       if (isNewSheet || isNewGroupTask) {
 
         bufferedMultipleRowRecord = googleSheetsSourceClient.getContent(fileId, currentSheetTitle,
-          currentGroupedRowTask.getRowNumber(), currentGroupedRowTask.getLength(), resolvedHeaders,
-          isNewSheet ? metadataCoordinates : null);
+                                                                        currentGroupedRowTask.getRowNumber(), currentGroupedRowTask.getLength(), resolvedHeaders,
+                                                                        isNewSheet ? metadataCoordinates : null);
 
         if (isNewSheet) {
           sheetMetadata = bufferedMultipleRowRecord.getMetadata();
@@ -169,8 +169,8 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
     } catch (ExecutionException | RetryException e) {
       throw new RuntimeException(
         String.format("Exception on retrieving sheet content, file id: '%s', sheet title: '%s', " +
-            "start row number: '%d', length of the group: '%d'",
-          fileId, currentSheetTitle, currentGroupedRowTask.getRowNumber(), currentGroupedRowTask.getLength()), e);
+                        "start row number: '%d', length of the group: '%d'",
+                      fileId, currentSheetTitle, currentGroupedRowTask.getRowNumber(), currentGroupedRowTask.getLength()), e);
     }
 
     processedRowsCounter++;

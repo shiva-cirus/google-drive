@@ -34,6 +34,14 @@ public class MultipleRowRecord {
   private Map<String, ComplexMultiValueColumn> headeredCells;
   private List<GridRange> merges;
 
+  /**
+   *     Constructor for MultipleRowRecord object.
+   * @param spreadsheetName  The  spread sheet name
+   * @param sheetTitle       The sheet title
+   * @param metadata         The metadata
+   * @param headeredCells    The headered cells
+   * @param merges           The merges
+   */
   public MultipleRowRecord(String spreadsheetName, String sheetTitle, Map<String, String> metadata,
                            Map<String, ComplexMultiValueColumn> headeredCells, List<GridRange> merges) {
     this.spreadsheetName = spreadsheetName;
@@ -67,6 +75,11 @@ public class MultipleRowRecord {
     this.metadata = metadata;
   }
 
+  /**
+   * Returns the instance of RowRecord.
+   * @param index The index is int type
+   * @return The instance of RowRecord
+   */
   public RowRecord getRowRecord(int index) {
     Map<String, ComplexSingleValueColumn> row = new HashMap<>();
     boolean isEmptyRow = convertToSingleRow(headeredCells, row, index);

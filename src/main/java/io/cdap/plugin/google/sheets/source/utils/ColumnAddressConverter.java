@@ -25,6 +25,7 @@ public class ColumnAddressConverter {
 
   /**
    * Method that converts index of column (it starts from 1) into name ('A', 'AC' etc.).
+   *
    * @param index index of the column.
    * @return name of the column.
    */
@@ -51,6 +52,7 @@ public class ColumnAddressConverter {
 
   /**
    * Method that returns index of column (it starts from 1) for it name ('A', 'AC' etc.).
+   *
    * @param columnName name of the column.
    * @return index of the column (starts from 1).
    */

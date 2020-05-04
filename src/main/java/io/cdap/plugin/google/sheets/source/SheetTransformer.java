@@ -41,6 +41,17 @@ public class SheetTransformer {
   private static final ZonedDateTime SHEETS_START_DATE_TIME =
     ZonedDateTime.of(1899, 12, 30, 0, 0, 0, 0, ZoneId.ofOffset("UTC", ZoneOffset.UTC));
 
+  /**
+   * Returns the StructuredRecord.
+   * @param rowRecord  The rowRecord  with
+   * @param schema     The schema    with
+   * @param extractMetadata  The extractMetadata     with
+   * @param metadataRecordName  The metadataRecordName   with
+   * @param addNames            The addNames              with
+   * @param spreadsheetFieldName The spreadsheetFieldName  with
+   * @param sheetFieldName       The sheetFieldName
+   * @return The StructuredRecord
+   */
   public static StructuredRecord transform(RowRecord rowRecord, Schema schema, boolean extractMetadata,
                                            String metadataRecordName,
                                            boolean addNames,

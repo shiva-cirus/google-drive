@@ -162,6 +162,6 @@ public class MultipleRowRecordTest {
     headeredCells.put("h1", new ComplexMultiValueColumn(subHeaderdCells));
 
     return new MultipleRowRecord(TEST_SPREADSHEET_NAME, TEST_SHEET_NAME, metadata,
-      headeredCells, Collections.emptyList());
+                                 headeredCells, Collections.emptyList());
   }
 }

@@ -21,7 +21,7 @@ import com.google.common.base.Objects;
 import java.util.StringJoiner;
 
 /**
- * Represents coordinates for metadata key and value cells
+ * Represents coordinates for metadata key and value cells.
  */
 public class MetadataKeyValueAddress {
   private final CellCoordinate nameCoordinate;
@@ -50,7 +50,7 @@ public class MetadataKeyValueAddress {
     }
     MetadataKeyValueAddress that = (MetadataKeyValueAddress) o;
     return Objects.equal(nameCoordinate, that.nameCoordinate) &&
-        Objects.equal(valueCoordinate, that.valueCoordinate);
+      Objects.equal(valueCoordinate, that.valueCoordinate);
   }
 
   @Override
@@ -61,8 +61,8 @@ public class MetadataKeyValueAddress {
   @Override
   public String toString() {
     return new StringJoiner(", ", MetadataKeyValueAddress.class.getSimpleName() + "[", "]")
-        .add("nameCoordinate=" + nameCoordinate)
-        .add("valueCoordinate=" + valueCoordinate)
-        .toString();
+      .add("nameCoordinate=" + nameCoordinate)
+      .add("valueCoordinate=" + valueCoordinate)
+      .toString();
   }
 }

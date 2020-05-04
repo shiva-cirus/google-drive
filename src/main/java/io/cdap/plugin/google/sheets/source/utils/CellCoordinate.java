@@ -52,7 +52,7 @@ public final class CellCoordinate implements Serializable {
     }
     CellCoordinate that = (CellCoordinate) o;
     return rowNumber == that.rowNumber &&
-        columnNumber == that.columnNumber;
+      columnNumber == that.columnNumber;
   }
 
   @Override
@@ -63,8 +63,8 @@ public final class CellCoordinate implements Serializable {
   @Override
   public String toString() {
     return new StringJoiner(", ", CellCoordinate.class.getSimpleName() + "[", "]")
-        .add("rowNumber=" + rowNumber)
-        .add("columnNumber=" + columnNumber)
-        .toString();
+      .add("rowNumber=" + rowNumber)
+      .add("columnNumber=" + columnNumber)
+      .toString();
   }
 }

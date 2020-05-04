@@ -31,6 +31,12 @@ public class FlatteredRowsRequest {
   private String spreadsheetName;
   private String sheetTitle;
 
+  /**
+   *    Constructor for FlatteredRowsRequest object.
+   * @param contentRequest the  content request is provided with
+   * @param mergeRequests  the merge requests is list of request with
+   * @param lastRowIndex   the last row index is provided.
+   */
   public FlatteredRowsRequest(Request contentRequest, List<Request> mergeRequests,
                               int lastRowIndex) {
 

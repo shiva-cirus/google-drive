@@ -66,6 +66,11 @@ public class GoogleFilteringSourceConfig extends GoogleRetryingConfig {
     "RFC3339 (https://tools.ietf.org/html/rfc3339) format, default timezone is UTC, e.g., 2012-06-04T12:00:00-08:00.")
   protected String endDate;
 
+  /**
+   * Returns the ValidationResult.
+   * @param collector   the failure collector is provided
+   * @return  The ValidationResult
+   */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
     if (validateModificationDateRange(collector)
@@ -95,7 +100,7 @@ public class GoogleFilteringSourceConfig extends GoogleRetryingConfig {
   }
 
   protected boolean checkPropertyIsValid(FailureCollector collector, boolean isPropertyValid, String propertyName,
-                                      Object propertyValue, String propertyLabel) {
+                                         Object propertyValue, String propertyLabel) {
     if (isPropertyValid) {
       return true;
     }

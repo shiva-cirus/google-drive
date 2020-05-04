@@ -61,6 +61,14 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
   private final String sheetName;
   private final boolean skipNameFields;
 
+  /**
+   * Constructor for StructuredRecordToFlatteredRowsRecordTransformer object.
+   * @param spreadsheetNameFieldName  The spread sheet Name Field Name
+   * @param sheetNameFieldName        The sheet Name Field Name
+   * @param spreadsheetName           The spread sheet Name
+   * @param sheetName                 The sheet Name
+   * @param skipNameFields            The skip Name Fields
+   */
   public StructuredRecordToFlatteredRowsRecordTransformer(String spreadsheetNameFieldName,
                                                           String sheetNameFieldName,
                                                           String spreadsheetName,
@@ -73,6 +81,11 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
     this.skipNameFields = skipNameFields;
   }
 
+  /**
+   *   Returns selected StructuredRecord.
+   * @param input The StructuredRecord
+   * @return  the instance of StructuredRecord
+   */
   public FlatteredRowsRecord transform(StructuredRecord input) {
     List<List<CellData>> data = new ArrayList<>();
     List<GridRange> mergeRanges = new ArrayList<>();
@@ -106,7 +119,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
     }
 
     FlatteredRowsRecord flatteredRowsRecord = new FlatteredRowsRecord(spreadsheetName, sheetName, header,
-      data, mergeRanges);
+                                                                      data, mergeRanges);
     return flatteredRowsRecord;
   }
 
@@ -161,7 +174,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
   private void addDataValue(CellData cellData, List<List<CellData>> data, List<GridRange> mergeRanges) {
     data.forEach(r -> r.add(cellData));
     mergeRanges.add(new GridRange().setStartRowIndex(0).setEndRowIndex(data.size())
-      .setStartColumnIndex(data.get(0).size() - 1).setEndColumnIndex(data.get(0).size()));
+                      .setStartColumnIndex(data.get(0).size() - 1).setEndColumnIndex(data.get(0).size()));
   }
 
   private CellData processDateTimeValue(Schema.LogicalType fieldLogicalType, Schema fieldSchema, Object value) {
@@ -180,7 +193,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
       case TIMESTAMP_MILLIS:
         if (value != null) {
           ZonedDateTime dateTime = getZonedDateTime((long) value, TimeUnit.MILLISECONDS,
-            ZoneId.ofOffset("UTC", ZoneOffset.UTC));
+                                                    ZoneId.ofOffset("UTC", ZoneOffset.UTC));
           userEnteredValue.setNumberValue(toSheetsDateTime(dateTime));
         }
         dateFormat.setType(SHEETS_CELL_DATE_TIME_TYPE);
@@ -188,7 +201,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
       case TIMESTAMP_MICROS:
         if (value != null) {
           ZonedDateTime dateTime = getZonedDateTime((long) value, TimeUnit.MICROSECONDS,
-            ZoneId.ofOffset("UTC", ZoneOffset.UTC));
+                                                    ZoneId.ofOffset("UTC", ZoneOffset.UTC));
           userEnteredValue.setNumberValue(toSheetsDateTime(dateTime));
         }
         dateFormat.setType(SHEETS_CELL_DATE_TIME_TYPE);
@@ -222,7 +235,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
         break;
       default:
         throw new IllegalStateException(String.format("Logical data type '%s' is not supported.",
-          fieldLogicalType.toString()));
+                                                      fieldLogicalType.toString()));
     }
     userEnteredFormat.setNumberFormat(dateFormat);
     cellData.setUserEnteredValue(userEnteredValue);
@@ -322,9 +335,9 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
             List<CellData> flattenRow = copyRow(data.get(j));
             flattenRow.add(nestedData);
             mergeRanges.add(new GridRange().setStartRowIndex(i + arrayData.size() * j)
-              .setEndRowIndex(i + arrayData.size() * j + 1)
-              .setStartColumnIndex(flattenRow.size() - 1)
-              .setEndColumnIndex(flattenRow.size()));
+                              .setEndRowIndex(i + arrayData.size() * j + 1)
+                              .setStartColumnIndex(flattenRow.size() - 1)
+                              .setEndColumnIndex(flattenRow.size()));
             extendedData[i + arrayData.size() * j] = flattenRow;
           }
         }
@@ -340,7 +353,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
         break;
       default:
         throw new IllegalStateException(String.format("Complex data format '%s' is not supported.",
-          fieldType.toString()));
+                                                      fieldType.toString()));
     }
   }
 
@@ -371,7 +384,7 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
 
   private boolean isSimpleType(Schema.Type fieldType) {
     return Arrays.asList(Schema.Type.STRING, Schema.Type.BYTES, Schema.Type.BOOLEAN, Schema.Type.LONG,
-      Schema.Type.INT, Schema.Type.DOUBLE, Schema.Type.FLOAT, Schema.Type.NULL).contains(fieldType);
+                         Schema.Type.INT, Schema.Type.DOUBLE, Schema.Type.FLOAT, Schema.Type.NULL).contains(fieldType);
   }
 
   private boolean isComplexType(Schema.Type fieldType) {

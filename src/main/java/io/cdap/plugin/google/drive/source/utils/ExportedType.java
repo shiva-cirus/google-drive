@@ -51,14 +51,19 @@ public enum ExportedType {
     return relatedMIME;
   }
 
+  /**
+   * Returns the  ExportedType.
+   * @param value  the vale is String type
+   * @return The ExportedType
+   */
   public static ExportedType fromValue(String value) {
     return Arrays.stream(ExportedType.values()).filter(exportedType -> exportedType.getValue().equals(value))
       .findAny().orElseThrow(() -> new InvalidPropertyTypeException(GoogleDriveSourceConfig.FILE_TYPES_TO_PULL_LABEL,
-            value, getAllowedValues()));
+                                                                    value, getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {
     return Arrays.stream(ExportedType.values()).map(v -> v.getValue())
-        .collect(Collectors.toList());
+      .collect(Collectors.toList());
   }
 }

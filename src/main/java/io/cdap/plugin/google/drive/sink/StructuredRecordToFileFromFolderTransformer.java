@@ -32,12 +32,23 @@ public class StructuredRecordToFileFromFolderTransformer {
   private final String nameFieldName;
   private final String mimeFieldName;
 
+  /**
+   *  Constructor for StructuredRecordToFileFromFolderTransformer object.
+   * @param bodyFieldName The body field name
+   * @param nameFieldName The name field name
+   * @param mimeFieldName The mime field name
+   */
   public StructuredRecordToFileFromFolderTransformer(String bodyFieldName, String nameFieldName, String mimeFieldName) {
     this.bodyFieldName = bodyFieldName;
     this.nameFieldName = nameFieldName;
     this.mimeFieldName = mimeFieldName;
   }
 
+  /**
+   * Returns instance of FileFromFolder.
+   * @param input The StructuredRecord
+   * @return the instance of FileFromFolder
+   */
   public FileFromFolder transform(StructuredRecord input) {
     byte[] content = new byte[]{};
     String name = null;

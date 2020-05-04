@@ -31,6 +31,14 @@ public class FlatteredRowsRecord {
   private List<List<CellData>> singleRowRecords;
   private List<GridRange> mergeRanges;
 
+  /**
+   *     Constructor for FlatteredRowsRecord object.
+   * @param spreadsheetName  the spread sheet name is provided with
+   * @param sheetTitle       the sheet title is provided with
+   * @param header           the header is provided with
+   * @param singleRowRecords the single row records is provided with
+   * @param mergeRanges      the merge Ranges is list of GridRange
+   */
   public FlatteredRowsRecord(String spreadsheetName, String sheetTitle, ComplexHeader header,
                              List<List<CellData>> singleRowRecords, List<GridRange> mergeRanges) {
     this.spreadsheetName = spreadsheetName;

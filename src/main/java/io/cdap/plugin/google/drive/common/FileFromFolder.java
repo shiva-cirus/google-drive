@@ -26,12 +26,23 @@ public class FileFromFolder {
   private final long offset;
   private final File file;
 
+  /**
+   *    Constructor for FileFromFolder object.
+   * @param content the content is provided with
+   * @param offset  the offset is provided with
+   * @param file    the file is provided
+   */
   public FileFromFolder(byte[] content, long offset, File file) {
     this.content = content;
     this.offset = offset;
     this.file = file;
   }
 
+  /**
+   *     Constructor for FileFromFolder object.
+   * @param content  the content is provided with
+   * @param file     the file is provided
+   */
   public FileFromFolder(byte[] content, File file) {
     this.content = content;
     this.file = file;

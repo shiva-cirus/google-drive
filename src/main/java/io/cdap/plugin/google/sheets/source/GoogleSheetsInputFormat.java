@@ -53,14 +53,14 @@ public class GoogleSheetsInputFormat extends InputFormat {
     String headersJson = conf.get(GoogleSheetsInputFormatProvider.PROPERTY_HEADERS_JSON);
 
     GoogleFilteringSourceConfig googleFilteringSourceConfig =
-        GoogleSheetsInputFormatProvider.GSON.fromJson(configJson, GoogleFilteringSourceConfig.class);
+      GoogleSheetsInputFormatProvider.GSON.fromJson(configJson, GoogleFilteringSourceConfig.class);
     GoogleSheetsSourceConfig googleSheetsSourceConfig =
-        GoogleSheetsInputFormatProvider.GSON.fromJson(configJson, GoogleSheetsSourceConfig.class);
+      GoogleSheetsInputFormatProvider.GSON.fromJson(configJson, GoogleSheetsSourceConfig.class);
 
     Type headersType = new TypeToken<Map<Integer, Map<String, List<String>>>>() {
     }.getType();
     Map<Integer, Map<String, List<String>>> resolvedHeaders =
-        GoogleSheetsInputFormatProvider.GSON.fromJson(headersJson, headersType);
+      GoogleSheetsInputFormatProvider.GSON.fromJson(headersJson, headersType);
 
     // get all sheets files according to filter
     GoogleDriveFilteringClient driveFilteringClient = new GoogleDriveFilteringClient(googleFilteringSourceConfig);
@@ -78,15 +78,15 @@ public class GoogleSheetsInputFormat extends InputFormat {
                                               Map<Integer, Map<String, List<String>>> resolvedHeaders) {
     List<InputSplit> splits = new ArrayList<>();
     String resolvedHeadersJson =
-        GoogleSheetsInputFormatProvider.GSON.toJson(resolvedHeaders);
+      GoogleSheetsInputFormatProvider.GSON.toJson(resolvedHeaders);
 
     List<MetadataKeyValueAddress> metadataCoordinates = googleSheetsSourceConfig.getMetadataCoordinates();
     String metadataCoordinatesJson =
-        GoogleSheetsInputFormatProvider.GSON.toJson(metadataCoordinates);
+      GoogleSheetsInputFormatProvider.GSON.toJson(metadataCoordinates);
 
     splits.addAll(files.stream().map(f ->
-        new GoogleSheetsSplit(f.getId(), resolvedHeadersJson, metadataCoordinatesJson))
-        .collect(Collectors.toList()));
+                                       new GoogleSheetsSplit(f.getId(), resolvedHeadersJson, metadataCoordinatesJson))
+                    .collect(Collectors.toList()));
     return splits;
   }
 

@@ -27,6 +27,12 @@ public class RecordsBatch implements Comparable<RecordsBatch> {
   private final String spreadsheetName;
   private final String spreadsheetId;
 
+  /**
+   *    Constructor for RecordsBatch object.
+   * @param group             The group
+   * @param spreadsheetName   The spread sheet name
+   * @param spreadsheetId     The spread sheet id
+   */
   public RecordsBatch(List<FlatteredRowsRequest> group, String spreadsheetName, String spreadsheetId) {
     this.group = group;
     this.spreadsheetName = spreadsheetName;

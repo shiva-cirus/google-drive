@@ -33,6 +33,11 @@ public class GoogleDriveRecordWriter extends RecordWriter<NullWritable, FileFrom
 
   private GoogleDriveSinkClient driveSinkClient;
 
+  /**
+   *   Constructor for GoogleDriveRecordWriter object.
+   * @param taskAttemptContext the task attempt context
+   * @throws IOException on issues with file reading
+   */
   public GoogleDriveRecordWriter(TaskAttemptContext taskAttemptContext) throws IOException {
     Configuration conf = taskAttemptContext.getConfiguration();
     String configJson = conf.get(GoogleDriveOutputFormatProvider.PROPERTY_CONFIG_JSON);

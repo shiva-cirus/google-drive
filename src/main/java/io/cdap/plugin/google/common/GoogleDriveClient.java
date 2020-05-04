@@ -42,6 +42,11 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
   protected final C config;
   protected NetHttpTransport httpTransport;
 
+  /**
+   *    Constructor for GoogleDriveClient object.
+   * @param config  the google auth base config is provided
+   * @throws IOException   on issues with file reading
+   */
   public GoogleDriveClient(C config) throws IOException {
     this.config = config;
     try {
@@ -55,6 +60,7 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
 
   /**
    * Provides credential object for Google APIs that supports this credential type.
+   *
    * @return filled credential.
    * @throws IOException on issues with service account file reading.
    */
@@ -71,8 +77,8 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
           .setTransport(httpTransport)
           .setJsonFactory(JSON_FACTORY)
           .setClientSecrets(config.getClientId(),
-                config.getClientSecret())
-            .build();
+                            config.getClientSecret())
+          .build();
         credential.setRefreshToken(config.getRefreshToken());
         break;
       case SERVICE_ACCOUNT:
