@@ -86,7 +86,7 @@ public class SchemaBuilder {
   public static final String IMAGE_ALTITUDE_FIELD_NAME = "altitude";
 
   /**
-   *   Returns the instance of Schema.
+   * Returns the instance of Schema.
    * @param fields      The Fields are list of fields
    * @param bodyFormat  The BodyFormat
    * @return  The instance of Schema
@@ -105,7 +105,7 @@ public class SchemaBuilder {
   }
 
   /**
-   *  Returns the field of Schema.
+   * Returns the field of Schema.
    * @param name  The name is String type
    * @param bodyFormat  The BodyFormat
    * @return The field of Schema
@@ -209,8 +209,9 @@ public class SchemaBuilder {
                                                                          videoMediaFieldsSchemas))));
     }
   }
+
   /**
-   *  Returns  the field of Schema.
+   * Returns the field of Schema.
    * @param name  The name is String type
    * @return The  field of Schema
    */
@@ -248,8 +249,9 @@ public class SchemaBuilder {
         }
     }
   }
+
   /**
-   *  Returns  the field of Schema.
+   * Returns the field of Schema.
    * @param name  The name is String type
    * @return The  field of Schema
    */
@@ -266,7 +268,7 @@ public class SchemaBuilder {
   }
 
   /**
-   *  Returns  the field of Schema.
+   * Returns the field of Schema.
    * @param name  The name is String type
    * @return The  field of Schema
    */

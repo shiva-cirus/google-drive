@@ -51,7 +51,7 @@ public class StructuredRecordToFileFromFolderTransformerTest {
 
     assertNotNull(fileFromFolder.getFile());
     assertEquals((long) StructuredRecordToFileFromFolderTransformer.RANDOM_FILE_NAME_LENGTH,
-                 fileFromFolder.getFile().getName().length());
+      fileFromFolder.getFile().getName().length());
     assertEquals(TEST_BYTES, fileFromFolder.getContent());
     assertEquals(null, fileFromFolder.getFile().getMimeType());
     assertEquals(0, fileFromFolder.getOffset());
@@ -71,7 +71,7 @@ public class StructuredRecordToFileFromFolderTransformerTest {
 
     assertNotNull(fileFromFolder.getFile());
     assertEquals((long) StructuredRecordToFileFromFolderTransformer.RANDOM_FILE_NAME_LENGTH,
-                 fileFromFolder.getFile().getName().length());
+      fileFromFolder.getFile().getName().length());
     assertTrue(Arrays.equals(new byte[]{}, fileFromFolder.getContent()));
     assertEquals(null, fileFromFolder.getFile().getMimeType());
     assertEquals(0, fileFromFolder.getOffset());

@@ -37,7 +37,7 @@ public abstract class GoogleSheetsClient<C extends GoogleAuthBaseConfig> extends
   protected Drive drive;
 
   /**
-   *     Constructor for GoogleSheetsClient object.
+   * Constructor for GoogleSheetsClient object.
    * @param config  the google auth base config is provided
    * @throws IOException     on issues with file reading
    */

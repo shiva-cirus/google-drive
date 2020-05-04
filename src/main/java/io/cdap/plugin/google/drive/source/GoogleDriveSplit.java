@@ -38,7 +38,7 @@ public class GoogleDriveSplit extends InputSplit implements Writable {
   }
 
   /**
-   *  Constructor for GoogleDriveSplit object.
+   * Constructor for GoogleDriveSplit object.
    * @param fileId     the field id is provided with
    * @param bytesFrom  the bytes from is provided with
    * @param bytesTo    the bytes to is provided

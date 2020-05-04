@@ -32,7 +32,7 @@ public class FlatteredRowsRecord {
   private List<GridRange> mergeRanges;
 
   /**
-   *     Constructor for FlatteredRowsRecord object.
+   * Constructor for FlatteredRowsRecord object.
    * @param spreadsheetName  the spread sheet name is provided with
    * @param sheetTitle       the sheet title is provided with
    * @param header           the header is provided with

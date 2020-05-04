@@ -99,8 +99,8 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
   private transient Schema schema = null;
 
   /**
-   *  Returns  the instance of Schema.
-   * @return The  instance of Schema
+   * Returns the instance of Schema.
+   * @return The instance of Schema
    */
   public Schema getSchema() {
     if (schema == null) {
@@ -110,7 +110,7 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
   }
 
   /**
-   * Returns the  ValidationResult.
+   * Returns the ValidationResult.
    * @param collector   the failure collector is provided
    * @return  The ValidationResult
    */

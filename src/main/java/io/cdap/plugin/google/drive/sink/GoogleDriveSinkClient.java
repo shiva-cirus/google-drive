@@ -46,7 +46,7 @@ public class GoogleDriveSinkClient extends GoogleDriveClient<GoogleDriveSinkConf
    */
   public void createFile(FileFromFolder fileFromFolder) throws ExecutionException, RetryException {
     APIRequestRetryer.getRetryer(config,
-                                 String.format("Creating of file with name '%s'.", fileFromFolder.getFile().getName()))
+      String.format("Creating of file with name '%s'.", fileFromFolder.getFile().getName()))
       .call(() -> {
         String folderId = config.getDirectoryIdentifier();
 
@@ -56,7 +56,7 @@ public class GoogleDriveSinkClient extends GoogleDriveClient<GoogleDriveSinkConf
         fileToWrite.setMimeType(fileFromFolder.getFile().getMimeType());
         fileToWrite.setParents(Collections.singletonList(folderId));
         ByteArrayContent fileContent = new ByteArrayContent(fileFromFolder.getFile().getMimeType(),
-                                                            fileFromFolder.getContent());
+          fileFromFolder.getContent());
         service.files().create(fileToWrite, fileContent).execute();
         return null;
       });

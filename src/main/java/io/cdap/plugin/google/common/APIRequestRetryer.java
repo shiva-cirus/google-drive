@@ -37,13 +37,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Utility class that provides retry capabilities for API calls.
  * Supported exceptions for retry:
- * - SocketTimeoutException.
- * - GoogleJsonResponseException (429 ('Too Many Requests', 'Rate Limit Exceeded')).
- * - GoogleJsonResponseException (403 ('Rate Limit Exceeded')).
- * - GoogleJsonResponseException (500).
- * - GoogleJsonResponseException (503).
- * - HttpResponseException (500).
- * - HttpResponseException (403 ('Rate Limit Exceeded')).
+ *  - SocketTimeoutException.
+ *  - GoogleJsonResponseException (429 ('Too Many Requests', 'Rate Limit Exceeded')).
+ *  - GoogleJsonResponseException (403 ('Rate Limit Exceeded')).
+ *  - GoogleJsonResponseException (500).
+ *  - GoogleJsonResponseException (503).
+ *  - HttpResponseException (500).
+ *  - HttpResponseException (403 ('Rate Limit Exceeded')).
  */
 public abstract class APIRequestRetryer {
   private static final Logger LOG = LoggerFactory.getLogger(APIRequestRetryer.class);
@@ -161,11 +161,11 @@ public abstract class APIRequestRetryer {
     TrueExponentialWaitStrategy(long multiplier,
                                 long maximumWait) {
       Preconditions.checkArgument(multiplier > 0L,
-                                  "multiplier must be > 0 but is '%d'", multiplier);
+        "multiplier must be > 0 but is '%d'", multiplier);
       Preconditions.checkArgument(maximumWait >= 0L,
-                                  "maximumWait must be >= 0 but is '%d'", maximumWait);
+        "maximumWait must be >= 0 but is '%d'", maximumWait);
       Preconditions.checkArgument(multiplier < maximumWait,
-                                  "multiplier must be < maximumWait but is '%d'", multiplier);
+        "multiplier must be < maximumWait but is '%d'", multiplier);
       this.multiplier = multiplier;
       this.maximumWait = maximumWait;
     }

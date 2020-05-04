@@ -100,7 +100,7 @@ public class GoogleFilteringSourceConfig extends GoogleRetryingConfig {
   }
 
   protected boolean checkPropertyIsValid(FailureCollector collector, boolean isPropertyValid, String propertyName,
-                                         Object propertyValue, String propertyLabel) {
+                                      Object propertyValue, String propertyLabel) {
     if (isPropertyValid) {
       return true;
     }

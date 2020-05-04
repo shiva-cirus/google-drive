@@ -59,31 +59,31 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
     "Supported types for record fields: '%s'. Supported logical types for record fields: '%s'.";
 
   public static final List<Schema.LogicalType> SUPPORTED_LOGICAL_TYPES = Arrays.asList(Schema.LogicalType.DATE,
-                                                                                       Schema.LogicalType.TIME_MILLIS,
-                                                                                       Schema.LogicalType.TIME_MICROS,
-                                                                                       Schema.LogicalType.TIMESTAMP_MILLIS,
-                                                                                       Schema.LogicalType.TIMESTAMP_MICROS,
-                                                                                       Schema.LogicalType.DECIMAL);
+    Schema.LogicalType.TIME_MILLIS,
+    Schema.LogicalType.TIME_MICROS,
+    Schema.LogicalType.TIMESTAMP_MILLIS,
+    Schema.LogicalType.TIMESTAMP_MICROS,
+    Schema.LogicalType.DECIMAL);
 
   public static final List<Schema.Type> SUPPORTED_TYPES = Arrays.asList(Schema.Type.STRING,
-                                                                        Schema.Type.LONG,
-                                                                        Schema.Type.INT,
-                                                                        Schema.Type.DOUBLE,
-                                                                        Schema.Type.FLOAT,
-                                                                        Schema.Type.BYTES,
-                                                                        Schema.Type.BOOLEAN,
-                                                                        Schema.Type.NULL,
-                                                                        Schema.Type.ARRAY,
-                                                                        Schema.Type.RECORD);
+    Schema.Type.LONG,
+    Schema.Type.INT,
+    Schema.Type.DOUBLE,
+    Schema.Type.FLOAT,
+    Schema.Type.BYTES,
+    Schema.Type.BOOLEAN,
+    Schema.Type.NULL,
+    Schema.Type.ARRAY,
+    Schema.Type.RECORD);
 
   public static final List<Schema.Type> SUPPORTED_NESTED_TYPES = Arrays.asList(Schema.Type.STRING,
-                                                                               Schema.Type.LONG,
-                                                                               Schema.Type.INT,
-                                                                               Schema.Type.DOUBLE,
-                                                                               Schema.Type.FLOAT,
-                                                                               Schema.Type.BYTES,
-                                                                               Schema.Type.BOOLEAN,
-                                                                               Schema.Type.NULL);
+    Schema.Type.LONG,
+    Schema.Type.INT,
+    Schema.Type.DOUBLE,
+    Schema.Type.FLOAT,
+    Schema.Type.BYTES,
+    Schema.Type.BOOLEAN,
+    Schema.Type.NULL);
 
   @Name(SHEET_NAME_FIELD_NAME)
   @Description("Default sheet title. Is used when user doesn't specify schema field with sheet title.")
@@ -162,7 +162,7 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
   private boolean skipNameFields;
 
   /**
-   *  Validate that the given schema is compatible with the given extension.
+   * Validate that the given schema is compatible with the given extension.
    * @param collector  failure collector with
    * @param schema  the schema to check compatibility
    */
@@ -171,11 +171,11 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
 
     // validate spreadsheet name field is in schema and has valid format
     validateSchemaField(collector, schema, SCHEMA_SPREAD_SHEET_NAME_FIELD_NAME, schemaSpreadsheetNameFieldName,
-                        "Spreadsheet name field", Schema.Type.STRING);
+      "Spreadsheet name field", Schema.Type.STRING);
 
     // validate sheet field is in schema and has valid format
     validateSchemaField(collector, schema, SCHEMA_SHEET_NAME_FIELD_NAME, schemaSheetNameFieldName,
-                        "Sheet name field", Schema.Type.STRING);
+      "Sheet name field", Schema.Type.STRING);
 
     // validate schema
     validateSchema(collector, schema);
@@ -185,27 +185,27 @@ public class GoogleSheetsSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
     for (Schema.Field field : schema.getFields()) {
       Schema fieldSchema = field.getSchema();
       checkSupportedSchemas(collector, fieldSchema, SUPPORTED_LOGICAL_TYPES, SUPPORTED_TYPES,
-                            String.format(TOP_LEVEL_SCHEMA_MESSAGE, field.getName(), fieldSchema.getType(),
-                                          fieldSchema.getLogicalType()),
-                            String.format(TOP_LEVEL_SCHEMA_CORRECTIVE_MESSAGE, SUPPORTED_TYPES.toString(),
-                                          SUPPORTED_LOGICAL_TYPES.toString()));
+        String.format(TOP_LEVEL_SCHEMA_MESSAGE, field.getName(), fieldSchema.getType(),
+          fieldSchema.getLogicalType()),
+        String.format(TOP_LEVEL_SCHEMA_CORRECTIVE_MESSAGE, SUPPORTED_TYPES.toString(),
+          SUPPORTED_LOGICAL_TYPES.toString()));
       // for array and record check that they don't have nested complex structures
       if (Schema.Type.ARRAY.equals(fieldSchema.getType())) {
         Schema componentSchema = fieldSchema.getComponentSchema();
         checkSupportedSchemas(collector, componentSchema, SUPPORTED_LOGICAL_TYPES, SUPPORTED_NESTED_TYPES,
-                              String.format(ARRAY_COMPONENTS_SCHEMA_MESSAGE, field.getName(),
-                                            componentSchema.getType(), componentSchema.getLogicalType()),
-                              String.format(ARRAY_COMPONENTS_SCHEMA_CORRECTIVE_MESSAGE, SUPPORTED_NESTED_TYPES.toString(),
-                                            SUPPORTED_LOGICAL_TYPES.toString()));
+          String.format(ARRAY_COMPONENTS_SCHEMA_MESSAGE, field.getName(),
+            componentSchema.getType(), componentSchema.getLogicalType()),
+          String.format(ARRAY_COMPONENTS_SCHEMA_CORRECTIVE_MESSAGE, SUPPORTED_NESTED_TYPES.toString(),
+          SUPPORTED_LOGICAL_TYPES.toString()));
       }
       if (Schema.Type.RECORD.equals(fieldSchema.getType())) {
         for (Schema.Field nestedField : fieldSchema.getFields()) {
           Schema nestedComponentSchema = nestedField.getSchema();
           checkSupportedSchemas(collector, nestedComponentSchema, SUPPORTED_LOGICAL_TYPES, SUPPORTED_NESTED_TYPES,
-                                String.format(RECORD_FIELD_SCHEMA_MESSAGE, field.getName(), nestedField.getName(),
-                                              nestedComponentSchema.getType(), nestedComponentSchema.getLogicalType()),
-                                String.format(String.format(RECORD_FIELD_SCHEMA_CORRECTIVE_MESSAGE,
-                                                            SUPPORTED_NESTED_TYPES.toString(), SUPPORTED_LOGICAL_TYPES.toString())));
+            String.format(RECORD_FIELD_SCHEMA_MESSAGE, field.getName(), nestedField.getName(),
+              nestedComponentSchema.getType(), nestedComponentSchema.getLogicalType()),
+            String.format(String.format(RECORD_FIELD_SCHEMA_CORRECTIVE_MESSAGE,
+              SUPPORTED_NESTED_TYPES.toString(), SUPPORTED_LOGICAL_TYPES.toString())));
         }
       }
     }

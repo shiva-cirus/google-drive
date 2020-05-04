@@ -59,7 +59,7 @@ public enum ModifiedDateRangeType {
   }
 
   /**
-   *  Returns ModifiedDateRangeType.
+   * Returns ModifiedDateRangeType.
    * @param value The value is String type.
    * @return  The  ModifiedDateRangeType
    */
@@ -73,6 +73,6 @@ public enum ModifiedDateRangeType {
 
   public static List<String> getAllowedValues() {
     return Arrays.stream(ModifiedDateRangeType.values()).map(v -> v.getValue())
-      .collect(Collectors.toList());
+        .collect(Collectors.toList());
   }
 }

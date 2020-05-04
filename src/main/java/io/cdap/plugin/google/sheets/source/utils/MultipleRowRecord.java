@@ -35,7 +35,7 @@ public class MultipleRowRecord {
   private List<GridRange> merges;
 
   /**
-   *     Constructor for MultipleRowRecord object.
+   * Constructor for MultipleRowRecord object.
    * @param spreadsheetName  The  spread sheet name
    * @param sheetTitle       The sheet title
    * @param metadata         The metadata

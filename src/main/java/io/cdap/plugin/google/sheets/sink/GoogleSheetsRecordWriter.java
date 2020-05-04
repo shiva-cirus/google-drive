@@ -106,7 +106,7 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
   private GoogleSheetsSinkConfig googleSheetsSinkConfig;
 
   /**
-   *      Constructor for GoogleSheetsRecordWriter object.
+   * Constructor for GoogleSheetsRecordWriter object.
    * @param taskAttemptContext  the task  attempt context is provided
    * @throws IOException   on issues with file reading
    */

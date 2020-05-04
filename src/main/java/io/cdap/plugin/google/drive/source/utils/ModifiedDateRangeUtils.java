@@ -42,7 +42,7 @@ public class ModifiedDateRangeUtils {
                       "(\\.[0-9]+)?(([Zz])|([\\+|\\-]([01][0-9]|2[0-3]):[0-5][0-9]))?)?$");
 
   /**
-   *  Returns the instance of DateRange.
+   * Returns the instance of DateRange.
    * @param modifiedDateRangeType  The modified date range type   with
    * @param startDate              The start date  with
    * @param endDate                The end date
@@ -145,7 +145,7 @@ public class ModifiedDateRangeUtils {
   }
 
   /**
-   *  Returns the String.
+   * Returns the String.
    * @param dateRange  The data range is reference of DateRange
    * @return The String
    */

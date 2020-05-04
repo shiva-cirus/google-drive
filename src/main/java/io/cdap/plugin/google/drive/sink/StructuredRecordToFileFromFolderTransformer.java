@@ -33,7 +33,7 @@ public class StructuredRecordToFileFromFolderTransformer {
   private final String mimeFieldName;
 
   /**
-   *  Constructor for StructuredRecordToFileFromFolderTransformer object.
+   * Constructor for StructuredRecordToFileFromFolderTransformer object.
    * @param bodyFieldName The body field name
    * @param nameFieldName The name field name
    * @param mimeFieldName The mime field name

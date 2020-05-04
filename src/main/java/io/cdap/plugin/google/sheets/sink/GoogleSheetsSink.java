@@ -75,9 +75,9 @@ public class GoogleSheetsSink extends BatchSink<StructuredRecord, Void, Flattere
     if (inputSchema.getFields() != null && !inputSchema.getFields().isEmpty()) {
       String operationDescription = "Wrote sheet to Google Drive directory";
       lineageRecorder.recordWrite("Write", operationDescription,
-                                  inputSchema.getFields().stream()
-                                    .map(Schema.Field::getName)
-                                    .collect(Collectors.toList()));
+        inputSchema.getFields().stream()
+          .map(Schema.Field::getName)
+          .collect(Collectors.toList()));
     }
   }
 
@@ -85,10 +85,10 @@ public class GoogleSheetsSink extends BatchSink<StructuredRecord, Void, Flattere
   public void initialize(BatchRuntimeContext context) throws Exception {
     super.initialize(context);
     transformer = new StructuredRecordToFlatteredRowsRecordTransformer(config.getSchemaSpreadsheetNameFieldName(),
-                                                                       config.getSchemaSheetNameFieldName(),
-                                                                       config.getSpreadsheetName(),
-                                                                       config.getSheetName(),
-                                                                       config.isSkipNameFields());
+      config.getSchemaSheetNameFieldName(),
+      config.getSpreadsheetName(),
+      config.getSheetName(),
+      config.isSkipNameFields());
   }
 
   @Override

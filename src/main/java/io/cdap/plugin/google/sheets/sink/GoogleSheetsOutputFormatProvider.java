@@ -33,7 +33,7 @@ public class GoogleSheetsOutputFormatProvider implements OutputFormatProvider {
   private final Map<String, String> configMap;
 
   /**
-   *     Constructor for GoogleSheetsOutputFormatProvider object.
+   * Constructor for GoogleSheetsOutputFormatProvider object.
    * @param config  the google sheets sink config is provided
    */
   public GoogleSheetsOutputFormatProvider(GoogleSheetsSinkConfig config) {

@@ -27,8 +27,8 @@
   <description>Google Drive plugins</description>
 
   <properties>
-    <cdap.version>6.1.0-SNAPSHOT</cdap.version>
-    <cdap.plugin.version>2.3.0-SNAPSHOT</cdap.plugin.version>
+    <cdap.version>6.1.1</cdap.version>
+    <cdap.plugin.version>2.3.5</cdap.plugin.version>
     <commons-collections.version>3.2.2</commons-collections.version>
     <commons-lang3.version>3.9</commons-lang3.version>
     <drive-api.version>v3-rev162-1.23.0</drive-api.version>
@@ -267,8 +267,8 @@
         <version>1.1.0</version>
         <configuration>
           <cdapArtifacts>
-            <parent>system:cdap-data-pipeline[6.1.0-SNAPSHOT,7.0.0-SNAPSHOT)</parent>
-            <parent>system:cdap-data-streams[6.1.0-SNAPSHOT,7.0.0-SNAPSHOT)</parent>
+            <parent>system:cdap-data-pipeline[6.1.1,7.0.0-SNAPSHOT)</parent>
+            <parent>system:cdap-data-streams[6.1.1,7.0.0-SNAPSHOT)</parent>
           </cdapArtifacts>
         </configuration>
         <executions>

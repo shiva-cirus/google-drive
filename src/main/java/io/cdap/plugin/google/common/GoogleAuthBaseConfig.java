@@ -143,7 +143,7 @@ public abstract class GoogleAuthBaseConfig extends PluginConfig {
         return true;
       } catch (InvalidPropertyTypeException e) {
         collector.addFailure(e.getMessage(), Arrays.stream(AuthType.values()).map(v -> v.getValue())
-          .collect(Collectors.joining()))
+            .collect(Collectors.joining()))
           .withConfigProperty(AUTH_TYPE);
         return false;
       }

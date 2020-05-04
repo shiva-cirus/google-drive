@@ -82,8 +82,8 @@ public class GoogleSheetsSource extends BatchSource<NullWritable, RowRecord, Str
     // skip empty rows if needed
     if (!config.isSkipEmptyData() || !rowRecord.isEmptyData()) {
       emitter.emit(SheetTransformer.transform(rowRecord, config.getSchema(), config.isExtractMetadata(),
-                                              config.getMetadataFieldName(), config.getAddNameFields(), config.getSpreadsheetFieldName(),
-                                              config.getSheetFieldName()));
+        config.getMetadataFieldName(), config.getAddNameFields(), config.getSpreadsheetFieldName(),
+        config.getSheetFieldName()));
     }
   }
 }

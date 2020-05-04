@@ -236,7 +236,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     if (schema == null) {
       if (dataSchemaInfo.isEmpty()) {
         throw new RuntimeException("There are no headers to process. " +
-                                     "Perhaps no validation step was executed before schema generation.");
+          "Perhaps no validation step was executed before schema generation.");
       }
       schema = SchemaBuilder.buildSchema(this, new ArrayList<>(dataSchemaInfo.values()));
     }
@@ -315,7 +315,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
   private void validateSourceFolder(FailureCollector collector, List<File> spreadsheetsFiles) {
     if (spreadsheetsFiles.isEmpty()) {
       collector.addFailure(String.format("No spreadsheets found in '%s' folder with '%s' filter.",
-                                         getDirectoryIdentifier(), getFilter()), null)
+        getDirectoryIdentifier(), getFilter()), null)
         .withConfigProperty(DIRECTORY_IDENTIFIER).withConfigProperty(FILTER);
     }
   }
@@ -375,7 +375,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
       if (!availableTitles.containsAll(requiredIdentifiers)) {
         collector.addFailure(
           String.format("Spreadsheet '%s' doesn't have all required sheets. Required: '%s', available: '%s'.",
-                        spreadsheetTitles.getKey(), requiredIdentifiers, availableTitles), null)
+            spreadsheetTitles.getKey(), requiredIdentifiers, availableTitles), null)
           .withConfigProperty(SHEETS_IDENTIFIERS);
       }
     }
@@ -397,14 +397,14 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
         switch (sheetsToPull) {
           case ALL:
             requiredTitles.put(currentSpreadsheetId,
-                               sheetsSourceClient.getSheetsTitles(currentSpreadsheetId));
+              sheetsSourceClient.getSheetsTitles(currentSpreadsheetId));
             break;
           case TITLES:
             requiredTitles.put(currentSpreadsheetId, getSheetsIdentifiers());
             break;
           case NUMBERS:
             requiredTitles.put(currentSpreadsheetId, sheetsSourceClient.getSheetsTitles(currentSpreadsheetId,
-                                                                                        getSheetsIdentifiers().stream().map(Integer::parseInt).collect(Collectors.toList())));
+              getSheetsIdentifiers().stream().map(Integer::parseInt).collect(Collectors.toList())));
             break;
           default:
             collector.addFailure(String.format("'%s' is not processed value.", sheetsToPull.toString()), null)
@@ -430,7 +430,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
           // get rows for columns and data
           MergesForNumeredRows headerDataRows = sheetsSourceClient.getSingleRows(currentSpreadsheetId,
-                                                                                 currentSheetTitle, new HashSet<>(Arrays.asList(columnNamesRow, subColumnNamesRow, firstDataRow)));
+            currentSheetTitle, new HashSet<>(Arrays.asList(columnNamesRow, subColumnNamesRow, firstDataRow)));
 
           List<CellData> columnsRow = headerDataRows.getNumeredRows().get(columnNamesRow);
           List<CellData> subColumnsRow = headerDataRows.getNumeredRows().get(subColumnNamesRow);
@@ -438,7 +438,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
           if (CollectionUtils.isEmpty(columnsRow)) {
             collector.addFailure(
               String.format("No headers found for row '%d', spreadsheet id '%s', sheet title '%s'.",
-                            columnNamesRow, currentSpreadsheetId, currentSheetTitle), null)
+                columnNamesRow, currentSpreadsheetId, currentSheetTitle), null)
               .withConfigProperty(CUSTOM_COLUMN_NAMES_ROW);
             return;
           }
@@ -451,7 +451,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
             .collect(Collectors.toList());
           if (!invalidColumnMerges.isEmpty()) {
             collector.addFailure(String.format("Invalid merged cells for first column row."),
-                                 "Column row shouldn't have merges cells from previous rows.")
+              "Column row shouldn't have merges cells from previous rows.")
               .withConfigProperty(CUSTOM_COLUMN_NAMES_ROW);
           }
 
@@ -475,7 +475,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
           Map.Entry<String, List<String>> firstFileTitles = requiredTitles.entrySet().iterator().next();
           MergesForNumeredRows firstRowData = sheetsSourceClient.getSingleRows(firstFileTitles.getKey(),
-                                                                               firstFileTitles.getValue().get(0), Collections.singleton(firstDataRow));
+            firstFileTitles.getValue().get(0), Collections.singleton(firstDataRow));
           List<CellData> dataCells = firstRowData.getNumeredRows().get(firstDataRow);
           if (CollectionUtils.isEmpty(dataCells)) {
             dataSchemaInfo = defaultGeneratedHeaders(getLastDataColumn());
@@ -486,7 +486,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
       } catch (IOException e) {
         collector.addFailure(
           String.format("Failed to prepare headers, spreadsheet id: '%s', sheet title: '%s'.",
-                        currentSpreadsheetId, currentSheetTitle), null);
+            currentSpreadsheetId, currentSheetTitle), null);
       }
     }
   }
@@ -527,7 +527,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
         }
         if (headerTitles.contains(title)) {
           collector.addFailure(String.format("Duplicate column name '%s'.", title),
-                               null);
+            null);
         }
         headerTitles.add(title);
       }
@@ -552,7 +552,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
       }
       if (titles.contains(subHeaderTitle)) {
         collector.addFailure(String.format("Duplicate sub-column name '%s'.", subHeaderTitle),
-                             null);
+          null);
         return subHeaders;
       }
       titles.add(subHeaderTitle);
@@ -569,7 +569,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     if (!COLUMN_NAME.matcher(title).matches()) {
       String defaultColumnName = ColumnAddressConverter.getColumnName(columnIndex + 1);
       LOG.warn(String.format("Original column name '%s' doesn't satisfy column name requirements '%s', " +
-                               "the default column name '%s' will be used.", title, COLUMN_NAME.pattern(), defaultColumnName));
+        "the default column name '%s' will be used.", title, COLUMN_NAME.pattern(), defaultColumnName));
       return defaultColumnName;
     }
     return title;
@@ -582,10 +582,11 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
       dataSchema = getCellSchema(dataCell);
     } else {
       LOG.warn(String.format("There is empty data cell for '%s' column during data types defining.",
-                             headerName));
+        headerName));
     }
     return dataSchema;
   }
+
   /**
    * Returns the int.
    * @return The int
@@ -653,7 +654,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     LinkedHashMap<Integer, ColumnComplexSchemaInfo> headers = new LinkedHashMap<>();
     for (int i = 1; i <= length; i++) {
       headers.put(i - 1, new ColumnComplexSchemaInfo(ColumnAddressConverter.getColumnName(i),
-                                                     Schema.of(Schema.Type.STRING)));
+        Schema.of(Schema.Type.STRING)));
     }
     return headers;
   }
@@ -699,7 +700,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
       // we should have at least one data row
       if (getLastHeaderRow() + 1 >= getFirstFooterRow()) {
         collector.addFailure("Header and footer are intersected or there are no data rows between them.",
-                             null)
+          null)
           .withConfigProperty(LAST_HEADER_ROW)
           .withConfigProperty(FIRST_FOOTER_ROW);
         return;
@@ -727,7 +728,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
           .collect(Collectors.toList());
         if (columnNames.contains(metadataFieldName)) {
           collector.addFailure(String.format("Metadata record name '%s' coincides with one of the column names.",
-                                             metadataFieldName), null).withConfigProperty(METADATA_FIELD_NAME);
+            metadataFieldName), null).withConfigProperty(METADATA_FIELD_NAME);
         }
       }
 
@@ -765,7 +766,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
       if ((row < getFirstHeaderRow() || row > getLastHeaderRow()) ==
         (row < getFirstFooterRow() || row > getLastFooterRow())) {
         collector.addFailure(String.format("Metadata cell '%s' is out of header or footer rows.", address),
-                             null)
+          null)
           .withConfigProperty(METADATA_CELLS);
         return false;
       }
@@ -887,7 +888,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
       for (Map.Entry<String, String> pair : keyValuePairs.entrySet()) {
         metadataCoordinates.add(new MetadataKeyValueAddress(toCoordinate(pair.getKey()),
-                                                            toCoordinate(pair.getValue())));
+          toCoordinate(pair.getValue())));
       }
     }
     return metadataCoordinates;

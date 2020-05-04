@@ -28,7 +28,7 @@ public class RecordsBatch implements Comparable<RecordsBatch> {
   private final String spreadsheetId;
 
   /**
-   *    Constructor for RecordsBatch object.
+   * Constructor for RecordsBatch object.
    * @param group             The group
    * @param spreadsheetName   The spread sheet name
    * @param spreadsheetId     The spread sheet id

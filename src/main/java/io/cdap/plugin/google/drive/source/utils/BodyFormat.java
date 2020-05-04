@@ -51,11 +51,11 @@ public enum BodyFormat {
       .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
       .findAny()
       .orElseThrow(() ->
-                     new InvalidPropertyTypeException(GoogleDriveSourceConfig.BODY_FORMAT_LABEL, value, getAllowedValues()));
+          new InvalidPropertyTypeException(GoogleDriveSourceConfig.BODY_FORMAT_LABEL, value, getAllowedValues()));
   }
 
   public static List<String> getAllowedValues() {
     return Arrays.stream(BodyFormat.values()).map(v -> v.getValue())
-      .collect(Collectors.toList());
+        .collect(Collectors.toList());
   }
 }

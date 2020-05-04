@@ -77,8 +77,8 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
           .setTransport(httpTransport)
           .setJsonFactory(JSON_FACTORY)
           .setClientSecrets(config.getClientId(),
-                            config.getClientSecret())
-          .build();
+                config.getClientSecret())
+            .build();
         credential.setRefreshToken(config.getRefreshToken());
         break;
       case SERVICE_ACCOUNT:

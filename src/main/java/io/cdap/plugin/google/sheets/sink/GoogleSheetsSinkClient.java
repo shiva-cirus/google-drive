@@ -75,8 +75,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   public Spreadsheet createEmptySpreadsheet(String spreadsheetName, String sheetTitle)
     throws ExecutionException, RetryException {
     Retryer<Spreadsheet> createSpreadsheetRetryer = APIRequestRetryer.getRetryer(config,
-                                                                                 String.format("Creation of empty spreadsheet, name: '%s', sheet title: '%s'.",
-                                                                                               spreadsheetName, sheetTitle));
+      String.format("Creation of empty spreadsheet, name: '%s', sheet title: '%s'.",
+        spreadsheetName, sheetTitle));
     return createSpreadsheetRetryer.call(() -> {
       Spreadsheet spreadsheet = new Spreadsheet();
 
@@ -107,8 +107,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   public SheetProperties createEmptySheet(String spreadsheetId, String spreadsheetName, String sheetTitle)
     throws ExecutionException, RetryException {
     Retryer<SheetProperties> createSheetRetryer = APIRequestRetryer.getRetryer(config,
-                                                                               String.format("Creation of empty sheet, spreadsheet name: '%s', sheet title: '%s'.",
-                                                                                             spreadsheetName, sheetTitle));
+      String.format("Creation of empty sheet, spreadsheet name: '%s', sheet title: '%s'.",
+        spreadsheetName, sheetTitle));
     return createSheetRetryer.call(() -> {
       BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest();
 
@@ -150,8 +150,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
     Request appendRequest = new Request().setAppendDimension(appendDimensionRequest);
 
     APIRequestRetryer.getRetryer(config,
-                                 String.format("Appending dimension of '%d' rows for spreadsheet '%s', sheet name '%s'.",
-                                               rowsToAdd, spreadsheetsName, sheetTitle))
+      String.format("Appending dimension of '%d' rows for spreadsheet '%s', sheet name '%s'.",
+        rowsToAdd, spreadsheetsName, sheetTitle))
       .call(() -> {
         BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest();
         requestBody.setRequests(Collections.singletonList(appendRequest));
@@ -181,8 +181,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
     throws ExecutionException, RetryException {
 
     APIRequestRetryer.getRetryer(config,
-                                 String.format("Populating of spreadsheet '%s' with records, sheet title names '%s'.",
-                                               spreadsheetName, sheetTitles.toString()))
+      String.format("Populating of spreadsheet '%s' with records, sheet title names '%s'.",
+        spreadsheetName, sheetTitles.toString()))
       .call(() -> {
         BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest();
         requestBody.setRequests(new ArrayList<>());
@@ -234,12 +234,12 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
     }
 
     rows.addAll(record.getSingleRowRecords().stream()
-                  .map(r -> new RowData().setValues(r)).collect(Collectors.toList()));
+      .map(r -> new RowData().setValues(r)).collect(Collectors.toList()));
     updateCellsRequest.setRows(rows);
 
     return new FlatteredRowsRequest(new Request().setUpdateCells(updateCellsRequest),
-                                    prepareMergeRequests(sheetId, record, shift),
-                                    shift + updateCellsRequest.getRows().size());
+      prepareMergeRequests(sheetId, record, shift),
+      shift + updateCellsRequest.getRows().size());
   }
 
   /**
@@ -315,12 +315,12 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
       if (depth + 1 < headersDepth) {
         // add vertical merging
         headerRanges.add(new GridRange().setStartRowIndex(depth).setEndRowIndex(headersDepth)
-                           .setStartColumnIndex(widthShift).setEndColumnIndex(widthShift + 1));
+          .setStartColumnIndex(widthShift).setEndColumnIndex(widthShift + 1));
       }
     } else {
       // add horizontal merging
       headerRanges.add(new GridRange().setStartRowIndex(depth).setEndRowIndex(depth + 1)
-                         .setStartColumnIndex(widthShift).setEndColumnIndex(widthShift + header.getWidth()));
+        .setStartColumnIndex(widthShift).setEndColumnIndex(widthShift + header.getWidth()));
 
       int widthSubShift = widthShift;
       for (ComplexHeader subHeader : header.getSubHeaders()) {
@@ -344,9 +344,9 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
       .filter(r -> r.getStartRowIndex() < r.getEndRowIndex() && r.getStartColumnIndex() < r.getEndColumnIndex())
       .filter(r -> r.getStartRowIndex() + 1 < r.getEndRowIndex() || r.getStartColumnIndex() + 1 < r.getEndColumnIndex())
       .map(r -> new MergeCellsRequest().setMergeType(MERGE_ALL_MERGE_TYPE).setRange(r
-                                                                                      .setSheetId(sheetId)
-                                                                                      .setStartRowIndex(r.getStartRowIndex() + rowsShift)
-                                                                                      .setEndRowIndex(r.getEndRowIndex() + rowsShift)))
+        .setSheetId(sheetId)
+        .setStartRowIndex(r.getStartRowIndex() + rowsShift)
+        .setEndRowIndex(r.getEndRowIndex() + rowsShift)))
       .collect(Collectors.toList());
   }
 
@@ -361,7 +361,7 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   public void moveSpreadsheetToDestinationFolder(String spreadsheetsId, String spreadsheetName)
     throws ExecutionException, RetryException {
     APIRequestRetryer.getRetryer(config,
-                                 String.format("Moving the spreadsheet '%s' to destination folder.", spreadsheetName))
+      String.format("Moving the spreadsheet '%s' to destination folder.", spreadsheetName))
       .call(() -> {
         drive.files().update(spreadsheetsId, null)
           .setAddParents(config.getDirectoryIdentifier())

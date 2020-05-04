@@ -29,7 +29,7 @@ public class RowRecord {
   private boolean isEmptyData;
 
   /**
-   *  Constructor for RowRecord object.
+   * Constructor for RowRecord object.
    * @param spreadsheetName  The spread sheet name
    * @param sheetTitle       The sheet title
    * @param metadata         The metadata

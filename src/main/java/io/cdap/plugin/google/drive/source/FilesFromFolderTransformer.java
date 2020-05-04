@@ -79,7 +79,7 @@ public class FilesFromFolderTransformer {
       Object value = info.get(field.getName());
       if (value instanceof GenericJson) {
         subBuilder.set(field.getName(),
-                       parseSubSchema(field.getSchema().getNonNullable(), (GenericJson) value));
+                parseSubSchema(field.getSchema().getNonNullable(), (GenericJson) value));
       } else {
         subBuilder.set(field.getName(), info.get(field.getName()));
       }

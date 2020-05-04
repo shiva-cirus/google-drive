@@ -45,7 +45,7 @@ public class GoogleDriveRecordReader extends RecordReader<NullWritable, FileFrom
     Configuration conf = taskAttemptContext.getConfiguration();
     String configJson = conf.get(GoogleDriveInputFormatProvider.PROPERTY_CONFIG_JSON);
     GoogleDriveSourceConfig googleDriveSourceConfig =
-      GoogleDriveInputFormatProvider.GSON.fromJson(configJson, GoogleDriveSourceConfig.class);
+        GoogleDriveInputFormatProvider.GSON.fromJson(configJson, GoogleDriveSourceConfig.class);
     googleDriveSourceClient = new GoogleDriveSourceClient(googleDriveSourceConfig);
 
     GoogleDriveSplit split = (GoogleDriveSplit) inputSplit;

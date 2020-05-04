@@ -55,7 +55,7 @@ public class GoogleDriveSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
   protected String schemaMimeFieldName;
   
   /**
-   *  Validate that the given schema is compatible with the given extension.
+   * Validate that the given schema is compatible with the given extension.
    * @param collector  failure collector with
    * @param schema  the schema to check compatibility
    */

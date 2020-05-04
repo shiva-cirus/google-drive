@@ -32,7 +32,7 @@ import java.io.IOException;
 public class GoogleDriveOutputFormat extends OutputFormat<NullWritable, FileFromFolder> {
   @Override
   public RecordWriter<NullWritable, FileFromFolder> getRecordWriter(TaskAttemptContext taskAttemptContext)
-    throws IOException {
+      throws IOException {
     return new GoogleDriveRecordWriter(taskAttemptContext);
   }
 

@@ -66,7 +66,7 @@ public class GoogleDriveSourceClient extends GoogleDriveFilteringClient<GoogleDr
   }
 
   /**
-   *  Returns the FileFromFolder.
+   * Returns the FileFromFolder.
    * @param fileId     the file id is provided with
    * @param bytesFrom  the bytes from is provided with
    * @param bytesTo    the bytes to is provided
@@ -76,9 +76,9 @@ public class GoogleDriveSourceClient extends GoogleDriveFilteringClient<GoogleDr
    * @throws RetryException  if there was an error getting the column information for the retry
    */
   public FileFromFolder getFilePartition(String fileId, Long bytesFrom, Long bytesTo)
-    throws IOException, ExecutionException, RetryException {
+      throws IOException, ExecutionException, RetryException {
     Retryer<FileFromFolder> fileFromFolderRetryer = APIRequestRetryer.getRetryer(config,
-                                                                                 String.format("File retrieving, id: '%s'.", fileId));
+        String.format("File retrieving, id: '%s'.", fileId));
     return fileFromFolderRetryer.call(() -> {
       FileFromFolder fileFromFolder;
 
@@ -98,7 +98,7 @@ public class GoogleDriveSourceClient extends GoogleDriveFilteringClient<GoogleDr
 
         get.executeMediaAndDownloadTo(outputStream);
         fileFromFolder =
-          new FileFromFolder(((ByteArrayOutputStream) outputStream).toByteArray(), offset, currentFile);
+            new FileFromFolder(((ByteArrayOutputStream) outputStream).toByteArray(), offset, currentFile);
       } else if (mimeType.equals(DRIVE_DOCUMENTS_MIME)) {
         fileFromFolder = exportGoogleFormatFile(service, currentFile, config.getDocsExportingFormat());
       } else if (mimeType.equals(DRIVE_SPREADSHEETS_MIME)) {
@@ -111,14 +111,14 @@ public class GoogleDriveSourceClient extends GoogleDriveFilteringClient<GoogleDr
         fileFromFolder = exportGoogleFormatFile(service, currentFile, DEFAULT_APPS_SCRIPTS_EXPORT_MIME);
       } else {
         fileFromFolder =
-          new FileFromFolder(new byte[]{}, offset, currentFile);
+            new FileFromFolder(new byte[]{}, offset, currentFile);
       }
       return fileFromFolder;
     });
   }
 
   /**
-   *  Returns the list of file.
+   * Returns the list of file.
    * @return The list of file
    * @throws ExecutionException   if there was an error getting the column information for the execution
    * @throws RetryException  if there was an error getting the column information for the retry
@@ -154,9 +154,9 @@ public class GoogleDriveSourceClient extends GoogleDriveFilteringClient<GoogleDr
 
   // Google Drive API does not support partitioning for exporting Google Docs
   private FileFromFolder exportGoogleFormatFile(Drive service, File currentFile, String exportFormat)
-    throws ExecutionException, RetryException {
+      throws ExecutionException, RetryException {
     Retryer<FileFromFolder> fileFromFolderRetryer = APIRequestRetryer.getRetryer(config,
-                                                                                 String.format("File exporting, id: '%s', export format: '%s'.", currentFile.getId(), exportFormat));
+        String.format("File exporting, id: '%s', export format: '%s'.", currentFile.getId(), exportFormat));
     return fileFromFolderRetryer.call(() -> {
       OutputStream outputStream = new ByteArrayOutputStream();
       service.files().export(currentFile.getId(), exportFormat).executeMediaAndDownloadTo(outputStream);

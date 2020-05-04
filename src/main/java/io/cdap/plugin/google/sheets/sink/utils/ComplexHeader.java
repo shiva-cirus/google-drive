@@ -45,7 +45,7 @@ public class ComplexHeader {
   }
 
   /**
-   * Returns the int.
+   * Returns the depth.
    * @return The int
    */
   public int getDepth() {
@@ -61,7 +61,7 @@ public class ComplexHeader {
   }
 
   /**
-   * Returns the int.
+   * Returns the width.
    * @return  The int
    */
   public int getWidth() {

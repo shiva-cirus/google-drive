@@ -35,7 +35,7 @@ public class RecordsBatchProcessor implements Callable {
   private final Semaphore threadsSemaphore;
 
   /**
-   *   Constructor for RecordsBatchProcessor object.
+   * Constructor for RecordsBatchProcessor object.
    * @param sheetsSinkClient      The sheets sink client
    * @param recordsBatch          The records batch
    * @param threadsSemaphore      The threads semaphore
@@ -68,7 +68,7 @@ public class RecordsBatchProcessor implements Callable {
       String spreadsheetId = recordsBatch.getSpreadsheetId();
 
       sheetsSinkClient.populateCells(spreadsheetId, spreadsheetName, sheetTitles,
-                                     contentRequests, mergeRequests);
+        contentRequests, mergeRequests);
     } finally {
       threadsSemaphore.release();
       return null;

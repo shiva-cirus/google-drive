@@ -98,7 +98,7 @@ public class FilesFromFolderTransformerTest {
     assertEquals(TEST_WIDTH, imageMetadataResult.get(SchemaBuilder.IMAGE_WIDTH_FIELD_NAME));
 
     StructuredRecord locationResult =
-      imageMetadataResult.get(SchemaBuilder.LOCATION_FIELD_NAME);
+            imageMetadataResult.get(SchemaBuilder.LOCATION_FIELD_NAME);
     assertEquals(TEST_LATITUDE, locationResult.get(SchemaBuilder.IMAGE_LATITUDE_FIELD_NAME));
 
     StructuredRecord videoMetadataResult = record.get(SchemaBuilder.VIDEO_METADATA_FIELD_NAME);

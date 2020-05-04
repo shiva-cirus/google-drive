@@ -33,7 +33,7 @@ public class GoogleDriveInputFormatProvider implements InputFormatProvider {
   private final Map<String, String> conf;
 
   /**
-   *    Constructor for GoogleDriveOutputFormatProvider object.
+   * Constructor for GoogleDriveOutputFormatProvider object.
    * @param config  the GoogleDriveSourceConfig is provided
    */
   public GoogleDriveInputFormatProvider(GoogleDriveSourceConfig config) {

@@ -74,7 +74,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   public List<com.google.api.services.sheets.v4.model.Sheet> getSheets(String spreadsheetId)
     throws ExecutionException, RetryException {
     Retryer<List<com.google.api.services.sheets.v4.model.Sheet>> sheetsRetryer = APIRequestRetryer.getRetryer(config,
-                                                                                                              String.format("Get spreadsheet, id: '%s'.", spreadsheetId));
+      String.format("Get spreadsheet, id: '%s'.", spreadsheetId));
     return sheetsRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets();
@@ -92,7 +92,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   public List<String> getSheetsTitles(String spreadsheetId, List<Integer> indexes)
     throws ExecutionException, RetryException {
     Retryer<List<String>> sheetTitlesRetryer = APIRequestRetryer.getRetryer(config,
-                                                                            String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
+      String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
     return sheetTitlesRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets().stream().filter(s -> indexes.contains(s.getProperties().getIndex()))
@@ -109,7 +109,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
    */
   public List<String> getSheetsTitles(String spreadsheetId) throws ExecutionException, RetryException {
     Retryer<List<String>> sheetsTitlesRetryer = APIRequestRetryer.getRetryer(config,
-                                                                             String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
+      String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
     return sheetsTitlesRetryer.call(() -> {
       Spreadsheet spreadsheet = service.spreadsheets().get(spreadsheetId).execute();
       return spreadsheet.getSheets().stream().map(s -> s.getProperties().getTitle()).collect(Collectors.toList());
@@ -141,8 +141,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       prepareContentRequest(spreadsheetId, sheetTitle, rowNumber, length, metadataCoordinates);
 
     Retryer<Spreadsheet> contentRetryer = APIRequestRetryer.getRetryer(config,
-                                                                       String.format("Get content, spreadsheet id: '%s', sheet title: '%s', row number: '%d'.",
-                                                                                     spreadsheetId, sheetTitle, rowNumber));
+      String.format("Get content, spreadsheet id: '%s', sheet title: '%s', row number: '%d'.",
+        spreadsheetId, sheetTitle, rowNumber));
     Spreadsheet spreadsheet = contentRetryer.call(() -> contentRequest.execute());
     checkSingleSheetRetrieved(spreadsheet);
 
@@ -180,7 +180,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     }
 
     return new MultipleRowRecord(spreadsheet.getProperties().getTitle(), sheetTitle, metadata, headers,
-                                 spreadsheet.getSheets().get(0).getMerges());
+      spreadsheet.getSheets().get(0).getMerges());
   }
 
   /**
@@ -203,11 +203,11 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     if (config.isExtractMetadata() && CollectionUtils.isNotEmpty(metadataCoordinates)) {
       if (config.getFirstHeaderRow() > 0) {
         headerRange = String.format("%s!%d:%d", sheetTitle,
-                                    config.getFirstHeaderRow(), config.getLastHeaderRow());
+          config.getFirstHeaderRow(), config.getLastHeaderRow());
       }
       if (config.getFirstFooterRow() > 0) {
         footerRange = String.format("%s!%d:%d", sheetTitle,
-                                    config.getFirstFooterRow(), config.getLastFooterRow());
+          config.getFirstFooterRow(), config.getLastFooterRow());
       }
     }
 
@@ -242,11 +242,11 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       for (GridRange range : mergeRanges) {
         if (!isHeadAvailableInDataRange(range, startRow)) {
           rangesToCall.add(String.format("%s!%s%d:%s%d",
-                                         sheetTitle,
-                                         ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
-                                         range.getStartRowIndex() + 1,
-                                         ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
-                                         range.getStartRowIndex() + 1));
+            sheetTitle,
+            ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
+            range.getStartRowIndex() + 1,
+            ColumnAddressConverter.getColumnName(range.getStartColumnIndex() + 1),
+            range.getStartRowIndex() + 1));
         }
       }
     }
@@ -275,7 +275,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
       headCellsRequest.setRanges(rangesToCall);
       headCellsRequest.setIncludeGridData(true);
       Retryer<Spreadsheet> headCellsRetryer = APIRequestRetryer.getRetryer(config,
-                                                                           "Get additional cells for merge resolving.");
+        "Get additional cells for merge resolving.");
       Spreadsheet headesSpreadsheet = headCellsRetryer.call(() -> headCellsRequest.execute());
       checkSingleSheetRetrieved(headesSpreadsheet);
 
@@ -291,8 +291,8 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
           headCell = gridData.getRowData().get(0).getValues().get(0);
         }
         retriedHeads.put(new GridRange().setStartRowIndex(headRow).setEndRowIndex(headRow + 1)
-                           .setStartColumnIndex(headColumn).setEndColumnIndex(headColumn + 1),
-                         headCell);
+            .setStartColumnIndex(headColumn).setEndColumnIndex(headColumn + 1),
+          headCell);
       }
     }
     return retriedHeads;
@@ -327,10 +327,10 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
         } else {
           // get cell value from additional API request results
           headCell = missedHeadCells.get(new GridRange()
-                                           .setStartRowIndex(range.getStartRowIndex())
-                                           .setEndRowIndex(range.getStartRowIndex() + 1)
-                                           .setStartColumnIndex(range.getStartColumnIndex())
-                                           .setEndColumnIndex(range.getStartColumnIndex() + 1));
+            .setStartRowIndex(range.getStartRowIndex())
+            .setEndRowIndex(range.getStartRowIndex() + 1)
+            .setStartColumnIndex(range.getStartColumnIndex())
+            .setEndColumnIndex(range.getStartColumnIndex() + 1));
         }
 
         // skip if head cell is empty
@@ -523,7 +523,7 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
   private void checkSingleSheetRetrieved(Spreadsheet spreadsheet) {
     if (CollectionUtils.isEmpty(spreadsheet.getSheets()) || spreadsheet.getSheets().size() > 1) {
       throw new RuntimeException(String.format("Invalid number of sheets were returned: '%d'.",
-                                               spreadsheet.getSheets() == null ? 0 : spreadsheet.getSheets().size()));
+        spreadsheet.getSheets() == null ? 0 : spreadsheet.getSheets().size()));
     }
   }
 }
