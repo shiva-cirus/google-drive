@@ -253,6 +253,8 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
     // reset current headers info
     dataSchemaInfo = new LinkedHashMap<>();
+    //SchemaBuilder.setDataSchemaInfo(new LinkedHashMap<>());
+    //schema = "";
 
     validateColumnNamesRow(collector);
 

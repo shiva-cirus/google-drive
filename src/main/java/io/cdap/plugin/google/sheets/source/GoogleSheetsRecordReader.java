@@ -18,7 +18,8 @@ package io.cdap.plugin.google.sheets.source;
 
 import com.github.rholder.retry.RetryException;
 import com.google.gson.reflect.TypeToken;
-import io.cdap.plugin.google.drive.source.GoogleDriveInputFormatProvider;
+import io.cdap.cdap.api.data.format.StructuredRecord;
+import io.cdap.cdap.api.data.schema.Schema;
 import io.cdap.plugin.google.sheets.source.utils.MetadataKeyValueAddress;
 import io.cdap.plugin.google.sheets.source.utils.MultipleRowRecord;
 import io.cdap.plugin.google.sheets.source.utils.RowRecord;
@@ -45,7 +46,7 @@ import java.util.stream.Collectors;
  * Reader supports buffered read. The size of the buffer is specified by
  * {@link GoogleSheetsSourceConfig#getReadBufferSize()}.
  */
-public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowRecord> {
+public class GoogleSheetsRecordReader extends RecordReader<NullWritable, StructuredRecord> {
 
   private GoogleSheetsSourceClient googleSheetsSourceClient;
   private String fileId;
@@ -62,23 +63,29 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
   private MultipleRowRecord bufferedMultipleRowRecord = null;
   private int processedRowsCounter = 0;
   private int overallRowsNumber = 0;
+  //private SheetTransformer sheetTransformer;
+  private Schema schema;
 
   @Override
   public void initialize(InputSplit inputSplit, TaskAttemptContext taskAttemptContext)
     throws IOException {
     Configuration conf = taskAttemptContext.getConfiguration();
-    String configJson = conf.get(GoogleDriveInputFormatProvider.PROPERTY_CONFIG_JSON);
-    config = GoogleDriveInputFormatProvider.GSON.fromJson(configJson, GoogleSheetsSourceConfig.class);
+    String configJson = conf.get(GoogleSheetsInputFormatProvider.PROPERTY_CONFIG_JSON);
+    String schemaJson = conf.get(GoogleSheetsInputFormatProvider.PROPERTY_CONFIG_SCHEMA);
+    schema = Schema.parseJson(schemaJson);
+    config = GoogleSheetsInputFormatProvider.GSON.fromJson(configJson, GoogleSheetsSourceConfig.class);
     googleSheetsSourceClient = new GoogleSheetsSourceClient(config);
+    //sheetTransformer = new SheetTransformer(schema, config.isExtractMetadata(), config.getMetadataFieldName(),
+    //  config.getAddNameFields(), config.getSpreadsheetFieldName(), config.getSheetFieldName());
 
     GoogleSheetsSplit split = (GoogleSheetsSplit) inputSplit;
     this.fileId = split.getFileId();
     Type headersType = new TypeToken<Map<Integer, Map<String, List<String>>>>() {
     }.getType();
-    this.resolvedHeaders = GoogleDriveInputFormatProvider.GSON.fromJson(split.getHeaders(), headersType);
+    this.resolvedHeaders = GoogleSheetsInputFormatProvider.GSON.fromJson(split.getHeaders(), headersType);
     Type metadataType = new TypeToken<List<MetadataKeyValueAddress>>() {
     }.getType();
-    this.metadataCoordinates = GoogleDriveInputFormatProvider.GSON.fromJson(split.getMetadates(), metadataType);
+    this.metadataCoordinates = GoogleSheetsInputFormatProvider.GSON.fromJson(split.getMetadates(), metadataType);
 
     bufferSize = config.getReadBufferSize();
 
@@ -149,7 +156,7 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
   }
 
   @Override
-  public RowRecord getCurrentValue() throws IOException {
+  public StructuredRecord getCurrentValue() throws IOException {
     boolean isNewGroupTask = currentRowIndex == 0;
     boolean isNewSheet = !currentGroupedRowTask.getSheetTitle().equals(currentSheetTitle);
     currentSheetTitle = currentGroupedRowTask.getSheetTitle();
@@ -174,7 +181,17 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, RowReco
     }
 
     processedRowsCounter++;
-    return bufferedMultipleRowRecord.getRowRecord(currentRowIndex);
+    RowRecord rowRecord = bufferedMultipleRowRecord.getRowRecord(currentRowIndex);
+
+    // skip empty rows if needed
+    if (!config.isSkipEmptyData() || !rowRecord.isEmptyData()) {
+      //return sheetTransformer.transform(rowRecord);
+      return SheetTransformer.transform(rowRecord, schema, config.isExtractMetadata(),
+                                        config.getMetadataFieldName(), config.getAddNameFields(),
+                                        config.getSpreadsheetFieldName(), config.getSheetFieldName());
+    }
+
+    return null;
   }
 
   @Override
