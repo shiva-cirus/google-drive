@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -67,10 +67,10 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
    * Method that creates spreadsheet with single empty sheet.
    *
    * @param spreadsheetName name of spreadsheet.
-   * @param sheetTitle      name of sheet.
+   * @param sheetTitle name of sheet.
    * @return created spreadsheet.
    * @throws ExecutionException when Sheets API threw some not repeatable exception.
-   * @throws RetryException     when API retry count was exceeded.
+   * @throws RetryException when API retry count was exceeded.
    */
   public Spreadsheet createEmptySpreadsheet(String spreadsheetName, String sheetTitle)
     throws ExecutionException, RetryException {
@@ -97,12 +97,12 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   /**
    * Method that creates new empty sheet for existing spreadsheet.
    *
-   * @param spreadsheetId   ID of the target spreadsheet file.
+   * @param spreadsheetId ID of the target spreadsheet file.
    * @param spreadsheetName name of the target spreadsheet file.
-   * @param sheetTitle      name of the new sheet.
+   * @param sheetTitle name of the new sheet.
    * @return ID of created sheet.
    * @throws ExecutionException when Sheets API threw some not repeatable exception.
-   * @throws RetryException     when API retry count was exceeded.
+   * @throws RetryException when API retry count was exceeded.
    */
   public SheetProperties createEmptySheet(String spreadsheetId, String spreadsheetName, String sheetTitle)
     throws ExecutionException, RetryException {
@@ -128,14 +128,14 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   /**
    * Method that extends existing sheet with new rows or columns.
    *
-   * @param spreadsheetsId   ID of the target spreadsheet file.
+   * @param spreadsheetsId ID of the target spreadsheet file.
    * @param spreadsheetsName name of the target spreadsheet file.
-   * @param sheetTitle       name of the target sheet.
-   * @param sheetId          ID of the target sheet.
-   * @param rowsToAdd        number of rows to add.
-   * @param dimensionType    defines the dimension of extension.
+   * @param sheetTitle name of the target sheet.
+   * @param sheetId ID of the target sheet.
+   * @param rowsToAdd number of rows to add.
+   * @param dimensionType defines the dimension of extension.
    * @throws ExecutionException when Sheets API threw some not repeatable exception.
-   * @throws RetryException     when API retry count was exceeded.
+   * @throws RetryException when API retry count was exceeded.
    */
   public void extendDimension(String spreadsheetsId, String spreadsheetsName, String sheetTitle,
                               int sheetId, int rowsToAdd, DimensionType dimensionType)
@@ -168,13 +168,13 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
    * Method that units and executes content and merge requests with single Sheets API request.
    * Requests may relate to separate sheets.
    *
-   * @param spreadsheetsId  ID of the target spreadsheet file.
+   * @param spreadsheetsId ID of the target spreadsheet file.
    * @param spreadsheetName name of the target spreadsheet file.
-   * @param sheetTitles     name of the target sheet.
+   * @param sheetTitles name of the target sheet.
    * @param contentRequests list of content requests.
-   * @param mergeRequests   list of merge requests.
+   * @param mergeRequests list of merge requests.
    * @throws ExecutionException when Sheets API threw some not repeatable exception.
-   * @throws RetryException     when API retry count was exceeded.
+   * @throws RetryException when API retry count was exceeded.
    */
   public void populateCells(String spreadsheetsId, String spreadsheetName, List<String> sheetTitles,
                             List<Request> contentRequests, List<Request> mergeRequests)
@@ -202,8 +202,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
    * Method that creates API requests for flattered rows record.
    *
    * @param sheetId ID of the target sheet.
-   * @param record  flattered rows record.
-   * @param shift   index of the start row.
+   * @param record flattered rows record.
+   * @param shift index of the start row.
    * @return requests ready for sending to Sheets API.
    */
   public FlatteredRowsRequest prepareFlatteredRequest(Integer sheetId, FlatteredRowsRecord record, int shift) {
@@ -245,8 +245,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   /**
    * Method that prepares merge requests (content and header) for flattered rows record.
    *
-   * @param sheetId    ID of the target sheet.
-   * @param record     flattered rows record.
+   * @param sheetId ID of the target sheet.
+   * @param record flattered rows record.
    * @param startShift index of the start row.
    * @return list of merge requests.
    */
@@ -284,9 +284,9 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
    * Method that populates nested header cells. Accepts single top level complex header.
    * So for multiple headers this method should be executed several times.
    *
-   * @param header     complex nested header.
+   * @param header complex nested header.
    * @param headerRows prepared list of the rows to update with required header names.
-   * @param depth      level of depth of complex header to process.
+   * @param depth level of depth of complex header to process.
    * @param widthShift width of initial complex header.
    */
   private void populateHeaderRows(ComplexHeader header, List<RowData> headerRows, int depth, int widthShift) {
@@ -303,11 +303,11 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
    * Method that generates relative merge ranges for headers. Accepts single top level complex header.
    * So for multiple headers this method should be executed several times.
    *
-   * @param header       complex nested header.
+   * @param header complex nested header.
    * @param headerRanges merge ranges to be extended with news.
-   * @param depth        level of depth of complex header to process.
+   * @param depth level of depth of complex header to process.
    * @param headersDepth depth of initial complex header.
-   * @param widthShift   index of column to start from.
+   * @param widthShift index of column to start from.
    */
   private void calculateHeaderMerges(ComplexHeader header, List<GridRange> headerRanges, int depth, int headersDepth,
                                      int widthShift) {
@@ -334,8 +334,8 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
    * Method that converts relative merge coordinated to absolute with use of shift value.
    * Grid range has half opened indexes, so the method increments start row/column index before comparing.
    *
-   * @param ranges    merge ranges with relative coordinates.
-   * @param sheetId   target sheet ID.
+   * @param ranges merge ranges with relative coordinates.
+   * @param sheetId target sheet ID.
    * @param rowsShift shift of ranges from the sheet start.
    * @return merge requests with absolute coordinates.
    */
@@ -353,10 +353,10 @@ public class GoogleSheetsSinkClient extends GoogleSheetsClient<GoogleSheetsSinkC
   /**
    * Method that moves file from root to destination folder.
    *
-   * @param spreadsheetsId  spreadsheet file id.
+   * @param spreadsheetsId spreadsheet file id.
    * @param spreadsheetName spreadsheet name.
    * @throws ExecutionException when Sheets API threw some not repeatable exception.
-   * @throws RetryException     when API retry count was exceeded.
+   * @throws RetryException when API retry count was exceeded.
    */
   public void moveSpreadsheetToDestinationFolder(String spreadsheetsId, String spreadsheetName)
     throws ExecutionException, RetryException {

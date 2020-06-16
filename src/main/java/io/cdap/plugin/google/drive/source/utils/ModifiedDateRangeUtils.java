@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -43,11 +43,11 @@ public class ModifiedDateRangeUtils {
 
   /**
    * Returns the instance of DateRange.
-   * @param modifiedDateRangeType  The modified date range type   with
-   * @param startDate              The start date  with
-   * @param endDate                The end date
+   * @param modifiedDateRangeType The modified date range type with
+   * @param startDate The start date  with
+   * @param endDate The end date
    * @return The instance of DateRange
-   * @throws InterruptedException  if there was an error getting the column information for the data
+   * @throws InterruptedException if there was an error getting the column information for the data
    */
   public static DateRange getDataRange(ModifiedDateRangeType modifiedDateRangeType, String startDate, String endDate)
     throws InterruptedException {
@@ -146,7 +146,7 @@ public class ModifiedDateRangeUtils {
 
   /**
    * Returns the String.
-   * @param dateRange  The data range is reference of DateRange
+   * @param dateRange The data range is reference of DateRange
    * @return The String
    */
   public static String getFilterValue(DateRange dateRange) {

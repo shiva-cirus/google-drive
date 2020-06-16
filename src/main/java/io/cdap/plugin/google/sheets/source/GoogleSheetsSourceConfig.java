@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -230,7 +230,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the instance of Schema.
-   * @return  The instance of Schema
+   * @return The instance of Schema
    */
   public Schema getSchema() {
     if (schema == null) {
@@ -245,16 +245,14 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the ValidationResult
-   * @param collector   the failure collector is provided
-   * @return  The ValidationResult
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
    */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
 
     // reset current headers info
     dataSchemaInfo = new LinkedHashMap<>();
-    //SchemaBuilder.setDataSchemaInfo(new LinkedHashMap<>());
-    //schema = "";
 
     validateColumnNamesRow(collector);
 
@@ -311,7 +309,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
   /**
    * Method that validates that source folder has at least single spreadsheet to process.
    *
-   * @param collector         failure collector.
+   * @param collector failure collector.
    * @param spreadsheetsFiles list of spreadsheet files.
    */
   private void validateSourceFolder(FailureCollector collector, List<File> spreadsheetsFiles) {
@@ -326,11 +324,11 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
    * Method that validates that retrieved spreadsheet file contains all required sheets. Is applicable only if
    * {@link SheetsToPull#ALL} option is not selected for "Sheets identifiers" property.
    *
-   * @param collector          failure collector.
+   * @param collector failure collector.
    * @param sheetsSourceClient sheets source client;
-   * @param spreadsheetsFiles  spreadsheet files.
+   * @param spreadsheetsFiles spreadsheet files.
    * @throws ExecutionException on API call is failed.
-   * @throws RetryException     on API call retry number is exceeded.
+   * @throws RetryException on API call retry number is exceeded.
    */
   private void validateSheetIdentifiers(FailureCollector collector, GoogleSheetsSourceClient sheetsSourceClient,
                                         List<File> spreadsheetsFiles) throws ExecutionException, RetryException {
@@ -860,7 +858,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the map which have key is Integer and value is map.
-   * @return   The Map which have key is Integer and value is map
+   * @return The Map which have key is Integer and value is map
    */
   public Map<Integer, Map<String, List<String>>> getHeaderTitlesRow() {
     Map<Integer, Map<String, List<String>>> titles = new HashMap<>();
@@ -880,8 +878,8 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
   }
 
   /**
-   *  Returns the list of MetadataKeyValueAddress.
-   * @return  the List of MetadataKeyValueAddress
+   * Returns the list of MetadataKeyValueAddress.
+   * @return the List of MetadataKeyValueAddress
    */
   public List<MetadataKeyValueAddress> getMetadataCoordinates() {
     List<MetadataKeyValueAddress> metadataCoordinates = new ArrayList<>();

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -44,8 +44,8 @@ public enum HeaderSelection {
 
   /**
    * Returns the HeaderSelection.
-   * @param value  The value is String type
-   * @return   The  HeaderSelection
+   * @param value The value is String type
+   * @return The HeaderSelection
    */
   public static HeaderSelection fromValue(String value) {
     return Stream.of(HeaderSelection.values())

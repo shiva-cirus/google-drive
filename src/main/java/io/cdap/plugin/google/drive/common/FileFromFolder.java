@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,8 +29,8 @@ public class FileFromFolder {
   /**
    * Constructor for FileFromFolder object.
    * @param content the content is provided with
-   * @param offset  the offset is provided with
-   * @param file    the file is provided
+   * @param offset the offset is provided with
+   * @param file the file is provided
    */
   public FileFromFolder(byte[] content, long offset, File file) {
     this.content = content;
@@ -40,8 +40,8 @@ public class FileFromFolder {
 
   /**
    * Constructor for FileFromFolder object.
-   * @param content  the content is provided with
-   * @param file     the file is provided
+   * @param content the content is provided with
+   * @param file the file is provided
    */
   public FileFromFolder(byte[] content, File file) {
     this.content = content;

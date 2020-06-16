@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -30,11 +30,11 @@ public class RowRecord {
 
   /**
    * Constructor for RowRecord object.
-   * @param spreadsheetName  The spread sheet name
-   * @param sheetTitle       The sheet title
-   * @param metadata         The metadata
-   * @param headeredCells    The headered cells
-   * @param isEmptyData      The isEmptyData
+   * @param spreadsheetName The spread sheet name
+   * @param sheetTitle The sheet title
+   * @param metadata The metadata
+   * @param headeredCells The headered cells
+   * @param isEmptyData The isEmptyData
    */
   public RowRecord(String spreadsheetName, String sheetTitle, Map<String, String> metadata,
                    Map<String, ComplexSingleValueColumn> headeredCells, boolean isEmptyData) {

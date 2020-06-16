@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -49,11 +49,11 @@ public class GoogleDriveFilteringClient<C extends GoogleFilteringSourceConfig> e
 
   /**
    * Returns the list of file.
-   * @param exportedTypes  the exported types are provided with
-   * @param filesNumber   the number of files is provided
+   * @param exportedTypes the exported types are provided with
+   * @param filesNumber the number of files is provided
    * @return The list of file
-   * @throws ExecutionException   if there was an error getting the column information for the execution
-   * @throws RetryException  if there was an error getting the column information for the retry
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException if there was an error getting the column information for the retry
    */
   public List<File> getFilesSummary(List<ExportedType> exportedTypes, int filesNumber)
       throws ExecutionException, RetryException {

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -56,8 +56,8 @@ public class GoogleDriveSinkConfig extends GoogleInputSchemaFieldsUsageConfig {
 
   /**
    * Validate that the given schema is compatible with the given extension.
-   * @param collector  failure collector with
-   * @param schema  the schema to check compatibility
+   * @param collector failure collector with
+   * @param schema the schema to check compatibility
    */
   public void validate(FailureCollector collector, Schema schema) {
     super.validate(collector);

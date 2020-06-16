@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -107,8 +107,8 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
 
   /**
    * Constructor for GoogleSheetsRecordWriter object.
-   * @param taskAttemptContext  the task  attempt context is provided
-   * @throws IOException   on issues with file reading
+   * @param taskAttemptContext the task attempt context is provided
+   * @throws IOException on issues with file reading
    */
   public GoogleSheetsRecordWriter(TaskAttemptContext taskAttemptContext) throws IOException {
     Configuration conf = taskAttemptContext.getConfiguration();
@@ -127,8 +127,7 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
 
     formerScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     formerScheduledExecutorService.schedule(new TasksFormer(true),
-                                            flushTimeout, TimeUnit.SECONDS);
-
+      flushTimeout, TimeUnit.SECONDS);
   }
 
   @Override
@@ -161,7 +160,7 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
         int extensionSize = record.getHeader().getWidth() -
           sheetsRowCount.get(spreadsheetName).get(sheetTitle);
         sheetsSinkClient.extendDimension(spreadsheetId, spreadsheetName, sheetTitle, sheetId, extensionSize,
-                                         DimensionType.COLUMNS);
+          DimensionType.COLUMNS);
         sheetsColumnCount.get(spreadsheetName).put(sheetTitle, record.getHeader().getWidth());
       }
 
@@ -172,9 +171,9 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
           sheetsRowCount.get(spreadsheetName).get(sheetTitle);
         int extensionSize = Math.max(minimalRequiredExtension, googleSheetsSinkConfig.getMinPageExtensionSize());
         sheetsSinkClient.extendDimension(spreadsheetId, spreadsheetName, sheetTitle, sheetId, extensionSize,
-                                         DimensionType.ROWS);
+          DimensionType.ROWS);
         sheetsRowCount.get(spreadsheetName).put(sheetTitle,
-                                                sheetsRowCount.get(spreadsheetName).get(sheetTitle) + extensionSize);
+          sheetsRowCount.get(spreadsheetName).get(sheetTitle) + extensionSize);
       }
 
       // 5. offer flattered requests to queue
@@ -250,7 +249,7 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
     // wait for scheduled task formers will be completed
     formerScheduledExecutorService.shutdown();
     formerScheduledExecutorService.awaitTermination(googleSheetsSinkConfig.getMaxFlushInterval() * 2,
-                                                    TimeUnit.SECONDS);
+      TimeUnit.SECONDS);
 
     // we should guarantee that at least one task former was called finally
     try {
@@ -297,7 +296,7 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
             } else {
               throw new RuntimeException(
                 String.format("Timeout '%d' exceeded when trying to schedule batch records for execution.",
-                              flushTimeout));
+                  flushTimeout));
             }
           } else {
             if (threadsSemaphore.tryAcquire()) {

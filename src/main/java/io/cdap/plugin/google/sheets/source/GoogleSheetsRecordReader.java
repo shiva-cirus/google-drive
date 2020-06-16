@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -63,7 +63,6 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, Structu
   private MultipleRowRecord bufferedMultipleRowRecord = null;
   private int processedRowsCounter = 0;
   private int overallRowsNumber = 0;
-  //private SheetTransformer sheetTransformer;
   private Schema schema;
 
   @Override
@@ -75,8 +74,6 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, Structu
     schema = Schema.parseJson(schemaJson);
     config = GoogleSheetsInputFormatProvider.GSON.fromJson(configJson, GoogleSheetsSourceConfig.class);
     googleSheetsSourceClient = new GoogleSheetsSourceClient(config);
-    //sheetTransformer = new SheetTransformer(schema, config.isExtractMetadata(), config.getMetadataFieldName(),
-    //  config.getAddNameFields(), config.getSpreadsheetFieldName(), config.getSheetFieldName());
 
     GoogleSheetsSplit split = (GoogleSheetsSplit) inputSplit;
     this.fileId = split.getFileId();
@@ -185,10 +182,9 @@ public class GoogleSheetsRecordReader extends RecordReader<NullWritable, Structu
 
     // skip empty rows if needed
     if (!config.isSkipEmptyData() || !rowRecord.isEmptyData()) {
-      //return sheetTransformer.transform(rowRecord);
       return SheetTransformer.transform(rowRecord, schema, config.isExtractMetadata(),
-                                        config.getMetadataFieldName(), config.getAddNameFields(),
-                                        config.getSpreadsheetFieldName(), config.getSheetFieldName());
+        config.getMetadataFieldName(), config.getAddNameFields(),
+        config.getSpreadsheetFieldName(), config.getSheetFieldName());
     }
 
     return null;

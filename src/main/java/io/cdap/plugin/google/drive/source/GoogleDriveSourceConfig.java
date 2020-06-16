@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -111,8 +111,8 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * Returns the ValidationResult.
-   * @param collector   the failure collector is provided
-   * @return  The ValidationResult
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
    */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
@@ -169,7 +169,7 @@ public class GoogleDriveSourceConfig extends GoogleFilteringSourceConfig {
 
   /**
    * returns the list of ExportedType.
-   * @return  The list of ExportedType
+   * @return The list of ExportedType
    */
   public List<ExportedType> getFileTypesToPull() {
     if (Strings.isNullOrEmpty(fileTypesToPull)) {

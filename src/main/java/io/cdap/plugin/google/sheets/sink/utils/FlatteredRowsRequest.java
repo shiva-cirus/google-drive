@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -33,13 +33,12 @@ public class FlatteredRowsRequest {
 
   /**
    * Constructor for FlatteredRowsRequest object.
-   * @param contentRequest the  content request is provided with
-   * @param mergeRequests  the merge requests is list of request with
-   * @param lastRowIndex   the last row index is provided.
+   * @param contentRequest the content request is provided with
+   * @param mergeRequests the merge requests is list of request with
+   * @param lastRowIndex the last row index is provided.
    */
   public FlatteredRowsRequest(Request contentRequest, List<Request> mergeRequests,
                               int lastRowIndex) {
-
     this.contentRequest = contentRequest;
     this.mergeRequests = mergeRequests;
     this.lastRowIndex = lastRowIndex;

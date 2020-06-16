@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -87,9 +87,9 @@ public class SchemaBuilder {
 
   /**
    * Returns the instance of Schema.
-   * @param fields      The Fields are list of fields
-   * @param bodyFormat  The BodyFormat
-   * @return  The instance of Schema
+   * @param fields The Fields are list of fields
+   * @param bodyFormat The BodyFormat
+   * @return The instance of Schema
    */
   public static Schema buildSchema(List<String> fields, BodyFormat bodyFormat) {
     List<String> extendedFields = new ArrayList<>(fields);
@@ -106,8 +106,8 @@ public class SchemaBuilder {
 
   /**
    * Returns the field of Schema.
-   * @param name  The name is String type
-   * @param bodyFormat  The BodyFormat
+   * @param name The name is String type
+   * @param bodyFormat The BodyFormat
    * @return The field of Schema
    */
   public static Schema.Field getTopLevelField(String name, BodyFormat bodyFormat) {
@@ -158,8 +158,8 @@ public class SchemaBuilder {
 
   /**
    * Returns type is void.
-   * @param fields        The fields are list of String
-   * @param schemaFields   The field of Schema
+   * @param fields The fields are list of String
+   * @param schemaFields The field of Schema
    */
   public static void processImageMediaMetadata(List<String> fields, List<Schema.Field> schemaFields) {
     List<String> imageMediaFields =
@@ -191,8 +191,8 @@ public class SchemaBuilder {
 
   /**
    * Returns type is void.
-   * @param fields        The fields are list of String
-   * @param schemaFields   The field of Schema
+   * @param fields The fields are list of String
+   * @param schemaFields The field of Schema
    */
   public static void processVideoMediaMetadata(List<String> fields, List<Schema.Field> schemaFields) {
     List<String> videoMediaFields =
@@ -212,8 +212,8 @@ public class SchemaBuilder {
 
   /**
    * Returns the field of Schema.
-   * @param name  The name is String type
-   * @return The  field of Schema
+   * @param name The name is String type
+   * @return The field of Schema
    */
   public static Schema.Field fromImageMediaMetadataName(String name) {
     switch (name) {
@@ -252,8 +252,8 @@ public class SchemaBuilder {
 
   /**
    * Returns the field of Schema.
-   * @param name  The name is String type
-   * @return The  field of Schema
+   * @param name The name is String type
+   * @return The field of Schema
    */
   public static Schema.Field fromVideoMediaMetadataName(String name) {
     switch (name) {
@@ -269,8 +269,8 @@ public class SchemaBuilder {
 
   /**
    * Returns the field of Schema.
-   * @param name  The name is String type
-   * @return The  field of Schema
+   * @param name The name is String type
+   * @return The field of Schema
    */
   public static Schema.Field fromLocationName(String name) {
     switch (name) {

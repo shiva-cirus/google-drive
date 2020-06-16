@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-  Copyright © 2017 Cask Data, Inc.
+  Copyright © 2020 Cask Data, Inc.
 
   Licensed under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy of
@@ -22,12 +22,12 @@
 
 <suppressions>
 
-  <suppress checks="Javadoc.*" files=".*[/\\]src[/\\]test[/\\]java[/\\].*"/>
+  <suppress checks="Javadoc.*" files=".*[/\\]src[/\\]test[/\\]java[/\\].*" />
 
-  <suppress checks="JavadocPackage" files=".*[/\\]src[/\\](main|integration)[/\\]java[/\\].*"/>
-  <suppress checks="JavadocPackage" files=".*[/\\]src[/\\].*[/\\]internal[/\\].*"/>
+  <suppress checks="JavadocPackage" files=".*[/\\]src[/\\](main|integration)[/\\]java[/\\].*" />
+  <suppress checks="JavadocPackage" files=".*[/\\]src[/\\].*[/\\]internal[/\\].*" />
 
-  <suppress checks="JavadocStyle" files=".*[/\\]src[/\\](main|integration)[/\\]java[/\\].*"/>
-  <suppress checks="JavadocStyle" files=".*[/\\]src[/\\].*[/\\]internal[/\\].*"/>
+  <suppress checks="JavadocStyle" files=".*[/\\]src[/\\](main|integration)[/\\]java[/\\].*" />
+  <suppress checks="JavadocStyle" files=".*[/\\]src[/\\].*[/\\]internal[/\\].*" />
 
 </suppressions>

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -25,7 +25,6 @@ public class ColumnAddressConverter {
 
   /**
    * Method that converts index of column (it starts from 1) into name ('A', 'AC' etc.).
-   *
    * @param index index of the column.
    * @return name of the column.
    */
@@ -52,7 +51,6 @@ public class ColumnAddressConverter {
 
   /**
    * Method that returns index of column (it starts from 1) for it name ('A', 'AC' etc.).
-   *
    * @param columnName name of the column.
    * @return index of the column (starts from 1).
    */

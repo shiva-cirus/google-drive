@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -38,8 +38,8 @@ public abstract class GoogleSheetsClient<C extends GoogleAuthBaseConfig> extends
 
   /**
    * Constructor for GoogleSheetsClient object.
-   * @param config  the google auth base config is provided
-   * @throws IOException     on issues with file reading
+   * @param config the google auth base config is provided
+   * @throws IOException on issues with file reading
    */
   public GoogleSheetsClient(C config) throws IOException {
     super(config);

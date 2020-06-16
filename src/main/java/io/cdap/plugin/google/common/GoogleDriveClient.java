@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -61,7 +61,6 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
 
   /**
    * Provides credential object for Google APIs that supports this credential type.
-   *
    * @return filled credential.
    * @throws IOException on issues with service account file reading.
    */
