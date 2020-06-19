@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -30,7 +30,6 @@ import io.cdap.cdap.etl.api.PipelineConfigurer;
 import io.cdap.cdap.etl.api.batch.BatchSource;
 import io.cdap.cdap.etl.api.batch.BatchSourceContext;
 import io.cdap.plugin.common.LineageRecorder;
-import io.cdap.plugin.google.sheets.source.utils.RowRecord;
 import org.apache.hadoop.io.NullWritable;
 
 import java.util.stream.Collectors;
@@ -41,7 +40,7 @@ import java.util.stream.Collectors;
 @Plugin(type = BatchSource.PLUGIN_TYPE)
 @Name(GoogleSheetsSource.NAME)
 @Description("Reads spreadsheets from specified Google Drive directory.")
-public class GoogleSheetsSource extends BatchSource<NullWritable, RowRecord, StructuredRecord> {
+public class GoogleSheetsSource extends BatchSource<NullWritable, StructuredRecord, StructuredRecord> {
   public static final String NAME = "GoogleSheets";
 
   private final GoogleSheetsSourceConfig config;
@@ -65,25 +64,23 @@ public class GoogleSheetsSource extends BatchSource<NullWritable, RowRecord, Str
     config.validate(failureCollector);
     failureCollector.getOrThrowException();
 
+    Schema configSchema = config.getSchema();
     LineageRecorder lineageRecorder = new LineageRecorder(context, config.getReferenceName());
-    lineageRecorder.createExternalDataset(config.getSchema());
+    lineageRecorder.createExternalDataset(configSchema);
     lineageRecorder.recordRead("Read", "Reading Google Sheets files",
-                               Preconditions.checkNotNull(config.getSchema().getFields()).stream()
+                               Preconditions.checkNotNull(configSchema.getFields()).stream()
                                  .map(Schema.Field::getName)
                                  .collect(Collectors.toList()));
 
-    context.setInput(Input.of(config.getReferenceName(), new GoogleSheetsInputFormatProvider(config)));
+    context.setInput(Input.of(config.getReferenceName(),
+                              new GoogleSheetsInputFormatProvider(config, configSchema.toString())));
   }
 
   @Override
-  public void transform(KeyValue<NullWritable, RowRecord> input, Emitter<StructuredRecord> emitter) {
-    RowRecord rowRecord = input.getValue();
-
-    // skip empty rows if needed
-    if (!config.isSkipEmptyData() || !rowRecord.isEmptyData()) {
-      emitter.emit(SheetTransformer.transform(rowRecord, config.getSchema(), config.isExtractMetadata(),
-        config.getMetadataFieldName(), config.getAddNameFields(), config.getSpreadsheetFieldName(),
-        config.getSheetFieldName()));
+  public void transform(KeyValue<NullWritable, StructuredRecord> input, Emitter<StructuredRecord> emitter) {
+    StructuredRecord record = input.getValue();
+    if (record != null) {
+      emitter.emit(record);
     }
   }
 }

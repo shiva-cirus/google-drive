@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -38,6 +38,13 @@ public class GoogleDriveSinkClient extends GoogleDriveClient<GoogleDriveSinkConf
     super(config);
   }
 
+  /**
+   * Create file that the given FileFromFolder is compatible with the given extension.
+   *
+   * @param fileFromFolder the file From Folder is provided
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException if there was an error getting the column information for the retry
+   */
   public void createFile(FileFromFolder fileFromFolder) throws ExecutionException, RetryException {
     APIRequestRetryer.getRetryer(config,
       String.format("Creating of file with name '%s'.", fileFromFolder.getFile().getName()))

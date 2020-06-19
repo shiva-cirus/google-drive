@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,7 +29,13 @@ import java.time.ZonedDateTime;
  * Transforms {@link FileFromFolder} wrapper to {@link StructuredRecord} instance.
  */
 public class FilesFromFolderTransformer {
-
+  /**
+   * Returns the StructuredRecord
+   *
+   * @param fileFromFolder the file from folder is provided with
+   * @param schema the schema is provided.
+   * @return The StructuredRecord
+   */
   public static StructuredRecord transform(FileFromFolder fileFromFolder, Schema schema) {
     StructuredRecord.Builder builder = StructuredRecord.builder(schema);
     File file = fileFromFolder.getFile();

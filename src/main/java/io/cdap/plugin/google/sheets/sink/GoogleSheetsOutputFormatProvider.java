@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -32,6 +32,10 @@ public class GoogleSheetsOutputFormatProvider implements OutputFormatProvider {
 
   private final Map<String, String> configMap;
 
+  /**
+   * Constructor for GoogleSheetsOutputFormatProvider object.
+   * @param config the google sheets sink config is provided
+   */
   public GoogleSheetsOutputFormatProvider(GoogleSheetsSinkConfig config) {
     this.configMap = new ImmutableMap.Builder<String, String>()
       .put(PROPERTY_CONFIG_JSON, GSON.toJson(config))

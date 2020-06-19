@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -32,6 +32,10 @@ public class GoogleDriveOutputFormatProvider implements OutputFormatProvider {
 
   private final Map<String, String> configMap;
 
+  /**
+   * Constructor for GoogleDriveOutputFormatProvider object.
+   * @param config the GoogleDriveSinkConfig is provided
+   */
   public GoogleDriveOutputFormatProvider(GoogleDriveSinkConfig config) {
     this.configMap = new ImmutableMap.Builder<String, String>()
       .put(PROPERTY_CONFIG_JSON, GSON.toJson(config))

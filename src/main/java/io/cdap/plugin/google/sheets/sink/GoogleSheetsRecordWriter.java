@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -105,6 +105,11 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
   private GoogleSheetsSinkClient sheetsSinkClient;
   private GoogleSheetsSinkConfig googleSheetsSinkConfig;
 
+  /**
+   * Constructor for GoogleSheetsRecordWriter object.
+   * @param taskAttemptContext the task attempt context is provided
+   * @throws IOException on issues with file reading
+   */
   public GoogleSheetsRecordWriter(TaskAttemptContext taskAttemptContext) throws IOException {
     Configuration conf = taskAttemptContext.getConfiguration();
     String configJson = conf.get(GoogleDriveOutputFormatProvider.PROPERTY_CONFIG_JSON);
@@ -123,7 +128,6 @@ public class GoogleSheetsRecordWriter extends RecordWriter<NullWritable, Flatter
     formerScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     formerScheduledExecutorService.schedule(new TasksFormer(true),
       flushTimeout, TimeUnit.SECONDS);
-
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -51,6 +51,12 @@ public enum ExportedType {
     return relatedMIME;
   }
 
+  /**
+   * Returns the ExportedType.
+   *
+   * @param value the vale is String type
+   * @return The ExportedType
+   */
   public static ExportedType fromValue(String value) {
     return Arrays.stream(ExportedType.values()).filter(exportedType -> exportedType.getValue().equals(value))
       .findAny().orElseThrow(() -> new InvalidPropertyTypeException(GoogleDriveSourceConfig.FILE_TYPES_TO_PULL_LABEL,

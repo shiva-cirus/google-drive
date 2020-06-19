@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -29,6 +29,12 @@ import java.util.stream.Collectors;
 public class SchemaBuilder {
   public static final String SCHEMA_ROOT_RECORD_NAME = "RowRecord";
 
+  /**
+   * Returns the instance of Schema.
+   * @param config The GoogleSheetsSourceConfig
+   * @param dataSchemaInfo The list of ColumnComplexSchemaInfo
+   * @return The instance of Schema
+   */
   public static Schema buildSchema(GoogleSheetsSourceConfig config,
                                    List<ColumnComplexSchemaInfo> dataSchemaInfo) {
     List<Schema.Field> generalFields = new ArrayList<>();

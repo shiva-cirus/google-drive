@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -31,6 +31,14 @@ public class FlatteredRowsRecord {
   private List<List<CellData>> singleRowRecords;
   private List<GridRange> mergeRanges;
 
+  /**
+   * Constructor for FlatteredRowsRecord object.
+   * @param spreadsheetName the spread sheet name is provided with
+   * @param sheetTitle the sheet title is provided with
+   * @param header the header is provided with
+   * @param singleRowRecords the single row records is provided with
+   * @param mergeRanges the merge Ranges is list of GridRange
+   */
   public FlatteredRowsRecord(String spreadsheetName, String sheetTitle, ComplexHeader header,
                              List<List<CellData>> singleRowRecords, List<GridRange> mergeRanges) {
     this.spreadsheetName = spreadsheetName;

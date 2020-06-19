@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -34,6 +34,12 @@ public class RecordsBatchProcessor implements Callable {
   private final RecordsBatch recordsBatch;
   private final Semaphore threadsSemaphore;
 
+  /**
+   * Constructor for RecordsBatchProcessor object.
+   * @param sheetsSinkClient The sheets sink client
+   * @param recordsBatch The records batch
+   * @param threadsSemaphore The threads semaphore
+   */
   public RecordsBatchProcessor(GoogleSheetsSinkClient sheetsSinkClient, RecordsBatch recordsBatch,
                                Semaphore threadsSemaphore) {
     this.sheetsSinkClient = sheetsSinkClient;

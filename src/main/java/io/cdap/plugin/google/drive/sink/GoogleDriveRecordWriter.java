@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -33,6 +33,11 @@ public class GoogleDriveRecordWriter extends RecordWriter<NullWritable, FileFrom
 
   private GoogleDriveSinkClient driveSinkClient;
 
+  /**
+   * Constructor for GoogleDriveRecordWriter object.
+   * @param taskAttemptContext the task attempt context
+   * @throws IOException on issues with file reading
+   */
   public GoogleDriveRecordWriter(TaskAttemptContext taskAttemptContext) throws IOException {
     Configuration conf = taskAttemptContext.getConfiguration();
     String configJson = conf.get(GoogleDriveOutputFormatProvider.PROPERTY_CONFIG_JSON);

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -90,6 +90,12 @@ public abstract class GoogleAuthBaseConfig extends PluginConfig {
   @Description("Identifier of the destination folder.")
   private String directoryIdentifier;
 
+  /**
+   * Returns the ValidationResult.
+   *
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
+   */
   public ValidationResult validate(FailureCollector collector) {
     IdUtils.validateReferenceName(referenceName, collector);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -32,12 +32,23 @@ public class StructuredRecordToFileFromFolderTransformer {
   private final String nameFieldName;
   private final String mimeFieldName;
 
+  /**
+   * Constructor for StructuredRecordToFileFromFolderTransformer object.
+   * @param bodyFieldName The body field name
+   * @param nameFieldName The name field name
+   * @param mimeFieldName The mime field name
+   */
   public StructuredRecordToFileFromFolderTransformer(String bodyFieldName, String nameFieldName, String mimeFieldName) {
     this.bodyFieldName = bodyFieldName;
     this.nameFieldName = nameFieldName;
     this.mimeFieldName = mimeFieldName;
   }
 
+  /**
+   * Returns instance of FileFromFolder.
+   * @param input The StructuredRecord
+   * @return the instance of FileFromFolder
+   */
   public FileFromFolder transform(StructuredRecord input) {
     byte[] content = new byte[]{};
     String name = null;

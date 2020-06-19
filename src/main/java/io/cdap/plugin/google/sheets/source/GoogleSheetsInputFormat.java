@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,7 +21,6 @@ import com.google.api.services.drive.model.File;
 import com.google.gson.reflect.TypeToken;
 import io.cdap.plugin.google.common.GoogleDriveFilteringClient;
 import io.cdap.plugin.google.common.GoogleFilteringSourceConfig;
-import io.cdap.plugin.google.drive.source.GoogleDriveInputFormatProvider;
 import io.cdap.plugin.google.drive.source.utils.ExportedType;
 import io.cdap.plugin.google.sheets.source.utils.MetadataKeyValueAddress;
 import org.apache.hadoop.conf.Configuration;
@@ -49,7 +48,7 @@ public class GoogleSheetsInputFormat extends InputFormat {
   public List<InputSplit> getSplits(JobContext jobContext) throws IOException {
     Configuration conf = jobContext.getConfiguration();
 
-    String configJson = conf.get(GoogleDriveInputFormatProvider.PROPERTY_CONFIG_JSON);
+    String configJson = conf.get(GoogleSheetsInputFormatProvider.PROPERTY_CONFIG_JSON);
     String headersJson = conf.get(GoogleSheetsInputFormatProvider.PROPERTY_HEADERS_JSON);
 
     GoogleFilteringSourceConfig googleFilteringSourceConfig =

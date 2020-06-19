@@ -5,8 +5,10 @@
 *.log
 
 # Intellij Files & Dir #
+.idea/
+target/*
+force/target/*
 *.iml
-.idea
 
 # Package Files #
 *.jar

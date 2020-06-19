@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -64,6 +64,14 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     return Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
   }
 
+  /**
+   * Returns the list of Sheet.
+   *
+   * @param spreadsheetId The spread sheet id is provided
+   * @return The list of Sheet
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException if there was an error getting the column information for the retry
+   */
   public List<com.google.api.services.sheets.v4.model.Sheet> getSheets(String spreadsheetId)
     throws ExecutionException, RetryException {
     Retryer<List<com.google.api.services.sheets.v4.model.Sheet>> sheetsRetryer = APIRequestRetryer.getRetryer(config,
@@ -74,6 +82,15 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     });
   }
 
+  /**
+   * Returns the list of String.
+   *
+   * @param spreadsheetId The spread sheet id is provided with
+   * @param indexes the indexes are provided
+   * @return The list of String
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException if there was an error getting the column information for the retry
+   */
   public List<String> getSheetsTitles(String spreadsheetId, List<Integer> indexes)
     throws ExecutionException, RetryException {
     Retryer<List<String>> sheetTitlesRetryer = APIRequestRetryer.getRetryer(config,
@@ -85,6 +102,14 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
     });
   }
 
+  /**
+   * Returns the list of String.
+   *
+   * @param spreadsheetId The spread sheet id is provided
+   * @return The list of String
+   * @throws ExecutionException if there was an error getting the column information for the execution
+   * @throws RetryException if there was an error getting the column information for the retry
+   */
   public List<String> getSheetsTitles(String spreadsheetId) throws ExecutionException, RetryException {
     Retryer<List<String>> sheetsTitlesRetryer = APIRequestRetryer.getRetryer(config,
       String.format("Get sheet titles, spreadsheet id: '%s'.", spreadsheetId));
@@ -256,7 +281,6 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
         "Get additional cells for merge resolving.");
       Spreadsheet headesSpreadsheet = headCellsRetryer.call(() -> headCellsRequest.execute());
       checkSingleSheetRetrieved(headesSpreadsheet);
-
 
       Sheet headsSheet = headesSpreadsheet.getSheets().get(0);
       for (GridData gridData : headsSheet.getData()) {
@@ -492,7 +516,6 @@ public class GoogleSheetsSourceClient extends GoogleSheetsClient<GoogleSheetsSou
             result.put(rowNumber, rows.get(0).getValues());
           }
         }
-
       }
     }
     return new MergesForNumeredRows(merges, result);

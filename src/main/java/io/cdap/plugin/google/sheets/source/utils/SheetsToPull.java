@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -42,6 +42,11 @@ public enum SheetsToPull {
     return value;
   }
 
+  /**
+   * Returns the SheetsToPull.
+   * @param value the value is a String type.
+   * @return The SheetsToPull
+   */
   public static SheetsToPull fromValue(String value) {
     return Stream.of(SheetsToPull.values())
         .filter(keyType -> keyType.getValue().equalsIgnoreCase(value))
@@ -49,6 +54,7 @@ public enum SheetsToPull {
         .orElseThrow(() -> new InvalidPropertyTypeException(GoogleSheetsSourceConfig.SHEETS_TO_PULL_LABEL, value,
           getAllowedValues()));
   }
+
   public static List<String> getAllowedValues() {
     return Arrays.stream(SheetsToPull.values()).map(v -> v.getValue())
       .collect(Collectors.toList());

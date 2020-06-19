@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -55,6 +55,14 @@ public abstract class APIRequestRetryer {
   protected static final String LIMIT_RATE_EXCEEDED_MESSAGE = "Rate Limit Exceeded";
   protected static final String FORBIDDEN_STATUS_MESSAGE = "Forbidden";
 
+  /**
+   * Returns the Retryer.
+   *
+   * @param config the google retrying config is provided with
+   * @param operationDescription the operation description is provided
+   * @param <T>
+   * @return The Retryer
+   */
   public static <T> Retryer<T> getRetryer(GoogleRetryingConfig config, String operationDescription) {
     RetryListener listener = new RetryListener() {
       @Override

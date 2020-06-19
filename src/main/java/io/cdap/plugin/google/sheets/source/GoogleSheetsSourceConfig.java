@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -228,6 +228,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
   @Macro
   private String sheetFieldName;
 
+  /**
+   * Returns the instance of Schema.
+   * @return The instance of Schema
+   */
   public Schema getSchema() {
     if (schema == null) {
       if (dataSchemaInfo.isEmpty()) {
@@ -239,6 +243,11 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     return schema;
   }
 
+  /**
+   * Returns the ValidationResult
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
+   */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
 
@@ -300,7 +309,7 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
   /**
    * Method that validates that source folder has at least single spreadsheet to process.
    *
-   * @param collector         failure collector.
+   * @param collector failure collector.
    * @param spreadsheetsFiles list of spreadsheet files.
    */
   private void validateSourceFolder(FailureCollector collector, List<File> spreadsheetsFiles) {
@@ -315,11 +324,11 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
    * Method that validates that retrieved spreadsheet file contains all required sheets. Is applicable only if
    * {@link SheetsToPull#ALL} option is not selected for "Sheets identifiers" property.
    *
-   * @param collector          failure collector.
+   * @param collector failure collector.
    * @param sheetsSourceClient sheets source client;
-   * @param spreadsheetsFiles  spreadsheet files.
+   * @param spreadsheetsFiles spreadsheet files.
    * @throws ExecutionException on API call is failed.
-   * @throws RetryException     on API call retry number is exceeded.
+   * @throws RetryException on API call retry number is exceeded.
    */
   private void validateSheetIdentifiers(FailureCollector collector, GoogleSheetsSourceClient sheetsSourceClient,
                                         List<File> spreadsheetsFiles) throws ExecutionException, RetryException {
@@ -578,6 +587,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     return dataSchema;
   }
 
+  /**
+   * Returns the int.
+   * @return The int
+   */
   public int getActualFirstDataRow() {
     int firstDataRow = 1;
     if (isExtractMetadata() && getLastHeaderRow() > 0) {
@@ -594,6 +607,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     return firstDataRow;
   }
 
+  /**
+   * Returns the int.
+   * @return The int
+   */
   public int getActualLastDataRow() {
     int lastDataRow = getLastDataRow();
     if (isExtractMetadata() && getFirstFooterRow() > 0) {
@@ -779,6 +796,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     return HeaderSelection.fromValue(columnNamesSelection);
   }
 
+  /**
+   * Returns the int.
+   * @return The int
+   */
   public int getColumnNamesRow() {
     int firstRowIndex = 1;
     if (getColumnNamesSelection().equals(HeaderSelection.FIRST_ROW_AS_COLUMNS)) {
@@ -835,6 +856,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     return Arrays.asList(sheetsIdentifiers.split(","));
   }
 
+  /**
+   * Returns the map which have key is Integer and value is map.
+   * @return The Map which have key is Integer and value is map
+   */
   public Map<Integer, Map<String, List<String>>> getHeaderTitlesRow() {
     Map<Integer, Map<String, List<String>>> titles = new HashMap<>();
     for (Map.Entry<Integer, ColumnComplexSchemaInfo> entry : dataSchemaInfo.entrySet()) {
@@ -852,6 +877,10 @@ public class GoogleSheetsSourceConfig extends GoogleFilteringSourceConfig {
     return titles;
   }
 
+  /**
+   * Returns the list of MetadataKeyValueAddress.
+   * @return the List of MetadataKeyValueAddress
+   */
   public List<MetadataKeyValueAddress> getMetadataCoordinates() {
     List<MetadataKeyValueAddress> metadataCoordinates = new ArrayList<>();
     if (extractMetadata) {

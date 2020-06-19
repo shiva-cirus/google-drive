@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -85,6 +85,12 @@ public class SchemaBuilder {
   public static final String IMAGE_LONGITUDE_FIELD_NAME = "longitude";
   public static final String IMAGE_ALTITUDE_FIELD_NAME = "altitude";
 
+  /**
+   * Returns the instance of Schema.
+   * @param fields The Fields are list of fields
+   * @param bodyFormat The BodyFormat
+   * @return The instance of Schema
+   */
   public static Schema buildSchema(List<String> fields, BodyFormat bodyFormat) {
     List<String> extendedFields = new ArrayList<>(fields);
     extendedFields.add(BODY_FIELD_NAME);
@@ -98,6 +104,12 @@ public class SchemaBuilder {
     return Schema.recordOf(SCHEMA_ROOT_RECORD_NAME, generalFields);
   }
 
+  /**
+   * Returns the field of Schema.
+   * @param name The name is String type
+   * @param bodyFormat The BodyFormat
+   * @return The field of Schema
+   */
   public static Schema.Field getTopLevelField(String name, BodyFormat bodyFormat) {
     switch (name) {
       case BODY_FIELD_NAME:
@@ -144,6 +156,11 @@ public class SchemaBuilder {
     }
   }
 
+  /**
+   * Returns type is void.
+   * @param fields The fields are list of String
+   * @param schemaFields The field of Schema
+   */
   public static void processImageMediaMetadata(List<String> fields, List<Schema.Field> schemaFields) {
     List<String> imageMediaFields =
       fields.stream().filter(f -> f.startsWith(IMAGE_METADATA_NAME_PREFIX))
@@ -172,6 +189,11 @@ public class SchemaBuilder {
     }
   }
 
+  /**
+   * Returns type is void.
+   * @param fields The fields are list of String
+   * @param schemaFields The field of Schema
+   */
   public static void processVideoMediaMetadata(List<String> fields, List<Schema.Field> schemaFields) {
     List<String> videoMediaFields =
       fields.stream().filter(f -> f.startsWith(VIDEO_METADATA_NAME_PREFIX))
@@ -188,6 +210,11 @@ public class SchemaBuilder {
     }
   }
 
+  /**
+   * Returns the field of Schema.
+   * @param name The name is String type
+   * @return The field of Schema
+   */
   public static Schema.Field fromImageMediaMetadataName(String name) {
     switch (name) {
       case IMAGE_WIDTH_FIELD_NAME:
@@ -223,6 +250,11 @@ public class SchemaBuilder {
     }
   }
 
+  /**
+   * Returns the field of Schema.
+   * @param name The name is String type
+   * @return The field of Schema
+   */
   public static Schema.Field fromVideoMediaMetadataName(String name) {
     switch (name) {
       case VIDEO_WIDTH_FIELD_NAME:
@@ -235,6 +267,11 @@ public class SchemaBuilder {
     }
   }
 
+  /**
+   * Returns the field of Schema.
+   * @param name The name is String type
+   * @return The field of Schema
+   */
   public static Schema.Field fromLocationName(String name) {
     switch (name) {
       case IMAGE_LATITUDE_FIELD_NAME:

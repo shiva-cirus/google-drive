@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,7 +21,7 @@ import com.google.common.base.Objects;
 import java.util.StringJoiner;
 
 /**
- * Represents coordinates for metadata key and value cells
+ * Represents coordinates for metadata key and value cells.
  */
 public class MetadataKeyValueAddress {
   private final CellCoordinate nameCoordinate;

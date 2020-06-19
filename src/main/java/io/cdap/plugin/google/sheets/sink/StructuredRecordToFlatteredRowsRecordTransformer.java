@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -61,6 +61,14 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
   private final String sheetName;
   private final boolean skipNameFields;
 
+  /**
+   * Constructor for StructuredRecordToFlatteredRowsRecordTransformer object.
+   * @param spreadsheetNameFieldName The spread sheet Name Field Name
+   * @param sheetNameFieldName The sheet Name Field Name
+   * @param spreadsheetName The spread sheet Name
+   * @param sheetName The sheet Name
+   * @param skipNameFields The skip Name Fields
+   */
   public StructuredRecordToFlatteredRowsRecordTransformer(String spreadsheetNameFieldName,
                                                           String sheetNameFieldName,
                                                           String spreadsheetName,
@@ -73,6 +81,11 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
     this.skipNameFields = skipNameFields;
   }
 
+  /**
+   * Returns selected StructuredRecord.
+   * @param input The StructuredRecord
+   * @return the instance of StructuredRecord
+   */
   public FlatteredRowsRecord transform(StructuredRecord input) {
     List<List<CellData>> data = new ArrayList<>();
     List<GridRange> mergeRanges = new ArrayList<>();
@@ -114,11 +127,11 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
    * Method that parse field of input structure record and add it to data list by appropriate way depends
    * on field's schema. Also merge ranges and headers are extended.
    *
-   * @param field                  field to process.
-   * @param input                  input structure record.
-   * @param data                   list of rows to extend with parsed data.
-   * @param header                 result complex header.
-   * @param mergeRanges            merge ranges, that units cells resulting from arrays flattering.
+   * @param field field to process.
+   * @param input input structure record.
+   * @param data list of rows to extend with parsed data.
+   * @param header result complex header.
+   * @param mergeRanges merge ranges, that units cells resulting from arrays flattering.
    * @param isComplexTypeSupported variable that defines are complex data formats are supported
    */
   private void processField(Schema.Field field, StructuredRecord input, List<List<CellData>> data,
@@ -154,8 +167,8 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
   /**
    * Method that adds cellData to the end of each data row. Also it creates merge range for whole column from data rows.
    *
-   * @param cellData    cell data to add.
-   * @param data        data rows to extend.
+   * @param cellData cell data to add.
+   * @param data data rows to extend.
    * @param mergeRanges merge ranges to extend.
    */
   private void addDataValue(CellData cellData, List<List<CellData>> data, List<GridRange> mergeRanges) {
@@ -278,11 +291,11 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
    * For records each record field is interpreted as separate column in data rows.
    * Nested complex data types are not supported.
    *
-   * @param fieldType   field type.
-   * @param fieldName   field name.
-   * @param input       input structure record.
-   * @param data        data rows to extend.
-   * @param header      complex header to extend.
+   * @param fieldType field type.
+   * @param fieldName field name.
+   * @param input input structure record.
+   * @param data data rows to extend.
+   * @param header complex header to extend.
    * @param mergeRanges data merge ranges to extend.
    */
   private void processComplexTypes(Schema.Type fieldType, String fieldName, StructuredRecord input,
@@ -367,7 +380,6 @@ public class StructuredRecordToFlatteredRowsRecordTransformer {
     copiedRow.addAll(row);
     return copiedRow;
   }
-
 
   private boolean isSimpleType(Schema.Type fieldType) {
     return Arrays.asList(Schema.Type.STRING, Schema.Type.BYTES, Schema.Type.BOOLEAN, Schema.Type.LONG,

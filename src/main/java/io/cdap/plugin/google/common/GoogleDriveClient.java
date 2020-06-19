@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -42,6 +42,12 @@ public class GoogleDriveClient<C extends GoogleAuthBaseConfig> {
   protected final C config;
   protected NetHttpTransport httpTransport;
 
+  /**
+   * Constructor for GoogleDriveClient object.
+   *
+   * @param config the google auth base config is provided
+   * @throws IOException on issues with file reading
+   */
   public GoogleDriveClient(C config) throws IOException {
     this.config = config;
     try {

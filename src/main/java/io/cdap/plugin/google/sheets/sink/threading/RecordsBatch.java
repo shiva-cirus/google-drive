@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -27,6 +27,12 @@ public class RecordsBatch implements Comparable<RecordsBatch> {
   private final String spreadsheetName;
   private final String spreadsheetId;
 
+  /**
+   * Constructor for RecordsBatch object.
+   * @param group The group
+   * @param spreadsheetName The spread sheet name
+   * @param spreadsheetId The spread sheet id
+   */
   public RecordsBatch(List<FlatteredRowsRequest> group, String spreadsheetName, String spreadsheetId) {
     this.group = group;
     this.spreadsheetName = spreadsheetName;

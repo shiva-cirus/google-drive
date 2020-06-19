@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Cask Data, Inc.
+ * Copyright © 2020 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -66,6 +66,12 @@ public class GoogleFilteringSourceConfig extends GoogleRetryingConfig {
     "RFC3339 (https://tools.ietf.org/html/rfc3339) format, default timezone is UTC, e.g., 2012-06-04T12:00:00-08:00.")
   protected String endDate;
 
+  /**
+   * Returns the ValidationResult.
+   *
+   * @param collector the failure collector is provided
+   * @return The ValidationResult
+   */
   public ValidationResult validate(FailureCollector collector) {
     ValidationResult validationResult = super.validate(collector);
     if (validateModificationDateRange(collector)
